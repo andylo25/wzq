@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <title>stomp</title>
+</head>
+
+<body>
+    Welcome<br/><input id="text" type="text" />
+    <button onclick="send(101)">yk登录</button>
+    <button onclick="send(102)">好友约战</button>
+    <button onclick="send(103)">加入房间</button>
+    <button onclick="send(104)">快速开始</button>
+    <button onclick="send(105)">开始准备</button>
+    <button onclick="send(106)">落子</button>
+    <button onclick="send(106,1)">机器人落子</button>
+    <button onclick="send(108)">退出房间</button>
+    <hr/>
+    <button onclick="closeWebSocket()">关闭WebSocket连接</button>
+    <hr/>
+    <div id="message"></div>
+</body>
+
+<script type="text/javascript">
+
+function send(act,rob){
+	var fd = text.value.split(" ");
+	var data = {action:act}
+	if(act == 101){
+		data.data = {};
+	}else if(act == 102){
+		data.data = {};
+	}else if(act == 103){
+		data.data = {roomNum:fd[0]};
+	}else if(act == 104){
+		data.data = {};
+	}else if(act == 105){
+		data.data = {};
+	}else if(act == 106){
+		if(rob){
+			data.data = {x:-1,y:-1};
+		}else{
+			data.data = {x:fd[0],y:fd[1]};
+		}
+	}else if(act == 108){
+		data.data = {};
+		
+	}
+	var msg = JSON.stringify(data);
+	socket.send(msg);
+	log("发送消息:"+msg);
+}
+function log(msg){
+	message.innerHTML = message.innerHTML+"<br>"+msg;
+}
+
+function closeWebSocket(){
+	socket.close();
+}
+
+var socket = new WebSocket("ws://localhost:8080/websocket");  
+//打开事件  
+socket.onopen = function() {  
+    console.log("Socket 已打开");  
+    //socket.send("这是来自客户端的消息" + location.href + new Date());  
+};
+//获得消息事件  
+socket.onmessage = function(msg) {  
+    console.log(msg.data);  
+    log("收到消息:"+msg.data);
+    //发现消息进入    调后台获取  
+};  
+//关闭事件  
+socket.onclose = function() {  
+    console.log("Socket已关闭");  
+};  
+//发生了错误事件  
+socket.onerror = function() {  
+    alert("Socket发生了错误");  
+}  
+ 
+
+//                      $("#btnSend").click(function() {  
+//                          socket.send("这是来自客户端的消息" + location.href + new Date());  
+//                      });  
+//
+//                      $("#btnClose").click(function() {  
+//                          socket.close();  
+//                      });  
+
+</script>
+
+</html>

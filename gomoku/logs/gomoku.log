@@ -1,0 +1,936 @@
+2018-04-23 19:15:51.076  INFO 24068 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 24068 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-23 19:15:51.081 DEBUG 24068 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-23 19:15:51.081  INFO 24068 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-23 19:16:03.278  WARN 24068 --- [main] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'datasource.driverClassName' in value "${datasource.driverClassName}"
+2018-04-23 19:16:03.538 ERROR 24068 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'datasource.driverClassName' in value "${datasource.driverClassName}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:372) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1268) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:308) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at com.andy.gomoku.GomokuApplication.main(GomokuApplication.java:12) [classes/:na]
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'datasource.driverClassName' in value "${datasource.driverClassName}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174) ~[spring-core-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:236) ~[spring-core-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210) ~[spring-core-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:172) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:837) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1086) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:585) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:366) ~[spring-beans-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	... 17 common frames omitted
+
+2018-04-23 19:17:18.892  INFO 12196 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 12196 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-23 19:17:18.897 DEBUG 12196 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-23 19:17:18.897  INFO 12196 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-23 19:17:23.311  INFO 12196 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.821 seconds (JVM running for 5.279)
+2018-04-23 19:17:31.088  INFO 12196 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-23 19:17:34.599  INFO 12196 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-23 19:17:35.895 ERROR 12196 --- [http-nio-8080-exec-6] o.a.t.websocket.pojo.PojoEndpointBase    : No error handling configured for [com.andy.gomoku.websocket.MyWebSocket] and the following error occurred
+
+java.lang.ClassCastException: java.lang.Long cannot be cast to java.lang.Integer
+	at com.andy.gomoku.dao.DaoUtils.insert(DaoUtils.java:166) ~[classes/:na]
+	at com.andy.gomoku.action.Login101Action.doAction(Login101Action.java:32) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onMessage(MyWebSocket.java:99) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoMessageHandlerWholeBase.onMessage(PojoMessageHandlerWholeBase.java:80) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.sendMessageText(WsFrameBase.java:394) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.sendMessageText(WsFrameServer.java:119) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataText(WsFrameBase.java:495) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:294) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:133) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:82) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:171) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:148) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+
+2018-04-23 19:17:35.901  INFO 12196 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 有连接关闭！ 当前在线人数0
+2018-04-23 19:23:22.576  INFO 20868 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 20868 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-23 19:23:22.584 DEBUG 20868 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-23 19:23:22.585  INFO 20868 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-23 19:23:26.325  INFO 20868 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.139 seconds (JVM running for 4.647)
+2018-04-23 19:23:36.372  INFO 20868 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-23 19:23:37.905  INFO 20868 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-23 19:32:42.898  INFO 23192 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 23192 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-23 19:32:42.903 DEBUG 23192 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-23 19:32:42.904  INFO 23192 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-23 19:32:46.820  INFO 23192 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.635 seconds (JVM running for 5.59)
+2018-04-23 19:32:51.387  INFO 23192 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-23 19:32:53.708  INFO 23192 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-23 19:32:54.182 ERROR 23192 --- [http-nio-8080-exec-6] o.a.t.websocket.pojo.PojoEndpointBase    : No error handling configured for [com.andy.gomoku.websocket.MyWebSocket] and the following error occurred
+
+com.andy.gomoku.exception.GoSeviceException: java.sql.SQLException: Incorrect string value: '\xF0\x9B\xB0\x91\xF0\xA3...' for column 'nick_name' at row 1 Query: INSERT INTO Usr_User (nick_Name,user_Name) VALUES (?,?) Parameters: [至囩㕡𛰑𣥄蛚쉵탤, 至囩㕡𛰑𣥄蛚쉵탤]
+	at com.andy.gomoku.dao.DaoUtils.insert(DaoUtils.java:193) ~[classes/:na]
+	at com.andy.gomoku.action.Login101Action.doAction(Login101Action.java:35) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onMessage(MyWebSocket.java:99) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoMessageHandlerWholeBase.onMessage(PojoMessageHandlerWholeBase.java:80) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.sendMessageText(WsFrameBase.java:394) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.sendMessageText(WsFrameServer.java:119) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataText(WsFrameBase.java:495) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:294) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:133) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:82) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:171) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:148) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+Caused by: java.sql.SQLException: Incorrect string value: '\xF0\x9B\xB0\x91\xF0\xA3...' for column 'nick_name' at row 1 Query: INSERT INTO Usr_User (nick_Name,user_Name) VALUES (?,?) Parameters: [至囩㕡𛰑𣥄蛚쉵탤, 至囩㕡𛰑𣥄蛚쉵탤]
+	at org.apache.commons.dbutils.AbstractQueryRunner.rethrow(AbstractQueryRunner.java:527) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.insert(QueryRunner.java:650) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.insert(QueryRunner.java:574) ~[commons-dbutils-1.7.jar:1.7]
+	at com.andy.gomoku.dao.DaoUtils.insert(DaoUtils.java:183) ~[classes/:na]
+	... 25 common frames omitted
+
+2018-04-23 19:32:54.187  INFO 23192 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 有连接关闭！ 当前在线人数0
+2018-04-23 19:34:02.365  INFO 23192 --- [http-nio-8080-exec-1] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-23 19:34:05.937  INFO 23192 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-24 13:58:11.047  INFO 632 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 632 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 13:58:11.069 DEBUG 632 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 13:58:11.069  INFO 632 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 13:58:16.490  INFO 632 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 6.036 seconds (JVM running for 6.718)
+2018-04-24 13:58:31.658  INFO 632 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-24 13:58:35.919  INFO 632 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-24 13:58:37.196 ERROR 632 --- [http-nio-8080-exec-7] o.a.t.websocket.pojo.PojoEndpointBase    : No error handling configured for [com.andy.gomoku.websocket.MyWebSocket] and the following error occurred
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:71) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send101(SendUtil.java:15) ~[classes/:na]
+	at com.andy.gomoku.action.Login101Action.doAction(Login101Action.java:48) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onMessage(MyWebSocket.java:105) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoMessageHandlerWholeBase.onMessage(PojoMessageHandlerWholeBase.java:80) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.sendMessageText(WsFrameBase.java:394) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.sendMessageText(WsFrameServer.java:119) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataText(WsFrameBase.java:495) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:294) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:133) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:82) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:171) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:148) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+
+2018-04-24 13:58:37.205  INFO 632 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 有连接关闭！ 当前在线人数0
+2018-04-24 14:21:41.600  INFO 21024 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 21024 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:21:41.606 DEBUG 21024 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:21:41.606  INFO 21024 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:21:45.764 ERROR 21024 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+com.andy.gomoku.exception.GoSeviceException: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'title_sort' at line 1 Query: title_sort Parameters: []
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:101) ~[classes/:na]
+	at com.andy.gomoku.utils.GameConf.init(GameConf.java:19) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:15) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:1) ~[classes/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.finished(EventPublishingRunListener.java:101) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.callFinishedListener(SpringApplicationRunListeners.java:79) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.finished(SpringApplicationRunListeners.java:72) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at com.andy.gomoku.GomokuApplication.main(GomokuApplication.java:12) [classes/:na]
+Caused by: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'title_sort' at line 1 Query: title_sort Parameters: []
+	at org.apache.commons.dbutils.AbstractQueryRunner.rethrow(AbstractQueryRunner.java:527) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:391) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.query(QueryRunner.java:329) ~[commons-dbutils-1.7.jar:1.7]
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:98) ~[classes/:na]
+	... 15 common frames omitted
+
+2018-04-24 14:22:51.404  INFO 24656 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 24656 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:22:51.409 DEBUG 24656 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:22:51.410  INFO 24656 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:24:14.860  INFO 22344 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 22344 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:24:14.867 DEBUG 22344 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:24:14.868  INFO 22344 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:24:18.886 ERROR 22344 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.AbstractStringBuilder.substring(AbstractStringBuilder.java:935) ~[na:1.8.0_131]
+	at java.lang.StringBuilder.substring(StringBuilder.java:76) ~[na:1.8.0_131]
+	at java.lang.AbstractStringBuilder.substring(AbstractStringBuilder.java:881) ~[na:1.8.0_131]
+	at java.lang.StringBuilder.substring(StringBuilder.java:76) ~[na:1.8.0_131]
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:140) ~[classes/:na]
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:73) ~[classes/:na]
+	at com.andy.gomoku.utils.GameConf.init(GameConf.java:19) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:15) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:1) ~[classes/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.finished(EventPublishingRunListener.java:101) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.callFinishedListener(SpringApplicationRunListeners.java:79) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.finished(SpringApplicationRunListeners.java:72) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at com.andy.gomoku.GomokuApplication.main(GomokuApplication.java:12) [classes/:na]
+
+2018-04-24 14:27:08.323  INFO 15656 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 15656 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:27:08.328 DEBUG 15656 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:27:08.328  INFO 15656 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:29:17.223  INFO 16228 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 16228 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:29:17.233 DEBUG 16228 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:29:17.234  INFO 16228 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:29:20.944 ERROR 16228 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.StringIndexOutOfBoundsException: String index out of range: -1
+	at java.lang.AbstractStringBuilder.substring(AbstractStringBuilder.java:935) ~[na:1.8.0_131]
+	at java.lang.StringBuilder.substring(StringBuilder.java:76) ~[na:1.8.0_131]
+	at java.lang.AbstractStringBuilder.substring(AbstractStringBuilder.java:881) ~[na:1.8.0_131]
+	at java.lang.StringBuilder.substring(StringBuilder.java:76) ~[na:1.8.0_131]
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:140) ~[classes/:na]
+	at com.andy.gomoku.dao.DaoUtils.getList(DaoUtils.java:73) ~[classes/:na]
+	at com.andy.gomoku.utils.GameConf.init(GameConf.java:19) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:15) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:1) ~[classes/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.finished(EventPublishingRunListener.java:101) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.callFinishedListener(SpringApplicationRunListeners.java:79) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.finished(SpringApplicationRunListeners.java:72) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at com.andy.gomoku.GomokuApplication.main(GomokuApplication.java:12) [classes/:na]
+
+2018-04-24 14:29:49.049  INFO 29524 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 29524 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:29:49.057 DEBUG 29524 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:29:49.057  INFO 29524 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:34:39.943  INFO 15856 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 15856 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:34:39.949 DEBUG 15856 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:34:39.950  INFO 15856 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:35:03.988  INFO 21620 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 21620 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:35:03.992 DEBUG 21620 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:35:03.993  INFO 21620 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:35:25.669 ERROR 21620 --- [main] o.s.boot.SpringApplication               : Application startup failed
+
+java.lang.NullPointerException: null
+	at java.util.concurrent.ConcurrentHashMap.putVal(ConcurrentHashMap.java:1011) ~[na:1.8.0_131]
+	at java.util.concurrent.ConcurrentHashMap.put(ConcurrentHashMap.java:1006) ~[na:1.8.0_131]
+	at com.andy.gomoku.utils.GameConf.init(GameConf.java:21) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:15) ~[classes/:na]
+	at com.andy.gomoku.conf.StartupListener.onApplicationEvent(StartupListener.java:1) ~[classes/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:393) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:347) ~[spring-context-4.3.16.RELEASE.jar:4.3.16.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.finished(EventPublishingRunListener.java:101) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.callFinishedListener(SpringApplicationRunListeners.java:79) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.finished(SpringApplicationRunListeners.java:72) ~[spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) [spring-boot-1.5.12.RELEASE.jar:1.5.12.RELEASE]
+	at com.andy.gomoku.GomokuApplication.main(GomokuApplication.java:12) [classes/:na]
+
+2018-04-24 14:36:06.675  INFO 15744 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 15744 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:36:06.687 DEBUG 15744 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:36:06.687  INFO 15744 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:50:38.957  INFO 27520 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 27520 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:50:38.962 DEBUG 27520 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:50:38.964  INFO 27520 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 14:58:53.459  INFO 15660 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 15660 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 14:58:53.464 DEBUG 15660 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 14:58:53.464  INFO 15660 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 15:03:11.638  INFO 26548 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 26548 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 15:03:11.643 DEBUG 26548 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 15:03:11.643  INFO 26548 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 15:20:14.402  INFO 13864 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 13864 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-24 15:20:14.407 DEBUG 13864 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-24 15:20:14.408  INFO 13864 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-24 15:20:42.020  INFO 13864 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 28.111 seconds (JVM running for 28.65)
+2018-04-24 15:20:52.166  INFO 13864 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数1
+2018-04-24 15:20:54.235  INFO 13864 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-24 15:21:03.641  INFO 13864 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-24 15:22:50.150  INFO 13864 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数2
+2018-04-24 15:22:50.558  INFO 13864 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 有连接关闭！ 当前在线人数1
+2018-04-24 15:22:50.660  INFO 13864 --- [http-nio-8080-exec-5] com.andy.gomoku.websocket.MyWebSocket    : 有新连接加入！ 当前在线人数2
+2018-04-24 15:22:53.042  INFO 13864 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-24 15:23:22.501  INFO 13864 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":103,"data":{"roomNum":"1"}}
+2018-04-25 20:47:57.719  INFO 23932 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 23932 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 20:47:57.748 DEBUG 23932 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 20:47:57.749  INFO 23932 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 20:48:10.336 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:15.303 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:20.304 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:22.940  INFO 23932 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 26.77 seconds (JVM running for 28.01)
+2018-04-25 20:48:25.304 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:30.304 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:35.305 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:40.305 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:45.306 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:50.305 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:48:55.306 ERROR 23932 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Global.outTimeUser(Global.java:106) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:49:51.248  INFO 8236 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 8236 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 20:49:51.258 DEBUG 8236 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 20:49:51.258  INFO 8236 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 20:49:55.274  INFO 8236 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.467 seconds (JVM running for 4.935)
+2018-04-25 20:49:58.971 ERROR 8236 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Room.addUser(Room.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.Global.newRoom(Global.java:72) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:56) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:50:03.952 ERROR 8236 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Room.addUser(Room.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.Global.newRoom(Global.java:72) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:56) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:50:08.953 ERROR 8236 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Room.addUser(Room.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.Global.newRoom(Global.java:72) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:56) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:50:13.952 ERROR 8236 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Room.addUser(Room.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.Global.newRoom(Global.java:72) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:56) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:50:18.953 ERROR 8236 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.Room.addUser(Room.java:44) ~[classes/:na]
+	at com.andy.gomoku.game.Global.newRoom(Global.java:72) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:56) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:50:38.304  INFO 4820 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 4820 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 20:50:38.314 DEBUG 4820 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 20:50:38.315  INFO 4820 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 20:50:42.603  INFO 4820 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.781 seconds (JVM running for 5.342)
+2018-04-25 20:51:20.383  INFO 4820 --- [http-nio-8080-exec-7] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数1
+2018-04-25 20:51:29.019  INFO 4820 --- [http-nio-8080-exec-3] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 20:51:37.713  INFO 4820 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 20:51:41.527  INFO 4820 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 20:51:48.085  INFO 4820 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-25 20:53:48.948  INFO 16176 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 16176 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 20:53:48.952 DEBUG 16176 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 20:53:48.953  INFO 16176 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 20:53:52.919  INFO 16176 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.463 seconds (JVM running for 4.911)
+2018-04-25 20:53:57.052  INFO 16176 --- [http-nio-8080-exec-3] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数1
+2018-04-25 20:53:58.851  INFO 16176 --- [http-nio-8080-exec-7] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 20:54:04.727  INFO 16176 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 20:54:07.595  INFO 16176 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 20:54:10.285  INFO 16176 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 20:54:21.411  INFO 16176 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 20:54:31.639 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:54:36.626 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:54:41.628 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:54:46.627 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:54:51.628 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:54:56.627 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:25.514 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:39.220 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:40.115 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:46.152 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:51.591 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:54.222 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:55:59.222 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:04.222 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:09.223 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:14.225 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:19.223 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:24.225 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:29.224 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:34.224 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:39.223 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 20:56:44.225 ERROR 16176 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.game.GameUser.getUserInfo(GameUser.java:82) ~[classes/:na]
+	at com.andy.gomoku.utils.SendUtil.send103(SendUtil.java:28) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.done(AutoMatchTask.java:62) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:48) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 21:01:21.962  INFO 20216 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 20216 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 21:01:21.974 DEBUG 20216 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 21:01:21.975  INFO 20216 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 21:01:26.195  INFO 20216 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.688 seconds (JVM running for 5.129)
+2018-04-25 21:01:31.838  INFO 20216 --- [http-nio-8080-exec-3] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数1
+2018-04-25 21:01:33.435  INFO 20216 --- [http-nio-8080-exec-9] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:01:36.712  INFO 20216 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:01:38.653  INFO 20216 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:01:39.883  INFO 20216 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:01:41.711  INFO 20216 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:01:59.932 ERROR 20216 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.entity.UsrGameInfo.addScore(UsrGameInfo.java:74) ~[classes/:na]
+	at com.andy.gomoku.game.GameUser.<init>(GameUser.java:39) ~[classes/:na]
+	at com.andy.gomoku.game.Global.getRobot(Global.java:125) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:47) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 21:02:04.906 ERROR 20216 --- [TimerManager] com.andy.gomoku.game.task.AutoMatchTask  : 
+
+java.lang.NullPointerException: null
+	at com.andy.gomoku.entity.UsrGameInfo.addScore(UsrGameInfo.java:74) ~[classes/:na]
+	at com.andy.gomoku.game.GameUser.<init>(GameUser.java:39) ~[classes/:na]
+	at com.andy.gomoku.game.Global.getRobot(Global.java:125) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.doRun(AutoMatchTask.java:47) ~[classes/:na]
+	at com.andy.gomoku.game.task.AutoMatchTask.run(AutoMatchTask.java:24) ~[classes/:na]
+	at java.util.TimerThread.mainLoop(Timer.java:555) [na:1.8.0_131]
+	at java.util.TimerThread.run(Timer.java:505) [na:1.8.0_131]
+
+2018-04-25 21:03:11.868  INFO 20216 --- [http-nio-8080-exec-5] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:03:11.926  INFO 20216 --- [http-nio-8080-exec-7] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:03:14.370  INFO 20216 --- [http-nio-8080-exec-4] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:03:14.386  INFO 20216 --- [http-nio-8080-exec-4] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:03:16.298  INFO 20216 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:03:19.220  INFO 20216 --- [http-nio-8080-exec-1] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:03:23.062  INFO 20216 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:03:23.933  INFO 20216 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:04:57.913  INFO 20216 --- [http-nio-8080-exec-6] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:04:57.917  INFO 20216 --- [http-nio-8080-exec-6] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:05:04.961  INFO 20216 --- [http-nio-8080-exec-1] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:05:04.970  INFO 20216 --- [http-nio-8080-exec-1] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:05:17.262  INFO 20216 --- [http-nio-8080-exec-5] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:05:21.293  INFO 20216 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:05:23.317  INFO 20216 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:05:24.317  INFO 20216 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:06:06.425  INFO 20216 --- [http-nio-8080-exec-1] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:06:06.436  INFO 20216 --- [http-nio-8080-exec-1] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:06:08.194  INFO 20216 --- [http-nio-8080-exec-9] com.andy.gomoku.game.Global              : 有连接关闭！ 当前在线人数1
+2018-04-25 21:06:08.200  INFO 20216 --- [http-nio-8080-exec-9] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:06:38.581  INFO 20216 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:06:40.942  INFO 20216 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:07:11.877  INFO 20216 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:07:13.846  INFO 20216 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:11:34.625  INFO 25116 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 25116 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-25 21:11:34.634 DEBUG 25116 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-25 21:11:34.635  INFO 25116 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-25 21:11:38.828  INFO 25116 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.645 seconds (JVM running for 5.243)
+2018-04-25 21:11:43.778  INFO 25116 --- [http-nio-8080-exec-3] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数1
+2018-04-25 21:11:45.040  INFO 25116 --- [http-nio-8080-exec-9] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数2
+2018-04-25 21:11:48.679  INFO 25116 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:11:51.036  INFO 25116 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:11:52.870  INFO 25116 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-25 21:11:53.861  INFO 25116 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-25 21:12:59.644  INFO 25116 --- [http-nio-8080-exec-5] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"7"}}
+2018-04-25 21:13:43.933  INFO 25116 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"6"}}
+2018-04-25 21:14:22.588  INFO 25116 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"8","y":"7"}}
+2018-04-25 21:14:43.346  INFO 25116 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"8","y":"7"}}
+2018-04-25 21:15:18.324  INFO 25116 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"8","y":"7"}}
+2018-04-25 21:15:47.645  INFO 25116 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"8","y":"7"}}
+2018-04-26 11:28:29.399  INFO 26796 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on cuiwenming-PC with PID 26796 (E:\workspace2\gomoku\target\classes started by cuiwm in E:\workspace2\gomoku)
+2018-04-26 11:28:29.411 DEBUG 26796 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-26 11:28:29.413  INFO 26796 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-26 11:28:33.540  INFO 26796 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.532 seconds (JVM running for 5.031)
+2018-04-26 11:28:37.718  INFO 26796 --- [http-nio-8080-exec-3] com.andy.gomoku.game.Global              : 有新连接加入！ 当前在线人数1
+2018-04-26 11:28:40.307  INFO 26796 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":101,"data":{}}
+2018-04-26 11:28:47.615  INFO 26796 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-26 11:28:59.830  INFO 26796 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":108,"data":{}}
+2018-04-26 11:33:59.846  INFO 26796 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-26 11:34:02.357  INFO 26796 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-26 11:34:06.573  INFO 26796 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":108,"data":{}}
+2018-04-26 11:34:09.118  INFO 26796 --- [http-nio-8080-exec-1] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":102,"data":{}}
+2018-04-26 11:39:46.029  INFO 26796 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-26 11:41:02.437  INFO 26796 --- [http-nio-8080-exec-5] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":""}}
+2018-04-26 11:41:30.525  INFO 26796 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-26 11:41:33.285  INFO 26796 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":108,"data":{}}
+2018-04-26 11:41:35.909  INFO 26796 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":104,"data":{}}
+2018-04-26 11:43:31.350  INFO 26796 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"7"}}
+2018-04-26 11:49:54.423  INFO 26796 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"7"}}
+2018-04-26 11:50:05.005  INFO 26796 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"8"}}
+2018-04-26 11:50:08.456  INFO 26796 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:50:17.559  INFO 26796 --- [http-nio-8080-exec-1] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"8"}}
+2018-04-26 11:50:39.221  INFO 26796 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:51:27.648  INFO 26796 --- [http-nio-8080-exec-5] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"9"}}
+2018-04-26 11:51:30.901  INFO 26796 --- [http-nio-8080-exec-7] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:51:44.981  INFO 26796 --- [http-nio-8080-exec-9] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"7","y":"10"}}
+2018-04-26 11:51:48.861  INFO 26796 --- [http-nio-8080-exec-2] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:52:05.301  INFO 26796 --- [http-nio-8080-exec-4] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"8","y":"10"}}
+2018-04-26 11:52:10.190  INFO 26796 --- [http-nio-8080-exec-6] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:52:25.157  INFO 26796 --- [http-nio-8080-exec-8] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"9","y":"10"}}
+2018-04-26 11:52:28.389  INFO 26796 --- [http-nio-8080-exec-10] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:52:38.566  INFO 26796 --- [http-nio-8080-exec-1] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":"10","y":"10"}}
+2018-04-26 11:52:44.029  INFO 26796 --- [http-nio-8080-exec-3] com.andy.gomoku.websocket.MyWebSocket    : 来自客户端消息:{"action":106,"data":{"x":-1,"y":-1}}
+2018-04-26 11:52:44.118 ERROR 26796 --- [http-nio-8080-exec-3] o.a.t.websocket.pojo.PojoEndpointBase    : No error handling configured for [com.andy.gomoku.websocket.MyWebSocket] and the following error occurred
+
+com.andy.gomoku.exception.GoSeviceException: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=17' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,del_Flag=?,title=?,lose_Count=?,score=?,uid=?,coin=?) WHERE id=? Parameters: [1, 1, 0, 1-2段, 0, 10, 21, 0, 17]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:254) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.saveDb(CommonUtils.java:65) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.gameOver(CommonUtils.java:53) ~[classes/:na]
+	at com.andy.gomoku.action.Action106.doAction(Action106.java:53) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onMessage(MyWebSocket.java:102) ~[classes/:na]
+	at sun.reflect.GeneratedMethodAccessor32.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoMessageHandlerWholeBase.onMessage(PojoMessageHandlerWholeBase.java:80) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.sendMessageText(WsFrameBase.java:394) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.sendMessageText(WsFrameServer.java:119) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataText(WsFrameBase.java:495) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:294) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:133) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:82) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:171) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:148) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+Caused by: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=17' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,del_Flag=?,title=?,lose_Count=?,score=?,uid=?,coin=?) WHERE id=? Parameters: [1, 1, 0, 1-2段, 0, 10, 21, 0, 17]
+	at org.apache.commons.dbutils.AbstractQueryRunner.rethrow(AbstractQueryRunner.java:527) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:531) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:497) ~[commons-dbutils-1.7.jar:1.7]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:251) ~[classes/:na]
+	... 26 common frames omitted
+
+2018-04-26 11:52:44.122 ERROR 26796 --- [http-nio-8080-exec-3] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [com.andy.gomoku.websocket.MyWebSocket]
+
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:106) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:535) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:513) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.close(WsHttpUpgradeHandler.java:240) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+Caused by: com.andy.gomoku.exception.GoSeviceException: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=null' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,title=?,lose_Count=?,score=?,coin=?) WHERE id=? Parameters: [1, 1, 1-2段, 505, 942, 886, null]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:254) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.saveDb(CommonUtils.java:65) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.gameOver(CommonUtils.java:53) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.outRoom(CommonUtils.java:20) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onClose(MyWebSocket.java:78) ~[classes/:na]
+	... 18 common frames omitted
+Caused by: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=null' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,title=?,lose_Count=?,score=?,coin=?) WHERE id=? Parameters: [1, 1, 1-2段, 505, 942, 886, null]
+	at org.apache.commons.dbutils.AbstractQueryRunner.rethrow(AbstractQueryRunner.java:527) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:531) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:497) ~[commons-dbutils-1.7.jar:1.7]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:251) ~[classes/:na]
+	... 22 common frames omitted
+
+2018-04-26 11:52:44.151 ERROR 26796 --- [http-nio-8080-exec-3] o.a.t.websocket.pojo.PojoEndpointBase    : No error handling configured for [com.andy.gomoku.websocket.MyWebSocket] and the following error occurred
+
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:106) ~[tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:535) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:513) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.close(WsHttpUpgradeHandler.java:240) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:151) [tomcat-embed-websocket-8.5.29.jar:8.5.29]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:54) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:53) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:790) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_131]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_131]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.29.jar:8.5.29]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]
+Caused by: com.andy.gomoku.exception.GoSeviceException: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=null' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,title=?,lose_Count=?,score=?,coin=?) WHERE id=? Parameters: [1, 1, 1-2段, 505, 942, 886, null]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:254) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.saveDb(CommonUtils.java:65) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.gameOver(CommonUtils.java:53) ~[classes/:na]
+	at com.andy.gomoku.utils.CommonUtils.outRoom(CommonUtils.java:20) ~[classes/:na]
+	at com.andy.gomoku.websocket.MyWebSocket.onClose(MyWebSocket.java:78) ~[classes/:na]
+	... 18 common frames omitted
+Caused by: java.sql.SQLException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') WHERE id=null' at line 1 Query: UPDATE Usr_Game_Info SET win_Count=?,title_Sort=?,title=?,lose_Count=?,score=?,coin=?) WHERE id=? Parameters: [1, 1, 1-2段, 505, 942, 886, null]
+	at org.apache.commons.dbutils.AbstractQueryRunner.rethrow(AbstractQueryRunner.java:527) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:531) ~[commons-dbutils-1.7.jar:1.7]
+	at org.apache.commons.dbutils.QueryRunner.update(QueryRunner.java:497) ~[commons-dbutils-1.7.jar:1.7]
+	at com.andy.gomoku.dao.DaoUtils.update(DaoUtils.java:251) ~[classes/:na]
+	... 22 common frames omitted
+
