@@ -17,6 +17,8 @@ public class UsrUser extends BaseEntity{
 	
 	private String role;
 	
+	private Integer icon;
+	
 	private String phone;
 
 	public String getUserName() {
@@ -49,6 +51,14 @@ public class UsrUser extends BaseEntity{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Integer getIcon() {
+		return icon;
+	}
+
+	public void setIcon(Integer icon) {
+		this.icon = icon;
 	}
 	
 	

@@ -87,6 +87,7 @@ public class GameUser implements Serializable{
 		Map<String, Object> resu = Maps.newHashMap();
 		resu.put("userId", id);
 		resu.put("nickName", getNickName());
+		resu.put("icon", user.getIcon());
 		resu.put("coin", gameInfo.getCoin());
 		resu.put("score", gameInfo.getScore());
 		resu.put("title", gameInfo.getTitle());
@@ -134,7 +135,6 @@ public class GameUser implements Serializable{
 	}
 
 	public void gameOver() {
-		
 		
 		this.game = null;
 		this.status = GoConstant.USER_STATUS_0;
