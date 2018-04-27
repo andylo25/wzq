@@ -1,6 +1,8 @@
 package com.andy.gomoku.entity;
 
-public class UsrUser extends BaseEntity{
+import com.andy.gomoku.base.BaseUser;
+
+public class UsrUser extends BaseEntity implements BaseUser{
 
 	private static final long serialVersionUID = 1L;
 

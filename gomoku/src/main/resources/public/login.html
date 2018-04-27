@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+  <head>
+ 	<meta charset="UTF-8">
+    <title>管理员登录</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="assets/styles.css" rel="stylesheet" media="screen">
+     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body id="login" ng-app="admin">
+    <div class="container" ng-controller="loginCtrl">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">登录</h2>
+        <input type="text" class="input-block-level" placeholder="用户名" ng-model="formData.userName">
+        <input type="password" class="input-block-level" placeholder="密码" ng-model="formData.password">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> 记住我
+        </label>
+        <input class="btn btn-large btn-primary" type="submit" ng-click="submitForm();" value="{{btnText}}" ng-disabled="btnStatus" />
+      </form>
+
+    </div> <!-- /container -->
+    <script src="vendors/jquery-1.9.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="vendors/layer/layer.js"></script>
+    <script src="assets/common/dyService.js"></script>
+    <script src="assets/common/dyDirective.js"></script>
+    
+    <script src="assets/app/login.js"></script>
+  </body>
+</html>

@@ -12,6 +12,7 @@ import com.andy.gomoku.game.Room;
 public class CommonUtils {
 
 	public static void outRoom(GameUser user) {
+		if(user == null)return;
 		Room room = user.getRoom();
 		GomokuGame game = user.getGame();
 		if(game != null){

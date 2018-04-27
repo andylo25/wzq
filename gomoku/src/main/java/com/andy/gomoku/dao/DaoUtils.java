@@ -138,10 +138,10 @@ public class DaoUtils {
 			vas = new Object[conds.length];
 			for (int i = 0; i < conds.length; i++) {
 				Where nv = conds[i];
-				sb.append(",").append(nv.getName()).append("=?");
+				sb.append(" AND ").append(nv.getName()).append(nv.getCondition()).append("?");
 				vas[i] = nv.getValue();
 			}
-			where = " WHERE " + sb.substring(1);
+			where = " WHERE 1=1" + sb.toString();
 		}
 		if(field == null){
 			field = "*";
