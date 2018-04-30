@@ -212,3 +212,7 @@ body {
   font-size: 12px;
   padding-left: 2px;
 }
+
+.table-toolbar {
+    margin-bottom: 15px;
+}

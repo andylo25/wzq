@@ -1216,6 +1216,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
     //table
     .directive("tableList", function($rootScope,postUrl){
         return {
+            restrict: "A",
             require: "?ngModel",
             templateUrl:'/ngtpl/tableList.html',
             scope: {
@@ -1252,13 +1253,18 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         scope.Pages = _data.data.total_pages; //总页数
                         scope.Epage = _data.data.epage; //每页条数
                         scope.reloadPage = _data.data.page; //当前页
+                        scope.pageLis = [];
+                        for(var i=scope.reloadPage-2;i<=scope.reloadPage+2;i++){
+                            if(i>scope.Pages)break;
+                            if(i<1) continue;
+                            scope.pageLis.push(i);
+                        }
                         layer.closeAll("loading");
                     })
                 }
 
-                scope.selectTime = function(index){
-                    scope.srcData.selectDate = index;
-                    scope.srcSubmit();
+                scope.select = function(index){
+                    scope.curSel = index;
                 }
 
                 //第一次请求，请求页面和页面结构数据，构建列表结构和自动请求列表的数据
@@ -1275,6 +1281,12 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     var params = angular.extend({}, scope.srcData, {"page": currentPage, "limit": itemsPerPage});
                     var url = scope.listUrl;
                     scope.getData(url, params);
+                }
+                scope.nextPage = function(){
+                    scope.gotoPage(scope.reloadPage+1);
+                }
+                scope.prevPage = function(){
+                    scope.gotoPage(scope.reloadPage-1);
                 }
                 //一页显示条数操作
                 scope.perChange = function(itemsPerPage){

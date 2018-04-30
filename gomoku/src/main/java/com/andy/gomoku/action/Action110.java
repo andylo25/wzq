@@ -10,11 +10,11 @@ import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.websocket.MyWebSocket;
 
 /**
- * 退出房间
+ * 超时检测
  * @author cuiwm
  *
  */
-@Component(GmAction.ACTION_PREFIX+GmAction.ACTION_108)
+@Component(GmAction.ACTION_PREFIX+GmAction.ACTION_110)
 public class Action110 implements IWebAction{
 
 	@Override

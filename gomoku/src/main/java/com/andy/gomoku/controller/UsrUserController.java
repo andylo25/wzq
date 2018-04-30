@@ -15,6 +15,7 @@ import com.andy.gomoku.base.table.Search;
 import com.andy.gomoku.base.table.TableHeader;
 import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
+import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 
 @Controller
@@ -33,7 +34,7 @@ public class UsrUserController extends BaseController{
 		tableHeader.setTexts(new String[]{"ID", "昵称","积分","段位","赢局","角色"});
 		
 		Tool tool = new Tool();
-//		tool.setList(buildTools());
+		tool.setList(buildTools("增加金币","admin/user/add"));
 		
 		Search search = new Search();
 		search.setNames(new String[]{"nick_name"});
@@ -52,14 +53,18 @@ public class UsrUserController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="listData")
-	public RespVO listData(Integer current_page, String author, String title, Integer category_id, Integer status) throws Exception {
-		PageVO users = DaoUtils.getPageForMap(UsrUser.table(), null,1,10);
+	public RespVO listData(Integer page,Integer limit, String nickName) throws Exception {
+		PageVO users = DaoUtils.getPageForMap(UsrUser.table(), null,page,limit);
 		
-		idToName(users.getItems(), UsrUser.table(), "id#uid:score,title,win_count");
+		idToName(users.getItems(), UsrGameInfo.table(), "id#uid:score,title,win_count");
 		
-        return RespVO.createSuccessJsonResonse(Collections.singletonMap("formData", users));
+        return RespVO.createSuccessJsonResonse(users);
 	}
 	
-	
+	@RequestMapping(value="add")
+	public ModelAndView add() throws Exception {
+		
+		return createCustMV("add",Collections.singletonMap("formStruct", null));
+	}
 	
 }

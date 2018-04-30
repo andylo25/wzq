@@ -111,9 +111,15 @@ public class DaoUtils {
 		}
 	}
 	
-	public static PageVO getPageForMap(String table,String field,int page,Integer epage, Where... conds) {
+	public static PageVO getPageForMap(String table,String field,Integer page,Integer epage, Where... conds) {
 		QueryRunner run = new QueryRunner(dataSource);
 		PageVO pageVO = new PageVO();
+		if(page==null) {
+			page = 1;
+		}
+		if(epage==null) {
+			epage = 10;
+		}
 		pageVO.setPage(page);
 		pageVO.setEpage(epage);
 		Object[] wh = buildWhere(conds);

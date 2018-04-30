@@ -295,17 +295,15 @@ public class PageUtil {
 		//查询框
 		List<Search> searchList = null;
 		if(search != null && search.getNames() != null) {
-//			searchList = new ArrayList<Search>();
-//			Map<String, List<Option>> optionMap = search.getOptionMap();
-//			if(optionMap == null) optionMap = new HashMap<String, List<Option>>();
-//			for(int i=0;i<search.getNames().length;i++) {
-//				Search temp = new Search();
-//				temp.setName(search.getNames()[i]);
-//				temp.setType(search.getTypes()[i]);
-//				temp.setText(search.getTexts()[i]);
-//				
-//				searchList.add(temp);
-//			}
+			searchList = new ArrayList<Search>();
+			for(int i=0;i<search.getNames().length;i++) {
+				Search temp = new Search();
+				temp.setName(search.getNames()[i]);
+				temp.setType(search.getTypes()[i]);
+				temp.setText(search.getTexts()[i]);
+				
+				searchList.add(temp);
+			}
 		}
 		pageStructure.setSearch(searchList);
 		

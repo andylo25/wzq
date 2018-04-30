@@ -8,9 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.andy.gomoku.base.BaseUser;
 import com.andy.gomoku.base.RequestUtil;
+import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.Where;
 import com.andy.gomoku.utils.JsonUtils;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class BaseController {
@@ -174,6 +176,17 @@ public class BaseController {
 			}
 		}
 		return null;
+	}
+	
+	public static List<Tool> buildTools(String... strs) {
+		List<Tool> tools = Lists.newArrayList();
+		for(int i=0;i<strs.length;i+=2) {
+			Tool tool = new Tool();
+			tool.setText(strs[i]);
+			tool.setUrl(strs[i+1]);
+			tools.add(tool);
+		}
+		return tools;
 	}
 	
 }
