@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.andy.gomoku.controller.BaseController;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.entity.ConfCommon;
 import com.andy.gomoku.entity.UsrGameInfo;
@@ -104,7 +105,7 @@ public class Global implements Serializable{
 	}
 	public static GameUser outTimeUser(int timeOut){
 		GameUser user = autoMatchs.peek();
-		if(user != null && user.isOutTime(timeOut)){
+		if(user != null && user.isMatchOutTime(timeOut)){
 			autoMatchs.remove(user);
 			return user;
 		}
@@ -136,13 +137,14 @@ public class Global implements Serializable{
 		readyRobots.addAll(robs);
 	}
 
-	private static List<UsrGameInfo> ranks = Lists.newArrayList();
-	public static List<UsrGameInfo> getRanks() {
+	private static List<Map<String, Object>> ranks = Lists.newArrayList();
+	public static List<Map<String, Object>> getRanks() {
 		return ranks;
 	}
 
 	public static void refreshRanks() {
-		ranks = DaoUtils.getListSql(UsrGameInfo.class, "select id,uid,win_count from usr_game_info order by win_count desc limit 0,10");
+		List<Map<String, Object>> users = DaoUtils.getListSql( "select uid,win_count as winCount from usr_game_info order by win_count desc limit 0,10");
+		BaseController.idToName(users, UsrUser.table(), "uid#id:icon,nick_name as nickName");
 	}
 
 	

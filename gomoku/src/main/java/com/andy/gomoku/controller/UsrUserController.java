@@ -29,19 +29,19 @@ public class UsrUserController extends BaseController{
 	@RequestMapping(value="list")
 	public ModelAndView list() throws Exception {
 		TableHeader tableHeader = new TableHeader();
-		tableHeader.setNames(new String[]{"id", "title", "author", "category_id", "status", "create_time:datetime","sort_index"});
-		tableHeader.setTexts(new String[]{"ID", "标题", "作者", "分类栏目:art_page", "是否发布:common_status", "时间","排序"});
+		tableHeader.setNames(new String[]{"id", "nick_name", "score", "title", "win_count","role"});
+		tableHeader.setTexts(new String[]{"ID", "昵称","积分","段位","赢局","角色"});
 		
 		Tool tool = new Tool();
 //		tool.setList(buildTools());
 		
 		Search search = new Search();
-		search.setNames(new String[]{"title"});
-		search.setTexts(new String[]{"标题"});
+		search.setNames(new String[]{"nick_name"});
+		search.setTexts(new String[]{"昵称"});
 		search.setTypes(new String[]{"text"});
 		
-		PageStructure data = PageUtil.createTablePageStructure("content/article/listData", "id", tableHeader,tool,search);
-		return createMV("tableList","用户管理", Collections.singletonMap("formData", data));
+		PageStructure data = PageUtil.createTablePageStructure("admin/user/listData", "id", tableHeader,tool,search);
+		return createMV("tableList","用户管理", Collections.singletonMap("formStruct", data));
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class UsrUserController extends BaseController{
 	public RespVO listData(Integer current_page, String author, String title, Integer category_id, Integer status) throws Exception {
 		PageVO users = DaoUtils.getPageForMap(UsrUser.table(), null,1,10);
 		
-		idToName(users.getItems(), UsrUser.table(), "uid:nick_name");
+		idToName(users.getItems(), UsrUser.table(), "id#uid:score,title,win_count");
 		
         return RespVO.createSuccessJsonResonse(Collections.singletonMap("formData", users));
 	}

@@ -6652,3 +6652,8 @@ java.lang.NullPointerException: null
 2018-04-30 11:44:42.486  INFO 9476 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
 2018-04-30 11:44:44.367 DEBUG 9476 --- [main] c.a.g.c.e.AdminExceptionResolver         : Looking for exception mappings: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@10734c3: startup date [Mon Apr 30 11:44:42 CST 2018]; root of context hierarchy
 2018-04-30 11:44:46.532  INFO 9476 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.339 seconds (JVM running for 5.003)
+2018-04-30 16:12:42.728  INFO 6268 --- [main] com.andy.gomoku.GomokuApplication        : Starting GomokuApplication on PC-20170426TCMK with PID 6268 (E:\git\wzq\gomoku\target\classes started by Administrator in E:\git\wzq\gomoku)
+2018-04-30 16:12:42.737 DEBUG 6268 --- [main] com.andy.gomoku.GomokuApplication        : Running with Spring Boot v1.5.12.RELEASE, Spring v4.3.16.RELEASE
+2018-04-30 16:12:42.738  INFO 6268 --- [main] com.andy.gomoku.GomokuApplication        : No active profile set, falling back to default profiles: default
+2018-04-30 16:12:44.625 DEBUG 6268 --- [main] c.a.g.c.e.AdminExceptionResolver         : Looking for exception mappings: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@10734c3: startup date [Mon Apr 30 16:12:42 CST 2018]; root of context hierarchy
+2018-04-30 16:12:46.882  INFO 6268 --- [main] com.andy.gomoku.GomokuApplication        : Started GomokuApplication in 4.425 seconds (JVM running for 5.039)

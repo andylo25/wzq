@@ -45,12 +45,12 @@ public class Action106 implements IWebAction{
 				resu = game.robotMove(mov);
 			}
 		}
-		
+		movUser.move(room.getOther(movUser).getLastMov());
 		if(resu >= 0){
 			SendUtil.send106(room, movUser.getId(), mov.x, mov.y);
 			
 			if(resu == 1){
-				CommonUtils.gameOver(room,game,gameUser);
+				CommonUtils.gameOver(room,game,movUser);
 			}
 		}
 		

@@ -22,6 +22,8 @@ public class GameUser implements Serializable{
 	private GomokuGame game;
 	
 	private Long startMatch;
+	private Long lastMov;
+	private Long allMovTime;
 	
 	public GameUser() {
 	}
@@ -118,7 +120,7 @@ public class GameUser implements Serializable{
 	public boolean isMatching(){
 		return status == GoConstant.USER_STATUS_2;
 	}
-	public boolean isOutTime(int timeOut){
+	public boolean isMatchOutTime(int timeOut){
 		return System.currentTimeMillis() - startMatch >= timeOut;
 	}
 
@@ -140,5 +142,15 @@ public class GameUser implements Serializable{
 		this.status = GoConstant.USER_STATUS_0;
 	}
 
-	
+	public void move(Long lastM) {
+		lastMov = System.currentTimeMillis();
+		allMovTime += lastMov - lastM;
+	}
+	public Long getLastMov() {
+		return lastMov;
+	}
+
+	public Long getAllMovTime() {
+		return allMovTime;
+	}
 }

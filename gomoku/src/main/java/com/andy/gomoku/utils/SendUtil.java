@@ -1,5 +1,6 @@
 package com.andy.gomoku.utils;
 
+import java.util.List;
 import java.util.Map;
 
 import com.andy.gomoku.game.GameUser;
@@ -112,6 +113,11 @@ public class SendUtil {
 		for(MyWebSocket session:Global.getUserSessions()){
 			doSend(session,action,data);
 		}
+	}
+
+	public static void send109(GameUser user, List<Map<String, Object>> ranks) {
+		if(user == null || ranks == null)return;
+		doSend(user,GmAction.ACTION_109, ranks);
 	}
 	
 

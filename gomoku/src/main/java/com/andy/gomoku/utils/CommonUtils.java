@@ -67,4 +67,19 @@ public class CommonUtils {
 		}
 	}
 
+	public static boolean checkMov(GameUser user) {
+		Room room = user.getRoom();
+		Long lastMov = room.getOther(user).getLastMov();
+		Long allMov = user.getAllMovTime();
+		Long curTime = System.currentTimeMillis();
+		if(curTime - lastMov >= GoConstant.STEP_TIMEOUT
+				|| curTime - allMov >= GoConstant.QUANPAN_TIMEOUT) {
+			// 超时,游戏结束
+			CommonUtils.gameOver(room,user.getGame(),room.getOther(user));
+			return false;
+		}else {
+			return true;
+		}
+	}
+
 }

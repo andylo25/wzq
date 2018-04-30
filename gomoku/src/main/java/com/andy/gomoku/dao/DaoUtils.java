@@ -176,6 +176,16 @@ public class DaoUtils {
 			throw new GoSeviceException(e);
 		}
 	}
+	
+	public static List<Map<String, Object>> getListSql(String sql, Object... conds) {
+		QueryRunner run = new QueryRunner(dataSource);
+		try {
+			List<Map<String, Object>> list = run.query(sql, new MapListHandler(), conds);
+			return list;
+		} catch (SQLException e) {
+			throw new GoSeviceException(e);
+		}
+	}
 
 	public static <T> T getOneSql(Class<T> clasz, String sql, Object... conds) {
 		List<T> list = getListSql(clasz, sql, conds);

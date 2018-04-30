@@ -1217,14 +1217,13 @@ var dyDir = angular.module("dyDir", ["dyService"])
     .directive("tableList", function($rootScope,postUrl){
         return {
             require: "?ngModel",
-            templateUrl:'/tableList.html',
+            templateUrl:'/ngtpl/tableList.html',
             scope: {
                 tableList: "="
             },
             link: function(scope, element, attrs){
                 scope.listUrl = scope.tableList.listUrl;
                 scope.tableHeader = scope.tableList.tableHeader;
-                scope.rowLink = scope.tableList.rowLink;  //操作栏中的多个操作处理
                 scope.search = scope.tableList.search;
                 scope.toollist = scope.tableList.toollist;
                 if(scope.tableList.ext){
