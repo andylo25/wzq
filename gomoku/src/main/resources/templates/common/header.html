@@ -1,0 +1,26 @@
+<head>
+    	<meta charset="UTF-8">
+        <base href="/" />
+        <title>后台管理</title>
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
+        <link href="assets/styles.css" rel="stylesheet" media="screen">
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script>
+        	var page_struct = ${data!"{}"};
+            var user_ = ${userJson!"{}"};
+            var pageTitle_ = "${pageTitle!}";
+            var menus_ = [
+                {id:1,text:"管理面板",url:"/"},
+                {id:2,text:"用户管理",url:"admin/user/list"},
+                {id:3,text:"参数配置",url:"admin/confCommon/list"},
+                {id:4,text:"称号配置",url:"admin/confTitle/list"},
+                {id:5,text:"输赢日志",url:"admin/playLog/list"}
+            ];
+        </script>
+    </head>

@@ -3,20 +3,25 @@ package com.andy.gomoku.dao;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.StringUtils;
 
+import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.exception.GoSeviceException;
 import com.andy.gomoku.utils.EntityUtils;
@@ -32,6 +37,8 @@ public class DaoUtils {
 	static BasicRowProcessor rowProcessor = new BasicRowProcessor(convert);
 
 	private static ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();
+	
+	private static final String keywordEscape = "`";
 
 	/**
 	 * 根据ID查询实体
@@ -85,9 +92,72 @@ public class DaoUtils {
 		return null;
 	}
 
-	public static List<Map> getList(String field, String group, Where... conds) {
-		return getList(Map.class, null, null, field, group, conds);
+	public static List<Map<String, Object>> getListMap(String table,String field,Integer limit, Where... conds) {
+		QueryRunner run = new QueryRunner(dataSource);
+		Object[] wh = buildWhere(conds);
+		Object[] vas = (Object[]) wh[1];
+		if(field == null){
+			field = "*";
+		}
+		String limits = "";
+		if(limit != null){
+			limits = " LIMIT 0," + limit;
+		}
+		try {
+			List<Map<String, Object>> list = run.query("SELECT " + field + " FROM " + table + wh[0] + limits, new MapListHandler(),vas);
+			return list;
+		} catch (SQLException e) {
+			throw new GoSeviceException(e);
+		}
 	}
+	
+	public static PageVO getPageForMap(String table,String field,int page,Integer epage, Where... conds) {
+		QueryRunner run = new QueryRunner(dataSource);
+		PageVO pageVO = new PageVO();
+		pageVO.setPage(page);
+		pageVO.setEpage(epage);
+		Object[] wh = buildWhere(conds);
+		Object[] vas = (Object[]) wh[1];
+		if(field == null){
+			field = "*";
+		}
+		String limits = " LIMIT "+(page-1) * epage+","+(page * epage);
+		try {
+			List<Map<String, Object>> list = run.query("SELECT " + field + " FROM " + table + wh[0] + limits, new MapListHandler(), vas);
+			Map<String, Object> count = run.query("SELECT count(1) as count FROM " + table + wh[0], new MapHandler(), vas);
+			pageVO.setItems(list);
+			pageVO.setTotal_items(MapUtils.getInteger(count, "count"));
+			return pageVO;
+		} catch (SQLException e) {
+			throw new GoSeviceException(e);
+		}
+	}
+	
+	private static Object[] buildWhere(Where... conds) {
+		String where = "";
+		StringBuilder sb = new StringBuilder();
+		Object[] vas = null;
+		if (conds.length > 0) {
+			vas = new Object[conds.length];
+			int c =0;
+			for (int i = 0; i < conds.length; i++) {
+				Where nv = conds[i];
+				sb.append(" AND ").append(keywordEscape).append(nv.getName()).append(keywordEscape).append(" ").append(nv.getCondition());
+				if(nv.getCondition().equals(Condition.IN) || nv.getCondition().equals(Condition.NOT_IN)) {
+					sb.append(" (").append(nv.getValue()).append(") ");
+				}else {
+					c++;
+					sb.append(" ? ");
+					vas[i] = nv.getValue();
+				}
+				vas[i] = nv.getValue();
+			}
+			vas = Arrays.copyOf(vas, c);
+			where = " WHERE 1=1" + sb.toString();
+		}
+		return new Object[]{where,vas};
+	}
+	
 	public static Map getOne(String field, String group, Where... conds) {
 		List<Map> list = getList(Map.class, null, null, field, group, conds);
 		if (list != null && !list.isEmpty()) {
@@ -130,22 +200,12 @@ public class DaoUtils {
 		QueryRunner run = new QueryRunner(dataSource);
 		
 		ResultSetHandler<List<T>> h = new BeanListHandler<T>(clasz,rowProcessor);
-		StringBuilder sb = new StringBuilder();
-		Object[] vas = null;
-		String where = "";
-		String limits = "";
-		if (conds.length > 0) {
-			vas = new Object[conds.length];
-			for (int i = 0; i < conds.length; i++) {
-				Where nv = conds[i];
-				sb.append(" AND ").append(nv.getName()).append(nv.getCondition()).append("?");
-				vas[i] = nv.getValue();
-			}
-			where = " WHERE 1=1" + sb.toString();
-		}
+		Object[] wh = buildWhere(conds);
+		Object[] vas = (Object[]) wh[1];
 		if(field == null){
 			field = "*";
 		}
+		String limits = "";
 		if(limit != null){
 			if(limit.indexOf(",") > 0){
 				limits = " LIMIT " + limit;
@@ -154,10 +214,10 @@ public class DaoUtils {
 			}
 		}
 		try {
-			List<T> list = run.query(
-					"SELECT " + field + " FROM " + toTable(clasz.getSimpleName()) + where
-							+ (group == null ? "" : " GROUP BY " + group)
-							+ (sort == null ? "" : " ORDER BY " + sort) + limits, h, vas);
+			List<T> list= run.query(
+						"SELECT " + field + " FROM " + toTable(clasz.getSimpleName()) + wh[0]
+								+ (group == null ? "" : " GROUP BY " + group)
+								+ (sort == null ? "" : " ORDER BY " + sort) + limits, h, vas);
 			return list;
 		} catch (SQLException e) {
 			throw new GoSeviceException(e);
@@ -194,7 +254,7 @@ public class DaoUtils {
 			Object[] vas = new Object[fields.size()];
 			for (int i = 0; i < fields.size(); i++) {
 				NameValue nv = fields.get(i);
-				sb.append(",").append(nv.getName());
+				sb.append(",").append(keywordEscape).append(nv.getName()).append(keywordEscape);
 				vas[i] = nv.getValue();
 			}
 			Object[] insert = run.insert("INSERT INTO " + table + " (" + sb.substring(1) + ") VALUES ("
@@ -244,7 +304,7 @@ public class DaoUtils {
 		Object[] vas = new Object[fields.size() + 1];
 		for (int i = 0; i < fields.size(); i++) {
 			NameValue nv = fields.get(i);
-			sb.append(",").append(nv.getName()).append("=?");
+			sb.append(",").append(keywordEscape).append(nv.getName()).append(keywordEscape).append("=?");
 			vas[i] = nv.getValue();
 		}
 		vas[fields.size()] = id;
@@ -271,7 +331,7 @@ public class DaoUtils {
 		String table = toTable(entitys.get(0).getClass().getSimpleName());
 		sql.append(table).append(" SET ");
 		for(String fie:fields){
-			sql.append(",").append(fie).append("=?");
+			sql.append(",").append(keywordEscape).append(fie).append(keywordEscape).append("=?");
 		}
 		sql.append(" WHERE id=?");
 		

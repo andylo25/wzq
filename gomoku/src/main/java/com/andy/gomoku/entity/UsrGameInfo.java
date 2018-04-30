@@ -91,6 +91,10 @@ public class UsrGameInfo extends BaseEntity{
 	public void setLoseCount(Integer loseCount) {
 		this.loseCount = loseCount;
 	}
+
+	public static String table() {
+		return "usr_game_info";
+	}
 	
 	
 }

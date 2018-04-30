@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.Global;
+import com.andy.gomoku.game.task.TimerManager;
 import com.andy.gomoku.utils.GameConf;
 
 @Component
@@ -16,6 +17,7 @@ public class StartupListener implements ApplicationListener<ApplicationReadyEven
     	GameConf.init();
     	initRank(event);
     	
+    	TimerManager.init();
     }
 
 	private void initRank(ApplicationReadyEvent event) {

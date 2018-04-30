@@ -5,16 +5,14 @@ import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TimerManager {
 	
 	private static Logger logger = LoggerFactory.getLogger(TimerManager.class);
 	
-	private Timer timer;
+	private static Timer timer;
 	
-	public TimerManager() {
+	public static void init() {
 		// 自动匹配
 		timer = new Timer("TimerManager");
 		TimerTask task = new AutoMatchTask();
@@ -26,7 +24,6 @@ public class TimerManager {
 		
 		// 刷新排行榜
 		timer.schedule(new RefreshRankTask() , 60*1000,60*1000);
-		
 	}
 	
 }

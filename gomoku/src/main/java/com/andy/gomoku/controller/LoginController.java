@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.andy.gomoku.base.RequestUtil;
 import com.andy.gomoku.base.RespVO;
@@ -21,7 +22,7 @@ import com.andy.gomoku.utils.SecurityUtil;
  */
 @Controller
 @RequestMapping("admin")
-public class LoginController {
+public class LoginController extends BaseController{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -39,10 +40,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping("logout")
-	public @ResponseBody RespVO logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session) {
 		session.removeAttribute(RequestUtil.SESSION_USER);
 		session.invalidate();
 		
-		return RespVO.createSuccessJsonResonse("登出成功");
+		return createCustMV("redirect:/login.html", null);
 	}
 }

@@ -62,6 +62,10 @@ public class UsrUser extends BaseEntity implements BaseUser{
 	public void setIcon(Integer icon) {
 		this.icon = icon;
 	}
+
+	public static String table() {
+		return "usr_user";
+	}
 	
 	
 }

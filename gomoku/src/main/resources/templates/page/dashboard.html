@@ -1,0 +1,65 @@
+<div class="row-fluid">
+    <div class="span6">
+        <!-- block -->
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <div class="muted pull-left">用户</div>
+                <div class="pull-right"><span class="badge badge-info">{{formData.userCount}}</span>
+                </div>
+            </div>
+            <div class="block-content collapse in">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th >ID</th>
+                            <th >用户名</th>
+                            <th >昵称</th>
+                            <th >角色</th>
+                            <th >头像ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in formData.users">
+                            <td ng-bind="item.id"></td>
+                            <td ng-bind="item.user_name"></td>
+                            <td ng-bind="item.nick_name"></td>
+                            <td ng-bind="item.role"></td>
+                            <td ng-bind="item.icon"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
+    <div class="span6">
+        <!-- block -->
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <div class="muted pull-left">用户游戏信息</div>
+            </div>
+            <div class="block-content collapse in">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>积分</th>
+                            <th>段位</th>
+                            <th>赢数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in formData.gameInfos">
+                            <td ng-bind="item.nick_name"></td>
+                            <td ng-bind="item.score"></td>
+                            <td ng-bind="item.title"></td>
+                            <td ng-bind="item.win_count"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
+</div>
+                    

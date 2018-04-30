@@ -13,6 +13,9 @@ var dyService = angular.module("dyService", [])
                 });
             }
         }
+        $rootScope.user_ = window.user_ || {};
+        $rootScope.menus_ = window.menus_ || {};
+        $rootScope.pageTitle_ = window.pageTitle_ || {};
     }])
     .factory('scopeService', function () {
         return {
