@@ -19,6 +19,7 @@ public class SendUtil {
 		}else{
 			Map<String, Object> map = gameUser.getUserInfo();
 			map.put("respCode", GoConstant.SUCC_CODE);
+			
 			doSend(session,GmAction.ACTION_100, gameUser.getUserInfo());
 		}
 	}
