@@ -10,15 +10,12 @@ public class WineAI {
 	private boolean isEnd;
 	
 	public WineAI() {
-		init(15);
+		this(15,0,0);
 	}
-	public WineAI(int size) {
-		init(size);
+	public WineAI(int size,int toTurn,int toMatch) {
+		winePoint = newPoint(size,0,toTurn,toMatch);
 	}
 	
-	public void init(int size){
-		winePoint = newPoint(size);
-	}
 	
 	public boolean addChess(int x,int y){
 		boolean isWin = addChess(winePoint, x, y);
@@ -39,6 +36,10 @@ public class WineAI {
 		deletePoint(winePoint);
 	}
 	
+	public void tackBack(){
+		takeBack(winePoint);
+	}
+	
 	public static class Mov{
 		public int x,y;
 		public Mov(){ }
@@ -48,9 +49,10 @@ public class WineAI {
 		}
 	}
 	
-	private static native long newPoint(int size);
+	private static native long newPoint(int size,int depth,int turn,int match);
 	private static native void deletePoint(long p);
 	private static native boolean addChess(long p,int x,int y);
 	private static native long getBestMove(long p);
+	private static native void takeBack(long p);
 	
 }
