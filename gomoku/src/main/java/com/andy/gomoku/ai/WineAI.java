@@ -7,7 +7,7 @@ public class WineAI {
 
 	static {
 		try {
-			System.loadLibrary("lib/WineAI");
+			System.loadLibrary("WineAI");
 			System.out.println("WineAI加载成功..");
 		} catch (Exception e) {
 			e.printStackTrace();

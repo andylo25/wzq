@@ -21,9 +21,9 @@ public class GameUser implements Serializable{
 	private Room room;
 	private GomokuGame game;
 	
-	private Long startMatch;
-	private Long lastMov;
-	private Long allMovTime;
+	private long startMatch;
+	private long lastMov;
+	private long allMovTime;
 	
 	public GameUser() {
 	}
@@ -140,6 +140,8 @@ public class GameUser implements Serializable{
 		
 		this.game = null;
 		this.status = GoConstant.USER_STATUS_0;
+		lastMov = 0;
+		allMovTime = 0;
 	}
 
 	public void move(Long lastM) {
