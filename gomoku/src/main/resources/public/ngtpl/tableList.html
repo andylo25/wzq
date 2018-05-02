@@ -1,13 +1,14 @@
 <!-- block -->
 <div class="block">
     <div class="navbar navbar-inner block-header">
-        <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+        <div class="muted pull-left"></div>
     </div>
     <div class="block-content collapse in">
         <div class="span12">
            <div class="table-toolbar">
               <div class="btn-group" ng-repeat="btn in toollist">
-                 <a layer-open="{url:btn.url,title:btn.text,id:tableB[curSel].id}"><button class="btn btn-success" >{{btn.text}} <i class="icon-plus icon-white"></i></button></a>
+                 <a ng-if="btn.type=='add'" layer-open="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-plus icon-white"></i></button></a>
+                 <a ng-if="btn.type=='edit'" layer-open="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true}"><button class="btn btn-success" >{{btn.text}} <i class="icon-edit icon-white"></i></button></a>
               </div>
               <div class="btn-group pull-right">
                  <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>

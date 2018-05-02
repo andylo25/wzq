@@ -16,6 +16,7 @@ var dyService = angular.module("dyService", [])
         $rootScope.user_ = window.user_ || {};
         $rootScope.menus_ = window.menus_ || {};
         $rootScope.pageTitle_ = window.pageTitle_ || {};
+        $rootScope.copyright = "&copy; Andy cui 2018";
     }])
     .factory('scopeService', function () {
         return {

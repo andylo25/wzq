@@ -48,10 +48,12 @@ public class PageUtil {
 	 */
 	public static Map<String, Object> createFormPageStructure(String subUrl, List<FormField> formFieldList, Object formData) throws Exception {
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("submit_url", subUrl);
-		data.put("form_struct", formFieldList!=null?formFieldList:Lists.newArrayList());
+		Map<String, Object> formStruct = new HashMap<String, Object>();
+		formStruct.put("submitUrl", subUrl);
+		formStruct.put("formlist", formFieldList!=null?formFieldList:Lists.newArrayList());
+		data.put("formStruct", formStruct);
 		if(formData != null){
-			data.put("form_data", formData);
+			data.put("formData", formData);
 		}
 
 		return data;
@@ -81,84 +83,6 @@ public class PageUtil {
 		}
 		
 		return createFormPageStructure(subUrl, formFieldList);
-	}
-	
-	/**
-	 * 构造表单数据
-	 * @param data Map/BaseEntity
-	 * @param fields
-	 * @return
-	 * @throws Exception
-	 */
-	public static Map<String, Object> createFormDataList(Object data, String[] fields) throws Exception {
-		return createFormDataList(data, fields, null, null);
-	}
-	
-	/**
-	 * 构造表单数据
-	 * @param data Map/BaseEntity
-	 * @param fields
-	 * @param doubleFields
-	 * @param df 默认保留两位小数
-	 * @return
-	 * @throws Exception
-	 */
-	public static Map<String, Object> createFormDataList(Object data, String[] fields, String doubleFields,
-			DecimalFormat df) {
-		//只出路Map/BaseEntity
-		if(!(data instanceof Map || data instanceof BaseEntity)) return null;
-		
-		//Double
-		if(df == null) df = DECIMAL_FORMAT;
-		if(StringUtils.isEmpty(doubleFields))
-			doubleFields = ",";
-		else
-			doubleFields = "," + doubleFields;
-		
-		//要处理的字段
-		String field = "";
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(fields == null || fields.length <= 0) {
-			if(data instanceof Map) {
-				map = (Map<String, Object>) data;
-				for(String key : ((Map<String, Object>) data).keySet()) {
-					field += "," + key;
-				}
-			} else if(data instanceof BaseEntity) {
-				for(Field temp : data.getClass().getDeclaredFields()) {
-					if("serialVersionUID".equals(temp.getName())) continue;
-					field += "," + temp.getName();
-				}
-			}
-		} else {
-			for(String temp : fields) {
-				field += "," + temp;
-			}
-		}
-		field = field.substring(1);
-		
-		//生成FormData
-		List<FormData> formDatas = new ArrayList<FormData>();
-		for(String key : field.split(",")) {
-			Object value = null;
-			if(data instanceof Map) {
-				map = (Map<String, Object>) data;
-				value = map.get(key);
-			}
-			else if(data instanceof BaseEntity) value = ReflectUtil.getFieldValue(data, key);
-					
-			if(doubleFields.indexOf("," + key) >= 0 && value instanceof Double) value = df.format((Double)value);
-			if(value instanceof BigDecimal) value = ((BigDecimal) value).toString();
-			
-			FormData formData = new FormData();
-			formData.setName(key);
-			formData.setValue(value);
-			formDatas.add(formData);
-		}
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("FormData", formDatas);
-		return result;
 	}
 	
 	/**

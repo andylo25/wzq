@@ -159,79 +159,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
             }
         };
     }])
-    //处理select联动，如省市联动等
-    .directive("dySelect", function($http) { 
-        return {
-            require: '?ngModel',
-            //scope:{
-                //'dyParams':'@?'
-            //},
-            restrict: 'ACE',
-            link: function(scope, element, attrs) {
-                var url = attrs.dataurl,//联动的地址
-                    params = attrs.dataparams ? eval('('+attrs.dataparams+')') : "",
-                    len = params != "" ? params.length : 0;
-                scope.linkData = {}; //存放请求回来的数据
-                $http.post(url).success(function(data){
-                    scope.linkData[0] = data.data;
-                });
-                //console.log(params[0]);
-                scope.linkFn = function(params){
-                    if((params.index+1)==scope.list.linklist.length){
-                        return;
-                    }
-                    $http({
-                        method: 'post',
-                        url: url,
-                        data: $.param(params),
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }).success(function(data) {
-                        scope.linkData[params.index+1] = data.data;
-                    });
-                }
-
-                //初始化选择省-市-区  dataparams="[{pid: 值, index: 0},{pid: 值, index: 1},{pid: 值, index: 2}]"
-                if(len > 0){
-                    for(var key=0; key<len; key++){
-                        scope.linkFn(params[key]);
-                    }
-                }
-
-                /*for(var i=0;i<len-1;i++){
-                    console.log(i);*/
-                // if(len==2){  //初始化选择省-市-区  dataparams="['省字段', '市字段', '县字段']"
-                //     scope.$watch('formData[params[0]]',function(newValue,oldValue){
-                //         var linkparams = {
-                //             'index':0
-                //         };
-                //         linkparams[params[0]] = scope.formData[params[0]];
-                //         scope.linkFn(linkparams);
-                //     });
-                // }else if(len==3){
-                //     scope.$watch('formData[params[0]]',function(newValue,oldValue){
-                //         var linkparams = {
-                //             'index':0
-                //         };
-                //         linkparams[params[0]] = scope.formData[params[0]];
-                //         scope.linkFn(linkparams);
-                //     });
-                //     scope.$watch('formData[params[1]]',function(newValue,oldValue){
-                //         var linkparams = {
-                //             'index':1
-                //         };
-                //         linkparams[params[1]] = scope.formData[params[1]];
-                //         scope.linkFn(linkparams);
-                //     });
-                // }
-                /*}*/
-                    
-                
-                
-            }
-        }
-    })
     //日历
     .directive("datePicker", function ($injector) {
         return {
@@ -735,133 +662,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
             }
         }
     })
-    //添加-带参数
-    .directive("commonAdd", function($http){
-        return {
-            require: "?ngModel",
-            scope: {
-                "commonAdd": "="
-            },
-            link: function(scope, element, attrs){
-                element.click(function(){
-                    var params = scope.commonAdd;
-                    var url = "/" + params.url + "?",
-                        key;
-                    for(key in params.form_data){
-                        url += key + "=" + params.form_data[key] + "&"
-                    }
-                    url = url.substring(0, url.length-1);
-                    parent.layer.open({
-                        type: 2,
-                        title: params.title,
-                        shadeClose: false,
-                        maxmin: true,
-                        shade: 0.3,
-                        area: ["750px", "650px"],
-                        content: url //iframe的url
-                    });
-                })
-            }
-        }
-    })
-    //编辑
-    .directive("dyEdit", function($http, postUrl){
-        return {
-            require: "?ngModel",
-            scope: {
-                "dyEdit": "=",
-                "checkValue": "="
-            },
-            link: function(scope, element, attrs){
-                element.click(function(){
-                    var params = scope.dyEdit;
-                    params.title = params.title || "编辑";
-                    if(scope.checkValue.length > 1 && params.single == 1){
-                        parent.layer.msg(params.title + "的选项只能为一项", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        })
-                    } else if (scope.checkValue.length == 0){
-                        parent.layer.msg("请先选择要" + params.title + "的选项！", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        })
-                    } else {
-                        var checkValue = scope.checkValue.join(",");
-                        if(params.click == "900"){
-                            parent.layer.open({
-                                type: 2,
-                                title: params.title,
-                                shadeClose: false,
-                                maxmin: true,
-                                shade: 0.3,
-                                area: ["900px", "650px"],
-                                content: "/" + params.url + "?id=" + checkValue //编辑的页面地址，需要传递id给后台
-                            });
-                        } else {
-                            parent.layer.open({
-                                type: 2,
-                                title: params.title,
-                                shadeClose: false,
-                                maxmin: true,
-                                shade: 0.3,
-                                area: ["750px", "650px"],
-                                content: "/" + params.url + "?id=" + checkValue //编辑的页面地址，需要传递id给后台
-                            });
-                        }
-                    }
-                })
-            }
-        }
-    })
-    //编辑-带参数
-    .directive("commonEdit", function($http){
-        return {
-            require: "?ngModel",
-            scope: {
-                "commonEdit": "=",
-                "checkValue": "="
-            },
-            link: function(scope, element, attrs){
-                element.click(function(){
-                    var params = scope.commonEdit;
-                    params.title = params.title || "编辑";
-                    var url = "/" + params.url + "?",
-                        key;
-                    for(key in params.form_data){
-                        url += key + "=" + params.form_data[key] + "&"
-                    }
-                    // url = url.substring(0, url.length-1);
-                    if(scope.checkValue.length > 1 && params.single == 1){
-                        parent.layer.msg(params.title + "的选项只能为一项", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        })
-                    } else if (scope.checkValue.length == 0){
-                        parent.layer.msg("请先选择要" + params.title + "的选项！", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        })
-                    } else {
-                        var checkValue = scope.checkValue.join(",");
-                        parent.layer.open({
-                            type: 2,
-                            title: params.title,
-                            shadeClose: false,
-                            maxmin: true,
-                            shade: 0.3,
-                            area: ["750px", "650px"],
-                            content: url + "id=" + checkValue  //编辑的页面地址，需要传递id给后台
-                        });
-                    }
-                })
-            }
-        }
-    })
     //只发送请求
     .directive("dyPost", function($http, postUrl){
         return {
@@ -891,94 +691,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
             }
         }
     })
-    //删除
-    .directive("dyDel", function($http,postUrl){
-        return {
-            require: "?ngModel",
-            scope: {
-                "dyDel": "=",
-                "checkValue": "="
-            },
-            link: function(scope, element, attrs){
-                element.click(function(){
-                    var params = scope.dyDel;
-                    params.title = params.title || "删除";
-                    var btnStatus = true;
-                    var _recallAjax = function(){
-                        parent.layer.confirm("确定是否" + params.title, {
-                            time: 0, //不自动关闭
-                            icon: 3,
-                            shade: 0.3,
-                            title: params.title,
-                            btn: ["确定", "取消"]
-                        }, function(index){
-                            if(btnStatus){
-                                btnStatus = false;
-                                var checkValue = scope.checkValue.join(",");
-                                postUrl.events("/" + params.url, {id: checkValue}).success(function(_data){
-                                    if(_data.status == 500){  //返回错误提示
-                                        parent.layer.msg(_data.description, {
-                                            icon: 2,
-                                            shade: 0.3,
-                                            time: 3000
-                                        })
-                                    } else if (_data.status == 600){  //返回超时弹窗
-                                        parent.layer.open({
-                                            type: 2,
-                                            title: "超时说明",
-                                            shadeClose: false,
-                                            maxmin: true,
-                                            shade: 0.3,
-                                            area: ["520px", "460px"],
-                                            content: "/workbench/buss/addOutExp?id=" + _data.description
-                                        });
-                                    } else {
-                                        parent.layer.msg(_data.description, {icon: 1, time: 1000}, function(){
-                                            if(!!params.refresh_tree){  //组织架构-部门管理全部刷新，否则左侧的树数据无法更新
-                                                window.parent.document.getElementById("rightcontent").contentWindow.location.reload(true);
-                                            } else {
-                                                top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                            }
-                                            layer.closeAll();
-                                        });
-                                    }
-                                });
-                            } else {
-                                return;
-                            }
-                        });
-                    }
-                    if(scope.checkValue.length > 1 && params.single == 1){
-                        parent.layer.msg(params.title + "的选项只能为一项", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        })
-                    } else if (scope.checkValue.length == 0){
-                        parent.layer.msg("请先选择要" + params.title + "的选项！", {
-                            icon: 2,
-                            shade: 0.3,
-                            time: 2000
-                        });
-                    } else {
-                        if(!!params.double){  //二手房-待保证号的完成报证-二次确认
-                            parent.layer.confirm("请确认是否已经导出", {
-                                time: 0, //不自动关闭
-                                icon: 3,
-                                shade: 0.3,
-                                title: "导出确认",
-                                btn: ["确定", "取消"]
-                            }, function(){
-                                _recallAjax();
-                            });
-                        }else{
-                            _recallAjax();
-                        }
-                    }
-                })
-            }
-        }
-    })
     //表单提交
     //<input type="submit" class="submit-btn" dy-submit="{url: formStruct.submit_url}" form-data="formData" value="提交">
     .directive("dySubmit", function(postUrl, scopeService){
@@ -999,16 +711,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
                                 scopeService.safeApply(scope, function () {
                                     scope.btnStatus = false;
                                 });
-                                if(!!scope.dySubmit.refresh_sub){
-                                    window.parent.document.getElementById("rightDialog").contentWindow.location.reload(true);
-                                } else if(!!scope.dySubmit.refresh_all){
-                                    top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                    window.parent.document.getElementById("rightDialog").contentWindow.location.reload(true);
-                                } else {
-                                    // window.parent.document.getElementById("rightcontent").contentWindow.location.reload(true);
-                                    top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                    window.parent.document.getElementById("frameSlideRight").style.right = "-920px";
-                                }
                                 parent.layer.closeAll();
                             });
                         }else{
@@ -1017,48 +719,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
                                     scope.btnStatus = false;
                                 });
                             });
-                        }
-                    });
-                })
-            }
-        }
-    })
-    //表单提交前的确认提示
-    //<input type="submit" class="submit-btn" dy-submit-confirm="{url: formStruct.submit_url, text: formStruct.text}" form-data="formData" value="提交">
-    .directive("dySubmitConfirm", function(postUrl){
-        return {
-            scope: {
-                dySubmitConfirm: "=",
-                dyFormData: "=formData"
-            },
-            link: function(scope, element, attrs){
-                element.click(function(){
-                    var btnStatus = true;
-                    parent.layer.confirm(scope.dySubmitConfirm.text || "是否已经打印完成？", {
-                        time: 0, //不自动关闭
-                        icon: 3,
-                        shade: 0.3,
-                        title: "确认",
-                        btn: ["确定", "取消"]
-                    }, function(){
-                        if(btnStatus){
-                            btnStatus = false;
-                            postUrl.events("/" + scope.dySubmitConfirm.url, scope.dyFormData).success(function(_data){
-                                if(_data.status == 200){
-                                    parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 1000}, function(){
-                                        // window.parent.document.getElementById("rightcontent").contentWindow.location.reload(true);
-                                        top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                        window.parent.document.getElementById("frameSlideRight").style.right = "-920px";
-                                        parent.layer.closeAll();
-                                    });
-                                }else{
-                                    parent.layer.msg(_data.description, {icon: 2, shade: 0.3, time: 1000}, function(){
-                                        //window.location.reload();
-                                    });
-                                }
-                            });
-                        } else {
-                            return;
                         }
                     });
                 })
@@ -1103,18 +763,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
                                     });
                                 } else {
                                     parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 1000}, function(){
-                                        if(!!scope.layerConfirm.refresh_sub){
-                                            window.parent.document.getElementById("rightDialog").contentWindow.location.reload(true);
-                                        } else if(!!scope.layerConfirm.refresh_all){
-                                            top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                            window.parent.document.getElementById("rightDialog").contentWindow.location.reload(true);
-                                        } else if(!!scope.layerConfirm.reload){
-                                            window.location.reload();
-                                        } else {
-                                            // window.parent.document.getElementById("rightcontent").contentWindow.location.reload(true);
-                                            top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                            window.parent.document.getElementById("frameSlideRight").style.right = "-920px";
-                                        }
                                         parent.layer.closeAll();
                                     });
                                 }
@@ -1149,48 +797,38 @@ var dyDir = angular.module("dyDir", ["dyService"])
                 element.click(function(){
                     var params = scope.layerOpen,
                         param = params.param ? "&param=" + params.param : "";
-                    if(!!params.reback){  //侧滑头部打印模版弹窗
-                        if(!!params.id){
-                            parent.layer.open({
-                                type: 2,
-                                title: params.title || "审核",
-                                shadeClose: false,
-                                maxmin: true,
-                                shade: 0.3,
-                                area: ["750px", "650px"],
-                                content: "/" + params.url + "?id=" + params.id + param
-                            });
-                        } else {
-                            parent.layer.msg("请选择打印模板！", {icon: 2, time: 2000});
-                        }
+                    var url = params.url;
+                    if(url.indexOf('&') == 0){
+                        url = params.col[url.substr(1)];
+                    }
+                    
+                    if(params.needId && !params.id){
+                    	 parent.layer.msg("请选择一条记录", {icon: 1, shade: 0.3, time: 1000}, function(){
+                         });
+                    	 return;
+                    }
+                    var srcUrl = url.indexOf('http') == 0?url:("/" + url + "?id=" + params.id + param);
+                    if(params.type == "full"){  //是否全屏显示
+                        var index = parent.layer.open({
+                            type: 2,
+                            title: params.title || "审核",
+                            shadeClose: false,
+                            maxmin: false,
+                            shade: 0.3,
+                            area: ["770px", "650px"],
+                            content: srcUrl
+                        });
+                        parent.layer.full(index);
                     } else {
-                        var url = params.url;
-                        if(url.indexOf('&') == 0){
-                            url = params.col[url.substr(1)];
-                        }
-                        var srcUrl = url.indexOf('http') == 0?url:("/" + url + "?id=" + params.id + param);
-                        if(params.type == "full"){  //是否全屏显示
-                            var index = parent.layer.open({
-                                type: 2,
-                                title: params.title || "审核",
-                                shadeClose: false,
-                                maxmin: false,
-                                shade: 0.3,
-                                area: ["750px", "650px"],
-                                content: srcUrl
-                            });
-                            parent.layer.full(index);
-                        } else {
-                            parent.layer.open({
-                                type: 2,
-                                title: params.title || "审核",
-                                shadeClose: false,
-                                maxmin: true,
-                                shade: 0.3,
-                                area: [params.width || "750px", params.height || "650px"],
-                                content: srcUrl
-                            });
-                        }
+                        parent.layer.open({
+                            type: 2,
+                            title: params.title || "审核",
+                            shadeClose: false,
+                            maxmin: true,
+                            shade: 0.3,
+                            area: [params.width || "770px", params.height || "550px"],
+                            content: srcUrl
+                        });
                     }
                 })
             }

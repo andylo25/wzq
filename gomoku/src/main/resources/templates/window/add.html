@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<#include "/common/header.html">
+	<body ng-app="admin" ng-controller="addCtrl">
+		<div class="container-fluid">
+            <div class="row-fluid">
+                <!--/span-->
+                <div class="span12">
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                        	<div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                     <form class="form-horizontal">
+                                      <fieldset style="margin-top: 15px;">
+                                        <div class="control-group" ng-repeat="list in formStruct.formlist">
+                                          <label class="control-label" title="{{list.text}}" ng-bind="list.text"></label>
+                                          <div class="controls" ng-if="list.type=='pwd'">
+                                            <input class="input-xlarge focused" placeholder="{{list.placeholder}}" name="{{list.name}}" type="password" ng-model="formData[list.name]">
+                                          </div>
+                                          <div class="controls" ng-if="list.type=='input'">
+                                            <input class="input-xlarge focused" placeholder="{{list.placeholder}}" name="{{list.name}}" type="text" ng-model="formData[list.name]">
+                                          </div>
+                                          <div class="controls" ng-if="list.type=='span'">
+                                            <span class="input-xlarge uneditable-input" ng-bind="formData[list.name]"></span>
+                                          </div>
+                                          <div class="controls" ng-if="list.type=='checkbox'">
+                                            <label ng-repeat="checkboxlist in list.options">
+                                              <input type="checkbox" name="{{checkboxlist.name}}" checklist-model="formData[list.name]" checklist-value="checkboxlist.value" ng-disabled="checkboxlist.disabled==0">
+                                              {{checkboxlist.text}}
+                                            </label>
+                                          </div>
+                                          <div class="controls" ng-if="list.type=='select'">
+                                          	<select name="{{list.name}}" ng-model="formData[list.name]"
+                                                ng-options="a.value as a.text for a in list.options" >
+                                            	<option value="">-- 请选择 --</option>
+                                        	</select>
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                          <button type="submit" class="btn btn-primary" ng-bind="btnText" ng-click="submitForm()"></button>
+                                          <button type="reset" class="btn" layer-close>取消</button>
+                                        </div>
+                                      </fieldset>
+                                      
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		<#include "/common/footer.html">
+		<script src="assets/app/index.js"></script>
+	</body>
+</html>

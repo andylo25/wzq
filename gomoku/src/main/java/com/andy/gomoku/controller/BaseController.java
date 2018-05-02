@@ -182,6 +182,7 @@ public class BaseController {
 		List<Tool> tools = Lists.newArrayList();
 		for(int i=0;i<strs.length;i+=2) {
 			Tool tool = new Tool();
+			tool.setType("edit");
 			tool.setText(strs[i]);
 			tool.setUrl(strs[i+1]);
 			tools.add(tool);
