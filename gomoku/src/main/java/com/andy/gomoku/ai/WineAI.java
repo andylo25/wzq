@@ -1,10 +1,20 @@
 package com.andy.gomoku.ai;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WineAI {
 
 	static {
-		System.loadLibrary("lib/WineAI");
+		try {
+			System.loadLibrary("lib/WineAI1");
+			System.out.println("WineAI加载成功..");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private long winePoint; // native 指针
 	private boolean isEnd;
@@ -13,12 +23,15 @@ public class WineAI {
 		this(15,0,0);
 	}
 	public WineAI(int size) {
-		winePoint = newPoint(size,0,0,0);
+		try {
+			winePoint = newPoint(size,0,0,0);
+		} catch (Exception e) {
+			logger.error("创建AI异常",e);
+		}
 	}
 	public WineAI(int size,int toTurn,int toMatch) {
 		winePoint = newPoint(size,0,toTurn,toMatch);
 	}
-	
 	
 	public boolean addChess(int x,int y){
 		boolean isWin = addChess(winePoint, x, y);
@@ -39,7 +52,7 @@ public class WineAI {
 		deletePoint(winePoint);
 	}
 	
-	public void tackBack(){
+	public void takeBack(){
 		takeBack(winePoint);
 	}
 	

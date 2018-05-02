@@ -3,6 +3,8 @@ package com.andy.gomoku.action;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.ai.WineAI.Mov;
@@ -22,6 +24,8 @@ import com.andy.gomoku.websocket.MyWebSocket;
 @Component(GmAction.ACTION_PREFIX+GmAction.ACTION_106)
 public class Action106 implements IWebAction{
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
 		int x = MapUtils.getIntValue(data, "x");
@@ -52,6 +56,8 @@ public class Action106 implements IWebAction{
 			if(resu == 1){
 				CommonUtils.gameOver(room,game,movUser);
 			}
+		}else{
+			logger.error("落子失败："+data);
 		}
 		
 		

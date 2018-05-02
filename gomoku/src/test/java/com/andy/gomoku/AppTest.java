@@ -33,9 +33,9 @@ public class AppTest extends TestCase {
 	 */
 	public void testApp() {
 		
-		WineAI fd = new WineAI(10);
+		WineAI fd = new WineAI(15);
 		fd.addChess(7, 7);
 		Mov mov = fd.getBestMove();
-		System.out.println(mov);
+		System.out.println(mov.x + ":"+ mov.y);
 	}
 }
