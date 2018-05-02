@@ -29,24 +29,17 @@ public class Login101Action implements IWebAction{
 
 	@Override
 	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
-		String userName = MapUtils.getString(data, "userName");
-		UsrUser user = null;
-		UsrGameInfo gameInfo = null;
-		if(StringUtils.isNotBlank(userName)){
-			user = DaoUtils.getOne(UsrUser.class, Where.eq("userName", userName));
-		}else {
-			user = new UsrUser();
-			user.setUserName(RandomStringUtils.randomAlphabetic(10));
-			user.setNickName(CommonUtils.genNickName());
-			DaoUtils.insert(user);
-			
-			gameInfo = new UsrGameInfo();
-			gameInfo.setUid(user.getId());
-			gameInfo.setTitleSort(0);
-			DaoUtils.insert(gameInfo);
-		}
+		UsrUser user = new UsrUser();
+		user.setUserName(RandomStringUtils.randomAlphabetic(10));
+		user.setNickName(CommonUtils.genNickName());
+		DaoUtils.insert(user);
+		
+		UsrGameInfo gameInfo = new UsrGameInfo();
+		gameInfo.setUid(user.getId());
+		gameInfo.setTitleSort(0);
+		DaoUtils.insert(gameInfo);
+		
 		GameUser gameUser = new GameUser(user);
-		gameInfo = DaoUtils.getOne(UsrGameInfo.class, Where.eq("uid", user.getId()));
 		gameUser.setGameInfo(gameInfo);
 		
 		Global.addUser(user.getId(), myWebSocket);
