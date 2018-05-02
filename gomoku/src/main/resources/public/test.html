@@ -9,6 +9,7 @@
 <body>
     Welcome<br/><input id="text" type="text" />
     <button onclick="send(101)">yk登录</button>
+    <button onclick="send(100)">登录</button>
     <button onclick="send(102)">好友约战</button>
     <button onclick="send(103)">加入房间</button>
     <button onclick="send(104)">快速开始</button>
@@ -27,7 +28,9 @@
 function send(act,rob){
 	var fd = text.value.split(" ");
 	var data = {action:act}
-	if(act == 101){
+	if(act == 100){
+		data.data = {userName:fd[0]};
+	}else if(act == 101){
 		data.data = {};
 	}else if(act == 102){
 		data.data = {};

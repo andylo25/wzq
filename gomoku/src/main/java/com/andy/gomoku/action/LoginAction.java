@@ -32,7 +32,7 @@ public class LoginAction implements IWebAction{
 		UsrGameInfo gameInfo = null;
 		if(StringUtils.isBlank(userName))return;
 		
-		user = DaoUtils.getOne(UsrUser.class, Where.eq("userName", userName));
+		user = DaoUtils.getOne(UsrUser.class, Where.eq("user_Name", userName));
 		if(user == null){
 			SendUtil.send100(myWebSocket, null);
 			return;
