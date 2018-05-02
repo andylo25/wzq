@@ -89,6 +89,7 @@ public class GameUser implements Serializable{
 		Map<String, Object> resu = Maps.newHashMap();
 		resu.put("userId", id);
 		resu.put("nickName", getNickName());
+		resu.put("userName", getUserName());
 		resu.put("icon", user.getIcon());
 		resu.put("coin", gameInfo.getCoin());
 		resu.put("score", gameInfo.getScore());

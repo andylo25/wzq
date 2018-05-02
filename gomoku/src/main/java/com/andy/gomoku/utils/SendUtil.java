@@ -11,6 +11,17 @@ import com.google.common.collect.Maps;
 
 public class SendUtil {
 
+	public static void send100(MyWebSocket session,GameUser gameUser) {
+		if(gameUser == null){
+			Map<String,Object> map = Maps.newHashMap();
+			map.put("respCode", 1);
+			doSend(session,GmAction.ACTION_100, map);
+		}else{
+			Map<String, Object> map = gameUser.getUserInfo();
+			map.put("respCode", GoConstant.SUCC_CODE);
+			doSend(session,GmAction.ACTION_100, gameUser.getUserInfo());
+		}
+	}
 	public static void send101(MyWebSocket session,GameUser gameUser) {
 		if(gameUser == null)return;
 		doSend(session,GmAction.ACTION_101, gameUser.getUserInfo());

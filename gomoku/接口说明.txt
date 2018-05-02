@@ -22,6 +22,7 @@ nickName 昵称
 响应：
   userId 用户ID
     icon 头像ID
+userName 用户名
 nickName 昵称
 	coin 金币
    score 积分
