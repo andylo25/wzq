@@ -12,6 +12,9 @@ public class WineAI {
 	public WineAI() {
 		this(15,0,0);
 	}
+	public WineAI(int size) {
+		winePoint = newPoint(size,0,0,0);
+	}
 	public WineAI(int size,int toTurn,int toMatch) {
 		winePoint = newPoint(size,0,toTurn,toMatch);
 	}
