@@ -44,7 +44,7 @@ public class LoginAction implements IWebAction{
 			Global.addUser(user.getId(), myWebSocket);
 			myWebSocket.setAttr(GoConstant.USER_SESSION_KEY, gameUser);
 			
-			SendUtil.send101(myWebSocket, gameUser);
+			SendUtil.send100(myWebSocket, gameUser);
 		}
 	}
 
