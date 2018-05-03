@@ -35,11 +35,13 @@ public class UsrUserController extends BaseController{
 	@RequestMapping(value="list")
 	public ModelAndView list() throws Exception {
 		TableHeader tableHeader = new TableHeader();
-		tableHeader.setNames(new String[]{"id", "nick_name", "score","coin", "title", "win_count","role"});
-		tableHeader.setTexts(new String[]{"ID", "昵称","积分","金币","段位","赢局","角色"});
+		tableHeader.setNames(new String[]{"id", "nick_name", "coin", "title", "win_count","role"});
+		tableHeader.setTexts(new String[]{"ID", "昵称","金币","段位","赢局","角色"});
 		
 		Tool tool = new Tool();
-		tool.setList(buildTools("增加金币","admin/user/toAddCoin"));
+		tool.setUrls("admin/user/toAddCoin");
+		tool.setTexts("增加金币");
+		tool.setTypes("edit");
 		
 		Search search = new Search();
 		search.setNames(new String[]{"nick_name"});

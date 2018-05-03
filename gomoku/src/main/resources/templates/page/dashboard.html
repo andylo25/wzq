@@ -21,7 +21,7 @@
                         <tr ng-repeat="item in formData.users">
                             <td ng-bind="item.id"></td>
                             <td ng-bind="item.nick_name"></td>
-                            <td ng-bind="item.role"></td>
+                            <td ng-bind="item.role==1?'机器人':'玩家'"></td>
                             <td ng-bind="item.icon"></td>
                         </tr>
                     </tbody>
@@ -41,7 +41,7 @@
                     <thead>
                         <tr>
                             <th>用户</th>
-                            <th>积分</th>
+                            <th>金币</th>
                             <th>段位</th>
                             <th>赢数</th>
                         </tr>
@@ -49,7 +49,7 @@
                     <tbody>
                         <tr ng-repeat="item in formData.gameInfos">
                             <td ng-bind="item.nick_name"></td>
-                            <td ng-bind="item.score"></td>
+                            <td ng-bind="item.coin"></td>
                             <td ng-bind="item.title"></td>
                             <td ng-bind="item.win_count"></td>
                         </tr>

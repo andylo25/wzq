@@ -126,7 +126,7 @@ public class Tool implements Serializable {
 		return ids;
 	}
 
-	public void setIds(String[] ids) {
+	public void setIds(String... ids) {
 		this.ids = ids;
 	}
 
@@ -134,7 +134,7 @@ public class Tool implements Serializable {
 		return clicks;
 	}
 
-	public void setClicks(String[] clicks) {
+	public void setClicks(String... clicks) {
 		this.clicks = clicks;
 	}
 
@@ -142,7 +142,7 @@ public class Tool implements Serializable {
 		return icons;
 	}
 
-	public void setIcons(String[] icons) {
+	public void setIcons(String... icons) {
 		this.icons = icons;
 	}
 
@@ -150,7 +150,7 @@ public class Tool implements Serializable {
 		return singles;
 	}
 
-	public void setSingles(String[] singles) {
+	public void setSingles(String... singles) {
 		this.singles = singles;
 	}
 
@@ -158,7 +158,7 @@ public class Tool implements Serializable {
 		return texts;
 	}
 
-	public void setTexts(String[] texts) {
+	public void setTexts(String... texts) {
 		this.texts = texts;
 	}
 
@@ -166,7 +166,7 @@ public class Tool implements Serializable {
 		return titles;
 	}
 
-	public void setTitles(String[] titles) {
+	public void setTitles(String... titles) {
 		this.titles = titles;
 	}
 
@@ -174,7 +174,7 @@ public class Tool implements Serializable {
 		return types;
 	}
 
-	public void setTypes(String[] types) {
+	public void setTypes(String... types) {
 		this.types = types;
 	}
 
@@ -182,7 +182,7 @@ public class Tool implements Serializable {
 		return urls;
 	}
 
-	public void setUrls(String[] urls) {
+	public void setUrls(String... urls) {
 		this.urls = urls;
 	}
 
@@ -190,7 +190,7 @@ public class Tool implements Serializable {
 		return checks;
 	}
 
-	public void setChecks(String[] checks) {
+	public void setChecks(String... checks) {
 		this.checks = checks;
 	}
 

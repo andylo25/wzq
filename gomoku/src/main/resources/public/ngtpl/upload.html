@@ -1,0 +1,35 @@
+<input type="hidden" validator="required" name="{{names+random}}" ng-model="sumData[names]" ng-if="required == '1'">
+<div class="uploader-file-box">
+    <input type="file" nv-file-select uploader="uploader" class="file" accept="image/*" multiple ng-click="clearQueue();" ng-if="type == 'images' && multiple == '1'" />
+    <input type="file" nv-file-select uploader="uploader" class="file" multiple ng-click="clearQueue();" ng-if="type == 'files' && multiple == '1'" />
+
+    <input type="file" nv-file-select uploader="uploader" class="file" accept="image/*" ng-click="clearQueue();" ng-if="type == 'images' && multiple == '0'" />
+    <input type="file" nv-file-select uploader="uploader" class="file" ng-click="clearQueue();" ng-if="type == 'files' && multiple == '0'" />
+    <a href="javascript:;" class="file-btn"></a>
+    <span class="txt" ng-if="template == 'list' || template == 'table'">单个附件不要大于2M</span>
+</div>
+
+<div ng-if="template == 'list'">
+    <div class="form-upload" ng-if="multiple == '0'">
+        <div class="label-img" ng-if="tempData.format == '.png' || tempData.format == '.jpg' || tempData.format == '.jpeg' || tempData.format == '.gif'">
+            <img width="80px" height="80px" ng-src="{{tempData.url}}" ng-if="tempData.url">
+            <a href="javascript:;" class="remove-btn" ng-click="removeFile()">删除</a>
+        </div>
+        <div class="label-file" ng-if="tempData.format && tempData.format != '.png' && tempData.format != '.jpg' && tempData.format != '.jpeg' && tempData.format != '.gif'">
+            <a ng-href="{{tempData.url}}" title="点击可下载" class="c-blue" ng-bind="tempData.name + tempData.format" target="_blank"></a>
+            <a href="javascript:;" ng-click="removeFile()"> 删除</a>
+        </div>
+    </div>
+    <div class="form-upload" ng-if="multiple == '1'">
+        <div class="label-img" ng-repeat="itemd in tempData" ng-if="itemd.format == '.png' || itemd.format == '.jpg' || itemd.format == '.jpeg' || itemd.format == '.gif'">
+            <img width="80px" height="80px" ng-src="{{itemd.url}}" ng-if="itemd.url">
+            <a href="javascript:;" class="remove-btn" ng-click="removeFile($index)">删除</a>
+        </div>
+        <div class="label-file" ng-repeat="itemd in tempData" ng-if="itemd.format && itemd.format != '.png' && itemd.format != '.jpg' && itemd.format != '.jpeg' && itemd.format != '.gif'">
+            <a ng-href="{{itemd.url}}" title="点击可下载" class="c-blue" ng-bind="itemd.name + itemd.format" target="_blank"></a>
+            <a href="javascript:;" ng-click="removeFile($index)"> 删除</a>
+        </div>
+    </div>
+</div>
+
+</div>

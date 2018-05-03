@@ -242,7 +242,6 @@ public class PageUtil {
 				temp.setText(tool.getTexts()[i]);
 				temp.setSingle("1");
 				temp.setType(tool.getTypes()[i]);
-				temp.setTitle(tool.getTitles()[i]);
 				if (tool.getChecks() != null && tool.getChecks().length > 0) {
 					temp.setCheck(tool.getChecks()[i]);
 				}

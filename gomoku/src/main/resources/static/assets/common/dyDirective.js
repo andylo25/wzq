@@ -399,7 +399,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
         return {
             restrict: "A",
             require: "?ngModel",
-            templateUrl: "/assets/ngtpl/upload.html",
+            templateUrl: "/ngtpl/upload.html",
             scope: {
                 "ngFileUpload": "="
             },
@@ -468,142 +468,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
             }
         }
     })
-    //图片懒加载
-    .directive("lazy", function ($timeout) {
-        return {
-            restrict: 'AC',
-            scope: {},
-            link: function (scope, element, attrs) {
-                function test(time) {
-                    $timeout(function () {
-                        element.lazyload({
-                            effect: 'fadeIn',
-                            effectspeed: 200,
-                            skip_invisible: false
-                        });
-                    }, time);
-                }
-
-                scope.$watch(function () {
-                    return element.attr('data-original');
-                }, function () {
-                    test(0);
-                }, true);
-            }
-        };
-    })
-    //上传图片
-    .directive('uploadFile', function ($timeout) {
-        return {
-            require: '?ngModel',
-            scope: {},
-            link: function ($S, element, attr, ctrl) {
-                if(typeof WebUploader==='undefined'){
-                    var style3 = document.createElement('link');
-                    style3.href = '/assets/src/js/plugins/webuploader/webuploader.css';
-                    style3.rel = 'stylesheet';
-                    style3.type = 'text/css';
-                     $('head').eq(0).append(style3);
-                    var script3=document.createElement('script'); 
-                    script3.src='/assets/src/js/plugins/webuploader/webuploader.min.js'; 
-                    script3.type='text/javascript'; 
-                    script3.defer=true; 
-                    $('head').eq(0).append(script3);
-                }
-                var $this = element,
-                    // 优化retina, 在retina下这个值是2
-                    ratio = window.devicePixelRatio || 1,
-                    // 缩略图大小
-                    thumbnailWidth = 100 * ratio,
-                    thumbnailHeight = 100 * ratio,
-                    $list = $this.siblings('.uploader-list');
-                var uploader = WebUploader.create({
-
-                    // 自动上传。
-                    auto: false,
-
-                    // swf文件路径
-                    // swf: BASE_URL + '/js/Uploader.swf',
-                    swf: 'Uploader.swf',
-
-                    // 文件接收服务端。
-                    //server: 'http://webuploader.duapp.com/server/fileupload.php',
-                    server: 'http://2betop.net/fileupload.php',
-
-                    // 选择文件的按钮。可选。
-                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-                    // pick: '#filePicker',
-                    pick: $this,
-
-                    // 只允许选择文件，可选。
-                    accept: {
-                        title: 'Images',
-                        extensions: 'gif,jpg,jpeg,bmp,png',
-                        mimeTypes: 'image/*'
-                    }
-                });
-                // 当有文件添加进来的时候
-                uploader.on( 'fileQueued', function( file ) {
-                    var $li = $(
-                            '<div id="' + file.id + '" class="file-item thumbnail">' +
-                                '<img>' +
-                                '<div class="info">' + file.name + '</div>' +
-                            '</div>'
-                            ),
-                    $img = $li.find('img');
-                    $list.append( $li );
-
-                    // 创建缩略图
-                    uploader.makeThumb( file, function( error, src ) {
-                        if ( error ) {
-                            $img.replaceWith('<span>不能预览</span>');
-                            return;
-                        }
-
-                        $img.attr( 'src', src );
-                    }, thumbnailWidth, thumbnailHeight );
-                });
-
-                // 文件上传过程中创建进度条实时显示。
-                uploader.on( 'uploadProgress', function( file, percentage ) {
-                    var $li = $( '#'+file.id ),
-                        $percent = $li.find('.progress span');
-
-                    // 避免重复创建
-                    if ( !$percent.length ) {
-                        $percent = $('<p class="progress"><span></span></p>')
-                                .appendTo( $li )
-                                .find('span');
-                    }
-
-                    $percent.css( 'width', percentage * 100 + '%' );
-                });
-
-                // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-                uploader.on( 'uploadSuccess', function( file ) {
-                    $( '#'+file.id ).addClass('upload-state-done');
-                });
-
-                // 文件上传失败，现实上传出错。
-                uploader.on( 'uploadError', function( file ) {
-                    var $li = $( '#'+file.id ),
-                        $error = $li.find('div.error');
-
-                    // 避免重复创建
-                    if ( !$error.length ) {
-                        $error = $('<div class="error"></div>').appendTo( $li );
-                    }
-
-                    $error.text('上传失败');
-                });
-
-                // 完成上传完了，成功或者失败，先删除进度条。
-                uploader.on( 'uploadComplete', function( file ) {
-                    $( '#'+file.id ).find('.progress').remove();
-                });
-            }
-        };
-    })
     //图表Echarts
     .directive("dyEcharts", function () {
         return {
@@ -655,7 +519,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         shadeClose: false,
                         maxmin: true,
                         shade: 0.3,
-                        area: ["750px", "650px"],
+                        area: ["770px", "550px"],
                         content: "/" + params.url //iframe的url
                     });
                 })
@@ -675,12 +539,6 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     postUrl.events("/" + params.url).success(function(_data){
                         if(_data.status == 200){
                             parent.layer.msg(_data.description, {icon: 1, time: 1000}, function(){
-                                if(!!params.refresh_sub){
-                                    window.parent.document.getElementById("rightDialog").contentWindow.location.reload(true);
-                                } else {
-                                    // window.parent.document.getElementById("rightcontent").contentWindow.location.reload(true);
-                                    top.frames["rightcontent"].reloadings();  //调用table页面的自定义函数刷新当前页面
-                                }
                                 layer.closeAll();
                             });
                         }else{
@@ -729,13 +587,12 @@ var dyDir = angular.module("dyDir", ["dyService"])
     .directive("layerConfirm", function(postUrl){
         return {
             scope: {
-                layerConfirm: "=",
-                dyFormData: "=formData"
+                layerConfirm: "="
             },
             link: function(scope, element, attrs){
                 element.click(function(){
                     var btnStatus = true;
-                    parent.layer.confirm(scope.layerConfirm.text || "是否确认？", {
+                    parent.layer.confirm("是否确认【" +scope.layerConfirm.title +"】？" , {
                         time: 0, //不自动关闭
                         icon: 3,
                         shade: 0.3,
@@ -744,25 +601,11 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     }, function(){
                         if(btnStatus){
                             btnStatus = false;
-                            postUrl.events("/" + scope.layerConfirm.url, scope.dyFormData).success(function(_data){
+                            postUrl.events("/" + scope.layerConfirm.url, {}).success(function(_data){
                                 if(_data.status == 500){
-                                    parent.layer.msg(_data.description, {
-                                        icon: 2,
-                                        shade: 0.3,
-                                        time: 3000
-                                    })
-                                } else if(_data.status == 600){  //返回超时弹窗
-                                    parent.layer.open({
-                                        type: 2,
-                                        title: "超时说明",
-                                        shadeClose: false,
-                                        maxmin: true,
-                                        shade: 0.3,
-                                        area: ["520px", "460px"],
-                                        content: "/workbench/buss/addOutExp?id=" + _data.description
-                                    });
+                                    parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 3000});
                                 } else {
-                                    parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 1000}, function(){
+                                    parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 1500}, function(){
                                         parent.layer.closeAll();
                                     });
                                 }
@@ -803,8 +646,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     }
                     
                     if(params.needId && !params.id){
-                    	 parent.layer.msg("请选择一条记录", {icon: 1, shade: 0.3, time: 1000}, function(){
-                         });
+                    	 parent.layer.msg("请选择一条记录", {icon: 1, shade: 0.3, time: 1000});
                     	 return;
                     }
                     var srcUrl = url.indexOf('http') == 0?url:("/" + url + "?id=" + params.id + param);
@@ -815,7 +657,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                             shadeClose: false,
                             maxmin: false,
                             shade: 0.3,
-                            area: ["770px", "650px"],
+                            area: ["770px", "550px"],
                             content: srcUrl
                         });
                         parent.layer.full(index);
@@ -897,12 +739,28 @@ var dyDir = angular.module("dyDir", ["dyService"])
                             if(i<1) continue;
                             scope.pageLis.push(i);
                         }
+                        scope.editFlag = [];
+                        for(var i=0;i<=scope.tableB.length;i++){
+                        	var edit_ = {};
+                        	for(var key in scope.tableB[i]){
+                        		edit_.key = 0;
+                        	}
+                        	scope.editFlag.push(edit_);
+                        }
                         layer.closeAll("loading");
                     })
                 }
 
                 scope.select = function(index){
                     scope.curSel = index;
+                }
+                
+                scope.toggleEdit = function(index,field){
+//                	if(!scope.editFlag[index][field]){
+//                		scope.editFlag[index][field] = 1;
+//                	}else{
+//                		scope.editFlag[index][field] = 0;
+//                	}
                 }
 
                 //第一次请求，请求页面和页面结构数据，构建列表结构和自动请求列表的数据

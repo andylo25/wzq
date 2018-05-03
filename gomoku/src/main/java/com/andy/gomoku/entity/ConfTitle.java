@@ -57,5 +57,9 @@ public class ConfTitle extends BaseEntity{
 		return (scr >= minScr && scr < maxScr);
 			
 	}
+
+	public static String table() {
+		return "conf_title";
+	}
 	
 }
