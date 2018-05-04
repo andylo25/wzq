@@ -1,4 +1,4 @@
-package com.andy.gomoku.dao;
+package com.andy.gomoku.dao.vo;
 
 import java.io.Serializable;
 

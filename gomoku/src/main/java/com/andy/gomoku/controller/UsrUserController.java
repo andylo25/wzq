@@ -19,7 +19,7 @@ import com.andy.gomoku.base.table.Search;
 import com.andy.gomoku.base.table.TableHeader;
 import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.dao.Where;
+import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 

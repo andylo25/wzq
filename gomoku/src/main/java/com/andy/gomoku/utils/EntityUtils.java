@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
-import com.andy.gomoku.dao.NameValue;
+import com.andy.gomoku.dao.vo.NameValue;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.exception.GoSeviceException;

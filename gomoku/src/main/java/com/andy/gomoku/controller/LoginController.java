@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.andy.gomoku.base.RequestUtil;
 import com.andy.gomoku.base.RespVO;
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.dao.Where;
+import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.UsrAdmin;
 import com.andy.gomoku.utils.SecurityUtil;
 

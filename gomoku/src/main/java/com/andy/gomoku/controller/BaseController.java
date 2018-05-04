@@ -10,7 +10,7 @@ import com.andy.gomoku.base.BaseUser;
 import com.andy.gomoku.base.RequestUtil;
 import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.dao.Where;
+import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.utils.JsonUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

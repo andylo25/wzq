@@ -22,6 +22,10 @@ import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.StringUtils;
 
 import com.andy.gomoku.base.PageVO;
+import com.andy.gomoku.dao.vo.GenTable;
+import com.andy.gomoku.dao.vo.GenTableColumn;
+import com.andy.gomoku.dao.vo.NameValue;
+import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.exception.GoSeviceException;
 import com.andy.gomoku.utils.EntityUtils;
@@ -382,6 +386,47 @@ public class DaoUtils {
 			throw new GoSeviceException(sqle);
 		}
 	}
+	
+	/**
+	 * 删除数据
+	 * @param table
+	 * @param i
+	 */
+	public static int delete(String table, long id) {
+		QueryRunner run = new QueryRunner(dataSource);
+		try {
+			int delets = run.update("DELETE FROM " + table + " WHERE id=?", id);
+			return delets;
+		} catch (SQLException sqle) {
+			throw new GoSeviceException(sqle);
+		}
+	}
+	
+	/**
+	 * 删除数据
+	 * @param table
+	 * @param i
+	 */
+	public static int delete(String table, Where... conds) {
+		QueryRunner run = new QueryRunner(dataSource);
+		Object[] wh = buildWhere(conds);
+		try {
+			int delets = run.update("DELETE FROM " + table + wh[0], (Object[])wh[1]);
+			return delets;
+		} catch (SQLException sqle) {
+			throw new GoSeviceException(sqle);
+		}
+	}
+	
+	public static GenTable getTables(final String table){
+		GenTable tables = getOneSql(GenTable.class, "SELECT t.table_name AS NAME,t.TABLE_COMMENT AS comments FROM information_schema.`TABLES` t "
+								+ "WHERE t.TABLE_SCHEMA = (SELECT DATABASE()) AND t.TABLE_NAME =(?) ORDER BY t.TABLE_NAME",table);
+		List<GenTableColumn> cols = getListSql(GenTableColumn.class, "SELECT t.COLUMN_NAME AS NAME,(CASE WHEN t.IS_NULLABLE = 'YES' THEN '1' ELSE '0'	END	) AS isNull,"
+				+ "	(t.ORDINAL_POSITION * 10) AS sort,	t.COLUMN_COMMENT AS comments, t.COLUMN_TYPE AS jdbcType FROM information_schema.`COLUMNS` t"
+				+ " where t.TABLE_SCHEMA = (SELECT DATABASE()) AND t.TABLE_NAME = (?) ORDER BY	t.ORDINAL_POSITION",table);
+		tables.setColumnList(cols);
+		return tables;
+	}
 
 	/**
 	 * @Method: startTransaction
@@ -437,5 +482,6 @@ public class DaoUtils {
 			throw new GoSeviceException(e);
 		}
 	}
+
 
 }

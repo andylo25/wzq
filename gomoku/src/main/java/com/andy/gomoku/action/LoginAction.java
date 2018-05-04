@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.dao.Where;
+import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.game.GameUser;

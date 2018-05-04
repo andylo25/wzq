@@ -1,10 +1,12 @@
-package com.andy.gomoku.dao;
+package com.andy.gomoku.dao.vo;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.andy.gomoku.dao.Condition;
 
 public class Where extends NameValue {
 	private static final long serialVersionUID = 8744148340895044297L;
