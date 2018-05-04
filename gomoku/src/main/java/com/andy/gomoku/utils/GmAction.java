@@ -15,6 +15,8 @@ public class GmAction {
 	public static final int ACTION_108 = 108; // 退出房间
 	public static final int ACTION_109 = 109; // 排行榜
 	public static final int ACTION_110 = 110; // 超时检测
+	public static final int ACTION_111 = 111; // 聊天
+	public static final int ACTION_112 = 112; // 主题选择
 	
 	
 	public static final int ACTION_200 = 200; // 广播消息

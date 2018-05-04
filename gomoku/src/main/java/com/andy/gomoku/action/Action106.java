@@ -34,7 +34,7 @@ public class Action106 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		GomokuGame game = gameUser.getGame();
 		Room room = gameUser.getRoom();
-		if(game == null || game == null)return;
+		if(room == null || game == null)return;
 		
 		Mov mov = new Mov(x,y);
 		int resu = -1;
@@ -47,6 +47,8 @@ public class Action106 implements IWebAction{
 				movUser = room.getOther(gameUser);
 				mov = new Mov();
 				resu = game.robotMove(mov);
+			}else{
+				logger.error("落子异常："+data);
 			}
 		}
 		movUser.move(room.getOther(movUser).getLastMov());

@@ -22,7 +22,7 @@ public class Action105 implements IWebAction{
 	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
 		GameUser gameUser = myWebSocket.getUser();
 		Room room = gameUser.getRoom();
-		if(room == null || room.getUsers().size() < 2)return;
+		if(room == null)return;
 		
 		GameUser first = room.ready(gameUser);
 		if(first != null){

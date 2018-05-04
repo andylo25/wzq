@@ -132,5 +132,15 @@ public class SendUtil {
 		doSend(user,GmAction.ACTION_109, ranks);
 	}
 	
+	public static void send111(Room room, Map<String, Object> msg) {
+		for(GameUser gameUser:room.getUsers()){
+			doSend(gameUser,GmAction.ACTION_111, msg);
+		}
+	}
+	
+	public static void send112(GameUser user, Map<String, Object> chess) {
+		doSend(user,GmAction.ACTION_112, chess);
+	}
+	
 
 }

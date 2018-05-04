@@ -131,6 +131,7 @@ public class GameUser implements Serializable{
 
 	public void setGame(GomokuGame game) {
 		this.game = game;
+		lastMov = System.currentTimeMillis();
 	}
 
 	public boolean isRobo() {

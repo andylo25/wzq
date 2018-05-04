@@ -54,6 +54,7 @@ public class Room implements Serializable{
 	public GameUser ready(GameUser gameUser) {
 		gameUser.toggleReady();
 		boolean haveRob = false;
+		if(users.size() < 2) return null;
 		for(GameUser user:users){
 			if(!user.isReady())return null;
 			haveRob = user.isRobo();
