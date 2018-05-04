@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -73,10 +74,16 @@ public class MyWebSocket {
 	 * 连接关闭
 	 */
 	@OnClose
-	public void onClose() {
+	public void onClose(Session session) {
 		// 先退出房间
 		CommonUtils.outRoom(this.getUser());
 		Global.removeSession(this);
+	}
+	
+	@OnError
+	public void onError(Session session,Throwable t){
+		onClose(session);
+		logger.error("连接关闭异常",t);
 	}
 
 	/**
@@ -111,6 +118,9 @@ public class MyWebSocket {
 	public void sendMessage(String message) {
 		if(!session.isOpen())return;
 		try {
+			if(logger.isInfoEnabled()){
+				logger.info("发送消息:{}", message);
+			}
 			session.getBasicRemote().sendText(message);
 		} catch (IOException e) {
 			logger.error("发送消息异常",e);

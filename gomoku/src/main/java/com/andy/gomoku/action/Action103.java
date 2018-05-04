@@ -29,6 +29,7 @@ public class Action103 implements IWebAction{
 		Integer roomId = MapUtils.getInteger(data, "roomNum");
 		Room room = Global.getRoom(roomId);
 		List<GameUser> users = room.getUsers();
+		if(users.size() > 1) return;
 		GameUser other = null;
 		if(!users.isEmpty()){
 			other = users.get(0);

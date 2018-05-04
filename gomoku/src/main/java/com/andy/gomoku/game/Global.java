@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.andy.gomoku.controller.BaseController;
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.entity.ConfCommon;
-import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GoConstant;
@@ -143,8 +141,9 @@ public class Global implements Serializable{
 	}
 
 	public static void refreshRanks() {
-		List<Map<String, Object>> users = DaoUtils.getListSql( "select uid,win_count as winCount from usr_game_info order by win_count desc limit 0,10");
-		BaseController.idToName(users, UsrUser.table(), "uid#id:icon,nick_name as nickName");
+		List<Map<String, Object>> ranksT = DaoUtils.getListSql( "select uid,win_count as winCount from usr_game_info order by win_count desc limit 0,10");
+		BaseController.idToName(ranksT, UsrUser.table(), "uid#id:icon,nick_name as nickName");
+		ranks = ranksT;
 	}
 
 	

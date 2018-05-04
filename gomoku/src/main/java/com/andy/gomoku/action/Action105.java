@@ -24,6 +24,15 @@ public class Action105 implements IWebAction{
 		Room room = gameUser.getRoom();
 		if(room == null)return;
 		
+		ready(gameUser, room);
+		
+		GameUser robot = room.getOther(gameUser);
+		if(robot.isRobo()){
+			ready(robot, room);
+		}
+	}
+
+	private void ready(GameUser gameUser, Room room) {
 		GameUser first = room.ready(gameUser);
 		if(first != null){
 			SendUtil.send105(room, gameUser, first);

@@ -17,6 +17,7 @@
     <button onclick="send(106)">落子</button>
     <button onclick="send(106,1)">机器人落子</button>
     <button onclick="send(108)">退出房间</button>
+    <button onclick="send(109)">排行榜</button>
     <hr/>
     <button onclick="closeWebSocket()">关闭WebSocket连接</button>
     <hr/>
@@ -48,6 +49,8 @@ function send(act,rob){
 		}
 	}else if(act == 108){
 		data.data = {};
+	}else if(act == 109){
+		data.data = {};
 		
 	}
 	var msg = JSON.stringify(data);
@@ -62,7 +65,8 @@ function closeWebSocket(){
 	socket.close();
 }
 
-var socket = new WebSocket("ws://120.77.214.82:8080/websocket");  
+//var socket = new WebSocket("ws://120.77.214.82:8080/websocket"); 
+var socket = new WebSocket("ws://192.168.137.136:8080/websocket");
 //打开事件  
 socket.onopen = function() {  
     console.log("Socket 已打开");  

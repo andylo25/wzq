@@ -71,7 +71,14 @@ public class GameUI {
 		board[y][x] = chessType;
 		chessType = 3 - chessType;
 		chessCount++;
-		drawBoard();
+//		drawBoard();
+	}
+
+	public void removeChess(int x, int y) {
+		board[y][x] = 0;
+		chessType = 3 - chessType;
+		chessCount--;
+//		drawBoard();
 	}
 
 }

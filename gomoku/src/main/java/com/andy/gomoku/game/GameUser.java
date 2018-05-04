@@ -24,6 +24,7 @@ public class GameUser implements Serializable{
 	private long startMatch;
 	private long lastMov;
 	private long allMovTime;
+	private long startPeace;
 	
 	public GameUser() {
 	}
@@ -156,5 +157,13 @@ public class GameUser implements Serializable{
 
 	public Long getAllMovTime() {
 		return allMovTime;
+	}
+
+	public void peace() {
+		startPeace = System.currentTimeMillis();
+	}
+	public boolean isOutPeace(){
+//		return System.currentTimeMillis() - startPeace > 10*1000;
+		return startPeace == 0;
 	}
 }

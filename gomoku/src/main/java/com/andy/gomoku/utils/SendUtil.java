@@ -74,9 +74,13 @@ public class SendUtil {
 	}
 	
 	public static void send107(Room room,GameUser winner) {
-		if(room == null || winner == null)return;
+		if(room == null)return;
 		Map<String,Object> map = Maps.newHashMap();
-		map.put("userId", winner.getId());
+		if(winner != null){
+			map.put("userId", winner.getId());
+		} else {
+			map.put("userId", -1);
+		}
 		for(GameUser gameUser:room.getUsers()){
 			doSend(gameUser,GmAction.ACTION_107, map);
 		}
@@ -140,6 +144,10 @@ public class SendUtil {
 	
 	public static void send112(GameUser user, Map<String, Object> chess) {
 		doSend(user,GmAction.ACTION_112, chess);
+	}
+	
+	public static void send113(GameUser user, Map<String, Object> type) {
+		doSend(user,GmAction.ACTION_113, type);
 	}
 	
 

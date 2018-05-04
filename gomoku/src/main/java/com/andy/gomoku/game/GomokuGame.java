@@ -1,16 +1,19 @@
 package com.andy.gomoku.game;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.andy.gomoku.ai.WineAI;
 import com.andy.gomoku.ai.WineAI.Mov;
 import com.andy.gomoku.utils.GameUI;
+import com.google.common.collect.Lists;
 
 public class GomokuGame implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private int[][] chess;
+	private List<Mov> movLine = Lists.newArrayList();
 	private int status;
 	private int turnInd;
 	private boolean haveRob;
@@ -50,6 +53,7 @@ public class GomokuGame implements Serializable{
 		if(chess[x][y] > 0)return -1;
 		if(turnInd != turnIndx)return -1;
 		chess[x][y] = turnIndx+1;
+		movLine.add(new Mov(x,y));
 		turnInd = 1-turnInd;
 		ui.addChess(x, y);
 		if(wineAI != null){
@@ -59,6 +63,18 @@ public class GomokuGame implements Serializable{
 			}
 		}
 		return 0;
+	}
+	
+	public void backMove(){
+		if(!movLine.isEmpty()){
+			Mov mov = movLine.remove(movLine.size());
+			chess[mov.x][mov.y] = 0;
+			turnInd = 1-turnInd;
+			ui.removeChess(mov.x, mov.y);
+			if(wineAI != null){
+				wineAI.takeBack();
+			}
+		}
 	}
 
 	public boolean haveRob() {

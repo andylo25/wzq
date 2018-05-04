@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public class Login101Action implements IWebAction{
 		UsrUser user = new UsrUser();
 		user.setUserName(RandomStringUtils.randomAlphabetic(10));
 		user.setNickName(CommonUtils.genNickName());
+		user.setIcon(RandomUtils.nextInt(0, 10));
 		DaoUtils.insert(user);
 		
 		UsrGameInfo gameInfo = new UsrGameInfo();

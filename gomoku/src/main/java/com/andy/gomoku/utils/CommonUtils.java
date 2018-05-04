@@ -22,9 +22,9 @@ public class CommonUtils {
 		}
 		if(room != null){
 			room.logout(user);
+			SendUtil.send108(room, user);
 		}
 		
-		SendUtil.send108(room, user);
 		
 	}
 
@@ -35,28 +35,33 @@ public class CommonUtils {
 	}
 
 	public static void gameOver(Room room, GomokuGame game,GameUser winner) {
-		GameUser other = room.getOther(winner);
-		UsrGameInfo wingi = winner.getGameInfo();
-		UsrGameInfo otgu = other.getGameInfo();
-		// 结算
-		wingi.setWinCount(wingi.getWinCount()+1);
-		otgu.setWinCount(wingi.getWinCount()-1);
-		if(wingi.getTitleSort() == otgu.getTitleSort()){
-			wingi.addScore(10);
-			otgu.addScore(-10);
-		}else if(wingi.getTitleSort() < otgu.getTitleSort()){
-			wingi.addScore(15);
-			otgu.addScore(-10);
-		}else{
-			wingi.addScore(5);
-			otgu.addScore(-10);
+		if(winner != null){
+			GameUser other = room.getOther(winner);
+			UsrGameInfo wingi = winner.getGameInfo();
+			UsrGameInfo otgu = other.getGameInfo();
+			// 结算
+			wingi.setWinCount(wingi.getWinCount()+1);
+			otgu.setWinCount(otgu.getWinCount()-1);
+			if(wingi.getTitleSort() == otgu.getTitleSort()){
+				wingi.addScore(10);
+				otgu.addScore(-10);
+			}else if(wingi.getTitleSort() < otgu.getTitleSort()){
+				wingi.addScore(15);
+				otgu.addScore(-10);
+			}else{
+				wingi.addScore(5);
+				otgu.addScore(-10);
+			}
+			
+			saveDb(wingi,otgu);
 		}
-		saveDb(wingi,otgu);
+		
 		for(GameUser us:room.getUsers()){
 			us.gameOver();
 		}
 		
 		SendUtil.send107(room, winner);
+		
 		
 	}
 	
