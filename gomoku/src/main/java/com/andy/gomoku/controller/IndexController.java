@@ -77,7 +77,7 @@ public class IndexController extends BaseController{
 		
 		List<GenTableColumn> columnList = genTable.getColumnList().stream().filter(new Predicate<GenTableColumn>() {
 			public boolean test(GenTableColumn t) {
-				if("create_uid,create_time,update_uid,update_time,del_flag".indexOf(t.getName()) > 0){
+				if("create_uid,create_time,update_uid,update_time,del_flag".indexOf(t.getName()) >= 0){
 					return false;
 				}
 				return true;
@@ -91,7 +91,7 @@ public class IndexController extends BaseController{
 			colComms[i] = column.getComments();
 			cols[i] = column.getName();
 		}
-		ExportExcel excel = new ExportExcel(cols);
+		ExportExcel excel = new ExportExcel(colComms);
 		excel.setFieldNames(cols);
 		
 		List list = DaoUtils.getListSql("select * from "+table);

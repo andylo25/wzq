@@ -283,7 +283,7 @@ public class ImportExcel {
 	 */
 	public static void main(String[] args) throws Throwable {
 
-		ImportExcel ei = new ImportExcel("d:/export.xlsx", 1);
+		ImportExcel ei = new ImportExcel("d:/段位配置 (3).xlsx", 1);
 
 		List<Map<String, Object>> fd = ei.getDataList();
 		System.out.println(fd);
