@@ -53,12 +53,14 @@ public class Action113 implements IWebAction{
 			user.rejuct();
 		}
 		
-		SendUtil.send113(user,data);
+		data.put("userId", user.getId());
+		SendUtil.send113(room,data);
 		
 		// 机器人处理,直接拒绝
-		if(game.haveRob() && (type == 1 || type == 3)){ // 求和,请求悔棋
+		if(other.isRobo() && (type == 1 || type == 3)){ // 求和,请求悔棋
 			data.put("type", 6);
-			SendUtil.send113(user,data);
+			data.put("userId", other.getId());
+			SendUtil.send113(room,data);
 		}
 		
 		

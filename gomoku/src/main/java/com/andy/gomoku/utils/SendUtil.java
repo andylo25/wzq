@@ -146,8 +146,10 @@ public class SendUtil {
 		doSend(user,GmAction.ACTION_112, chess);
 	}
 	
-	public static void send113(GameUser user, Map<String, Object> type) {
-		doSend(user,GmAction.ACTION_113, type);
+	public static void send113(Room room, Map<String, Object> type) {
+		for(GameUser gameUser:room.getUsers()){
+			doSend(gameUser,GmAction.ACTION_113, type);
+		}
 	}
 	
 
