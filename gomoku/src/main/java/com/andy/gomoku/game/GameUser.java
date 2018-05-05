@@ -145,6 +145,9 @@ public class GameUser implements Serializable{
 		this.status = GoConstant.USER_STATUS_0;
 		lastMov = 0;
 		allMovTime = 0;
+		
+		startPeace = 0;
+		
 	}
 
 	public void move(Long lastM) {
@@ -165,5 +168,9 @@ public class GameUser implements Serializable{
 	public boolean isOutPeace(){
 //		return System.currentTimeMillis() - startPeace > 10*1000;
 		return startPeace == 0;
+	}
+
+	public void rejuct() {
+		startPeace = 0;
 	}
 }
