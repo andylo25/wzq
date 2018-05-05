@@ -15,14 +15,11 @@ import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
 import com.andy.gomoku.base.form.FormField;
 import com.andy.gomoku.base.table.PageStructure;
-import com.andy.gomoku.base.table.Search;
 import com.andy.gomoku.base.table.TableHeader;
 import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.ConfTitle;
-import com.andy.gomoku.entity.UsrGameInfo;
-import com.andy.gomoku.entity.UsrUser;
 
 @Controller
 @RequestMapping("admin/confTitle")
@@ -40,12 +37,12 @@ public class ConfTitleController extends BaseController{
 		tableHeader.setTexts(new String[]{"ID", "段位名称","大于等于","小于积分"});
 		
 		Tool tool = new Tool();
-		tool.setUrls("admin/confTitle/refreshCache");
-		tool.setTexts("配置生效");
-		tool.setTypes("confirm");
+		tool.setUrls("admin/confTitle/add","admin/confTitle/edit","admin/confTitle/delete","admin/confTitle/refreshCache");
+		tool.setTexts("新增","编辑","删除","配置生效");
+		tool.setTypes("add","edit","del","confirm");
 		
-		PageStructure data = PageUtil.createTablePageStructure("admin/confTitle/listData","admin/confTitle/update", "id", tableHeader,tool,null);
-		return createMV("tableList","段位管理", Collections.singletonMap("formStruct", data));
+		PageStructure data = PageUtil.createTablePageStructure("admin/confTitle/listData","id", tableHeader,tool,null);
+		return createMV("tableList","称号配置", Collections.singletonMap("formStruct", data));
 	}
 	
 	/**
@@ -57,9 +54,61 @@ public class ConfTitleController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="listData")
 	public RespVO listData(Integer page,Integer limit) throws Exception {
-		PageVO titles = DaoUtils.getPageForMap(ConfTitle.table(), null,page,limit);
+		PageVO titles = DaoUtils.getPageForMap(ConfTitle.table(), null,"min_scr",page,limit);
 		
         return RespVO.createSuccessJsonResonse(titles);
+	}
+	
+	/**
+	 * 编辑
+	 * @param current_page
+	 * @param areas
+	 * @return
+	 */
+	@RequestMapping(value="add")
+	public ModelAndView add() throws Exception {
+		List<FormField> formFieldList = new ArrayList<>();
+		formFieldList.add(FormField.builder().name("title").text("段位名称").build());
+		formFieldList.add(FormField.builder().name("minScr").text("大于等于").build());
+		formFieldList.add(FormField.builder().name("maxScr").text("小于").build());
+		
+		Map<String, Object> data = PageUtil.createFormPageStructure("admin/confTitle/save", formFieldList);
+		
+		return createCustMV("window/add",data);
+	}
+	
+	/**
+	 * 新增
+	 * @param current_page
+	 * @param areas
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="save")
+	public RespVO save(ConfTitle confTitle) throws Exception {
+		DaoUtils.insert(confTitle);
+		
+		return RespVO.createSuccessJsonResonse("配置已保存");
+	}
+	
+	/**
+	 * 编辑
+	 * @param current_page
+	 * @param areas
+	 * @return
+	 */
+	@RequestMapping(value="edit")
+	public ModelAndView edit(Long id) throws Exception {
+		List<FormField> formFieldList = new ArrayList<>();
+		formFieldList.add(FormField.builder().name("id").text("ID").type("span").build());
+		formFieldList.add(FormField.builder().name("title").text("段位名称").build());
+		formFieldList.add(FormField.builder().name("minScr").text("大于等于").build());
+		formFieldList.add(FormField.builder().name("maxScr").text("小于").build());
+		ConfTitle confTitle = DaoUtils.getOne(ConfTitle.class,Where.eq("id", id));
+		
+		Map<String, Object> data = PageUtil.createFormPageStructure("admin/confTitle/update", formFieldList,confTitle);
+		
+		return createCustMV("window/add",data);
 	}
 	
 	/**
@@ -70,9 +119,21 @@ public class ConfTitleController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="update")
-	public RespVO update() throws Exception {
+	public RespVO update(ConfTitle confTitle) throws Exception {
+		DaoUtils.update(confTitle);
 		
 		return RespVO.createSuccessJsonResonse("配置已保存");
+	}
+	
+	/**
+	 * 删除
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="delete")
+	public RespVO delete(Long id) throws Exception {
+		DaoUtils.delete(ConfTitle.table(), id);
+		return RespVO.createSuccessJsonResonse("删除成功");
 	}
 	
 	/**

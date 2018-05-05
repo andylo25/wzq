@@ -4,6 +4,20 @@
  * 网站公用指令
  */
 var dyDir = angular.module("dyDir", ["dyService"])
+	//转换时间戳指令，将php返回过来的10位的时间戳转换为13位
+    .filter("timestamp", function() {
+        var filterfun = function(time) {
+            if(time){
+                if(angular.isNumber(time) || time.length == 10){
+                    return time += '000';
+                }
+                return time;
+            }
+            return "";
+        };
+
+        return filterfun;
+    })
     .directive("dyValicode", function(scopeService) { //图形验证码
         return {
             restrict: 'A',
@@ -591,6 +605,11 @@ var dyDir = angular.module("dyDir", ["dyService"])
             },
             link: function(scope, element, attrs){
                 element.click(function(){
+                	var params = scope.layerConfirm;
+                	if(params.needId && !params.id){
+                   	 	parent.layer.msg("请选择一条记录", {icon: 1, shade: 0.3, time: 1000});
+                   	 	return;
+                    }
                     var btnStatus = true;
                     parent.layer.confirm("是否确认【" +scope.layerConfirm.title +"】？" , {
                         time: 0, //不自动关闭
@@ -601,12 +620,14 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     }, function(){
                         if(btnStatus){
                             btnStatus = false;
-                            postUrl.events("/" + scope.layerConfirm.url, {}).success(function(_data){
+                            postUrl.events("/" + scope.layerConfirm.url, {id:params.id}).success(function(_data){
                                 if(_data.status == 500){
                                     parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 3000});
+                                    
                                 } else {
                                     parent.layer.msg(_data.description, {icon: 1, shade: 0.3, time: 1500}, function(){
                                         parent.layer.closeAll();
+                                        params.cb && params.cb();
                                     });
                                 }
                             });
@@ -734,7 +755,16 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         scope.Epage = _data.data.epage; //每页条数
                         scope.reloadPage = _data.data.page; //当前页
                         scope.pageLis = [];
-                        for(var i=scope.reloadPage-2;i<=scope.reloadPage+2;i++){
+                        var min = 2,max = 2;
+                        if(scope.reloadPage < 3){
+                        	min = scope.reloadPage-1;
+                        	max = 4-min;
+                        }
+                        if(scope.reloadPage > scope.Pages-2){
+                        	max = scope.Pages - scope.reloadPage;
+                        	min = 4-max;
+                        }
+                        for(var i=scope.reloadPage-min;i<=scope.reloadPage+max;i++){
                             if(i>scope.Pages)break;
                             if(i<1) continue;
                             scope.pageLis.push(i);
@@ -790,6 +820,9 @@ var dyDir = angular.module("dyDir", ["dyService"])
                     var params = angular.extend({}, scope.srcData, {"page": 1, "limit": itemsPerPage});
                     var url = scope.listUrl;
                     scope.getData(url, params);
+                }
+                scope.refresh = function(){
+                	scope.gotoPage(scope.reloadPage);
                 }
 
                 /*** 处理搜索栏搜索数据 ***/

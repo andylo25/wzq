@@ -9,15 +9,16 @@
               <div class="btn-group" ng-repeat="btn in toollist">
                  <a ng-if="btn.type=='add'" dy-add="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-plus icon-white"></i></button></a>
                  <a ng-if="btn.type=='edit'" layer-open="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true}"><button class="btn btn-success" >{{btn.text}} <i class="icon-edit icon-white"></i></button></a>
+                 <a ng-if="btn.type=='del'" layer-confirm="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true,cb:refresh}"><button class="btn btn-success" >{{btn.text}} <i class="icon-remove icon-white"></i></button></a>
                  <a ng-if="btn.type=='confirm'" layer-confirm="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-refresh icon-white"></i></button></a>
               </div>
-              <div class="btn-group pull-right">
+              <!-- <div class="btn-group pull-right">
                  <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
                  <ul class="dropdown-menu">
-                    <!-- <li><a href="#">Print</a></li>
-                    <li><a href="#">Export to Excel</a></li> -->
+                    <li><a href="#">Print</a></li>
+                    <li><a href="#">Export to Excel</a></li>
                  </ul>
-              </div>
+              </div> -->
            </div>
             
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" >
@@ -29,8 +30,9 @@
                 <tbody>
                     <tr class="{{$index%2?odd:even}}" ng-class="{success:$index==curSel}" ng-click="select($index)" ng-repeat="item in tableB">
                         <td ng-repeat="head in tableHeader" >
-                        	<span ng-if="!editFlag[$parent.$index][head.name]" ng-click="toggleEdit($parent.$index,head.name)">{{item[head.name]}}</span>
-                        	<input class="input-xlarge" ng-if="editFlag[$parent.$index][head.name]" ng-model="item[head.name]" ng-blur="toggleEdit($parent.$index,head.name)"/>
+                        	<span ng-if="head.type==''">{{item[head.name]}}</span>
+                        	<span ng-if="head.type=='date'">{{item[head.name] | timestamp | date:'yyyy-MM-dd'}}</span>
+                        	<span ng-if="head.type=='datetime'">{{item[head.name] | timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</span>
                         </td>
                     </tr>
                 </tbody>

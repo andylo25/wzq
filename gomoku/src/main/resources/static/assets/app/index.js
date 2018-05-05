@@ -29,8 +29,8 @@ admin.controller("indexCtrl", function($scope, $http, postUrl,scopeService){
 });
 
 admin.controller("addCtrl", function($scope, $http, postUrl,scopeService){
-	$scope.formData = page_struct.formData;
-    $scope.formStruct = page_struct.formStruct;
+	$scope.formData = page_struct.formData || {};
+    $scope.formStruct = page_struct.formStruct || {};
 
     var initbtnText = $scope.formStruct.btnText ? $scope.formStruct.btnText : "提 交";
     $scope.btnText = initbtnText;

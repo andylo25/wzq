@@ -77,6 +77,7 @@ public class UsrUserController extends BaseController{
 	@RequestMapping(value="toAddCoin")
 	public ModelAndView toAddCoin(Long id) throws Exception {
 		List<FormField> formFieldList = new ArrayList<>();
+		formFieldList.add(FormField.builder().name("uid").text("玩家ID").type("span").build());
 		formFieldList.add(FormField.builder().name("coin").text("拥有金币").type("span").build());
 		formFieldList.add(FormField.builder().name("addCoin").text("增加金币").build());
 		UsrGameInfo gameInfo = DaoUtils.getOne(UsrGameInfo.class,Where.eq("uid", id));

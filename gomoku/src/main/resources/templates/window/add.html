@@ -25,7 +25,7 @@
                                             <input class="input-xlarge focused" placeholder="{{list.placeholder}}" name="{{list.name}}" type="text" ng-model="formData[list.name]">
                                           </div>
                                           <div class="controls" ng-if="list.type=='span'">
-                                            <span class="input-xlarge" ng-bind="formData[list.name]"></span>
+                                            <span class="input-xlarge uneditable-input" ng-bind="formData[list.name]"></span>
                                           </div>
                                           <div class="controls" ng-if="list.type=='checkbox'">
                                             <label ng-repeat="checkboxlist in list.options">

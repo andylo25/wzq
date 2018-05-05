@@ -20,6 +20,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.dao.vo.GenTable;
@@ -115,7 +116,14 @@ public class DaoUtils {
 		}
 	}
 	
+	public static PageVO getPageForMap(String table,Integer page,Integer epage, Where... conds) {
+		return getPageForMap(table, null , null, page, epage, conds);
+	}
 	public static PageVO getPageForMap(String table,String field,Integer page,Integer epage, Where... conds) {
+		return getPageForMap(table, field, null , page, epage, conds);
+	}
+	
+	public static PageVO getPageForMap(String table,String field,String sort,Integer page,Integer epage, Where... conds) {
 		QueryRunner run = new QueryRunner(dataSource);
 		PageVO pageVO = new PageVO();
 		if(page==null) {
@@ -131,9 +139,14 @@ public class DaoUtils {
 		if(field == null){
 			field = "*";
 		}
-		String limits = " LIMIT "+(page-1) * epage+","+(page * epage);
+		String limits = " LIMIT "+(page-1) * epage+","+ epage;
+		if(sort == null){
+			sort = "";
+		}else{
+			sort = " order by "+sort;
+		}
 		try {
-			List<Map<String, Object>> list = run.query("SELECT " + field + " FROM " + table + wh[0] + limits, new MapListHandler(), vas);
+			List<Map<String, Object>> list = run.query("SELECT " + field + " FROM " + table + wh[0] + sort + limits, new MapListHandler(), vas);
 			Map<String, Object> count = run.query("SELECT count(1) as count FROM " + table + wh[0], new MapHandler(), vas);
 			pageVO.setItems(list);
 			pageVO.setTotal_items(MapUtils.getInteger(count, "count"));
@@ -254,10 +267,11 @@ public class DaoUtils {
 		QueryRunner run = new QueryRunner(dataSource);
 		try {
 			List<NameValue> fields = null;
-			Serializable id = null;
 			if (entity instanceof BaseEntity) {
+				((BaseEntity) entity).setCreateTime(System.currentTimeMillis()/1000);
 				fields = EntityUtils.getNameValues((BaseEntity) entity, false,true);
 			} else if (entity instanceof Map) {
+				((Map) entity).put("create_time", System.currentTimeMillis()/1000);
 				fields = Lists.newArrayList();
 				for (Entry<String, Object> fc : ((Map<String, Object>) entity).entrySet()) {
 					Object value = fc.getValue();
@@ -302,9 +316,11 @@ public class DaoUtils {
 		List<NameValue> fields = null;
 		Serializable id = null;
 		if (entity instanceof BaseEntity) {
+			((BaseEntity) entity).setUpdateTime(System.currentTimeMillis()/1000);
 			fields = EntityUtils.getNameValues((BaseEntity) entity, false,false);
 			id = ((BaseEntity) entity).getId();
 		} else if (entity instanceof Map) {
+			((Map) entity).put("update_time", System.currentTimeMillis()/1000);
 			id = (Serializable) ((Map) entity).get("id");
 			fields = Lists.newArrayList();
 			for (Entry<String, Object> fc : ((Map<String, Object>) entity).entrySet()) {
@@ -356,6 +372,7 @@ public class DaoUtils {
 		sql.append(" WHERE id=?");
 		
 		for(int i=0;i<entitys.size();i++){
+			entitys.get(i).setUpdateTime(System.currentTimeMillis()/1000);
 			for (int j = 0; j < fields.length; j++) {
 				params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fields[j]);
 			}

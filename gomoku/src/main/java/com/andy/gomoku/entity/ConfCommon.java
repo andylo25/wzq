@@ -41,6 +41,10 @@ public class ConfCommon extends BaseEntity{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public static String table() {
+		return "conf_common";
+	}
 	
 
 }

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.entity.UsrGameInfo;
+import com.andy.gomoku.entity.UsrGameLog;
 import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.GomokuGame;
 import com.andy.gomoku.game.Room;
@@ -39,21 +40,31 @@ public class CommonUtils {
 			GameUser other = room.getOther(winner);
 			UsrGameInfo wingi = winner.getGameInfo();
 			UsrGameInfo otgu = other.getGameInfo();
+			UsrGameLog winLog = new UsrGameLog(wingi);
+			UsrGameLog otLog = new UsrGameLog(otgu);
 			// 结算
 			wingi.setWinCount(wingi.getWinCount()+1);
 			otgu.setWinCount(otgu.getWinCount()-1);
+			winLog.setResult(1);
+			otLog.setResult(-1);
 			if(wingi.getTitleSort() == otgu.getTitleSort()){
 				wingi.addScore(10);
+				winLog.setAddCoin(10);
 				otgu.addScore(-10);
+				otLog.setAddCoin(-10);
 			}else if(wingi.getTitleSort() < otgu.getTitleSort()){
 				wingi.addScore(15);
+				winLog.setAddCoin(15);
 				otgu.addScore(-10);
+				otLog.setAddCoin(-10);
 			}else{
 				wingi.addScore(5);
+				winLog.setAddCoin(5);
 				otgu.addScore(-10);
+				otLog.setAddCoin(-10);
 			}
 			
-			saveDb(wingi,otgu);
+			saveDb(wingi,otgu,winLog,otLog);
 		}
 		
 		for(GameUser us:room.getUsers()){
@@ -68,7 +79,11 @@ public class CommonUtils {
 	public static void saveDb(BaseEntity... entity){
 		// todo 可改批量插入
 		for(BaseEntity en:entity){
-			DaoUtils.update(en);
+			if(en.getId() != null){
+				DaoUtils.update(en);
+			}else{
+				DaoUtils.insert(en);
+			}
 		}
 	}
 
