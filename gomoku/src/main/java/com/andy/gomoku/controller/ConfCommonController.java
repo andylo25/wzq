@@ -21,6 +21,8 @@ import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.ConfCommon;
 import com.andy.gomoku.entity.UsrGameInfo;
+import com.andy.gomoku.game.Global;
+import com.andy.gomoku.utils.GameConf;
 
 @Controller
 @RequestMapping("admin/confCommon")
@@ -101,7 +103,7 @@ public class ConfCommonController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="refreshCache")
 	public RespVO refreshCache() throws Exception {
-		
+		GameConf.initCommons();
         return RespVO.createSuccessJsonResonse("配置已生效，需重新登录客户端验证");
 	}
 }

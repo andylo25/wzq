@@ -28,6 +28,10 @@ public class Action103 implements IWebAction{
 		
 		Integer roomId = MapUtils.getInteger(data, "roomNum");
 		Room room = Global.getRoom(roomId);
+		if(room == null){
+			SendUtil.send103(gameUser,null);
+			return;
+		}
 		List<GameUser> users = room.getUsers();
 		if(users.size() > 1) return;
 		GameUser other = null;

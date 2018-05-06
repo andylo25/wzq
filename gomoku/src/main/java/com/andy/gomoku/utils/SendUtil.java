@@ -37,9 +37,13 @@ public class SendUtil {
 	}
 	
 	public static void send103(GameUser session,GameUser gameUser) {
-		if(gameUser == null)return;
-		Map<String,Object> map = gameUser.getUserInfo();
-		map.put("roomNum", gameUser.getRoom().getId());
+		Map<String,Object> map = Maps.newHashMap();
+		if(gameUser != null){
+			map = gameUser.getUserInfo();
+			map.put("roomNum", gameUser.getRoom().getId());
+		}else{
+			map.put("roomNum", 0);
+		}
 		doSend(session,GmAction.ACTION_103, map);
 	}
 	

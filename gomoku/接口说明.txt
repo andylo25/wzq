@@ -11,6 +11,7 @@ respCode 响应码，0-成功，1-用户名不存在
   userId 用户ID
     icon 头像ID
 nickName 昵称
+     cid 棋子ID
 	coin 金币
    score 积分
    title 称号
@@ -45,6 +46,7 @@ roomNum 房间号
   userId 对方用户ID
     icon 头像ID
 nickName 对方昵称
+     cid 棋子ID
 	coin 对方金币
    score 对方积分
    title 对方称号

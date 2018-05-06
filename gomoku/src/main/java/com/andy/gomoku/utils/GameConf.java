@@ -18,18 +18,30 @@ public class GameConf {
 	
 	public static void init() {
 	
-		titles = Maps.newHashMap();
-		List<ConfTitle> cts = DaoUtils.getList(ConfTitle.class,"title_sort",null);
-		for(ConfTitle ct:cts){
-			titles.put(ct.getTitleSort(), ct);
-		}
+		initTitles();
 		
-		confCommons = Maps.newHashMap();
+		initCommons();
+		
+	}
+
+	public static void initCommons() {
+		Map<String,ConfCommon> confCommonsT = Maps.newHashMap();
 		List<ConfCommon> commons = DaoUtils.getList(ConfCommon.class);
 		for(ConfCommon comm:commons){
-			confCommons.put(comm.getNid(), comm);
+			confCommonsT.put(comm.getNid(), comm);
 			initConf(comm);
 		}
+		confCommons = confCommonsT;
+	}
+
+	public static void initTitles() {
+		Map<Integer,ConfTitle> titlesT = Maps.newHashMap();
+		List<ConfTitle> cts = DaoUtils.getList(ConfTitle.class,"title_sort",null);
+		for(ConfTitle ct:cts){
+			titlesT.put(ct.getTitleSort(), ct);
+		}
+		
+		titles = titlesT;
 		
 	}
 	

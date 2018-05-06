@@ -67,7 +67,7 @@ public class GomokuGame implements Serializable{
 	
 	public void backMove(){
 		if(!movLine.isEmpty()){
-			Mov mov = movLine.remove(movLine.size());
+			Mov mov = movLine.remove(movLine.size()-1);
 			chess[mov.x][mov.y] = 0;
 			turnInd = 1-turnInd;
 			ui.removeChess(mov.x, mov.y);

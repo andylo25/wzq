@@ -20,6 +20,7 @@ import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.ConfTitle;
+import com.andy.gomoku.utils.GameConf;
 
 @Controller
 @RequestMapping("admin/confTitle")
@@ -145,7 +146,7 @@ public class ConfTitleController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="refreshCache")
 	public RespVO refreshCache() throws Exception {
-		
+		GameConf.initTitles();
         return RespVO.createSuccessJsonResonse("配置已生效，需重新登录客户端验证");
 	}
 }

@@ -37,6 +37,7 @@ public class Action106 implements IWebAction{
 		if(room == null || game == null)return;
 		// 求和中，悔棋中不能下子
 		if(!gameUser.isOutPeace()) return;
+		if(!CommonUtils.checkMov(gameUser)) return;
 		
 		Mov mov = new Mov(x,y);
 		int resu = -1;
