@@ -2,15 +2,17 @@ package com.andy.gomoku.action;
 
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
+import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.SendUtil;
 import com.andy.gomoku.websocket.MyWebSocket;
 
 /**
- * 超时检测
+ * 主题选择
  * @author cuiwm
  *
  */
@@ -22,7 +24,9 @@ public class Action112 implements IWebAction{
 		
 		GameUser user = myWebSocket.getUser();
 		
+		user.getUser().setTheme(MapUtils.getInteger(data, "chess"));
 		
+		CommonUtils.saveDb(user.getUser());
 		
 		SendUtil.send112(user,data);
 		

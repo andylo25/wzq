@@ -82,8 +82,8 @@ public class MyWebSocket {
 	
 	@OnError
 	public void onError(Session session,Throwable t){
-		onClose(session);
 		logger.error("连接关闭异常",t);
+		onClose(session);
 	}
 
 	/**

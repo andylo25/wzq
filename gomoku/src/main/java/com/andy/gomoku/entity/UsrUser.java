@@ -21,6 +21,8 @@ public class UsrUser extends BaseEntity implements BaseUser{
 	
 	private Integer icon;
 	
+	private Integer theme;
+	
 	private String phone;
 
 	public String getUserName() {
@@ -65,6 +67,14 @@ public class UsrUser extends BaseEntity implements BaseUser{
 
 	public static String table() {
 		return "usr_user";
+	}
+
+	public Integer getTheme() {
+		return theme;
+	}
+
+	public void setTheme(Integer theme) {
+		this.theme = theme;
 	}
 	
 	

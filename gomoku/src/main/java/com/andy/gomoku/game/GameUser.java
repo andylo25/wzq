@@ -92,6 +92,7 @@ public class GameUser implements Serializable{
 		resu.put("nickName", getNickName());
 		resu.put("userName", getUserName());
 		resu.put("icon", user.getIcon());
+		resu.put("cid", user.getTheme());
 		resu.put("coin", gameInfo.getCoin());
 		resu.put("score", gameInfo.getScore());
 		resu.put("title", gameInfo.getTitle());

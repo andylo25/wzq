@@ -1,6 +1,8 @@
 package com.andy.gomoku.utils;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.entity.BaseEntity;
@@ -12,6 +14,8 @@ import com.andy.gomoku.game.Room;
 
 public class CommonUtils {
 
+	private static Logger logger = LoggerFactory.getLogger(CommonUtils.class);
+	
 	public static void outRoom(GameUser user) {
 		if(user == null)return;
 		Room room = user.getRoom();
@@ -78,12 +82,16 @@ public class CommonUtils {
 	
 	public static void saveDb(BaseEntity... entity){
 		// todo 可改批量插入
-		for(BaseEntity en:entity){
-			if(en.getId() != null){
-				DaoUtils.update(en);
-			}else{
-				DaoUtils.insert(en);
+		try {
+			for(BaseEntity en:entity){
+				if(en.getId() != null){
+					DaoUtils.update(en);
+				}else{
+					DaoUtils.insert(en);
+				}
 			}
+		} catch (Exception e) {
+			logger.error("持久化异常",e);
 		}
 	}
 
