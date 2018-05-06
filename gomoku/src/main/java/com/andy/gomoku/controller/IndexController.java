@@ -1,5 +1,6 @@
 package com.andy.gomoku.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.andy.gomoku.base.PageUtil;
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
+import com.andy.gomoku.base.form.FormField;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.GenTable;
 import com.andy.gomoku.dao.vo.GenTableColumn;
@@ -51,17 +53,37 @@ public class IndexController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="importExcel/{table}")
 	public RespVO importExcel(MultipartFile upload,@PathVariable("table") String table) throws Exception {
+		if(upload == null){
+			return RespVO.createErrorJsonResonse("请选择Excel文件");
+		}
 		ImportExcel excel = new ImportExcel(upload, 1,0);
 		List<Map<String, Object>> list = excel.getDataList();
 		if(list != null && !list.isEmpty()){
 			DaoUtils.delete(table);
 			for(Map entity:list){
+				entity.put("table_", table);
 				DaoUtils.insert(entity);
 			}
 		}
 		
 		return RespVO.createSuccessJsonResonse("导入成功");
 	}
+	
+	/**
+	 * 导入界面
+	 * @param table
+	 * @return
+	 */
+	@RequestMapping("toImportExcel/{table}")  
+    public ModelAndView toExportExcel(@PathVariable("table") String table) {
+		List<FormField> formFieldList = new ArrayList<>();
+		formFieldList.add(FormField.builder().name("table").text("导入表").type("span").build());
+		formFieldList.add(FormField.builder().name("upload").text("选择文件").type("upload").build());
+		
+		Map<String, Object> data = PageUtil.createFormPageStructure("importExcel/"+table, formFieldList,Collections.singletonMap("table", table));
+		
+		return createCustMV("window/add",data);
+    }  
 	
 	/**
 	 * 导出excel

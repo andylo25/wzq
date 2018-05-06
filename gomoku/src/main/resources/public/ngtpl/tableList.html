@@ -7,8 +7,8 @@
         <div class="span12">
            <div class="table-toolbar">
               <div class="btn-group" ng-repeat="btn in toollist">
-                 <a ng-if="btn.type=='add'" dy-add="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-plus icon-white"></i></button></a>
-                 <a ng-if="btn.type=='edit'" layer-open="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true}"><button class="btn btn-success" >{{btn.text}} <i class="icon-edit icon-white"></i></button></a>
+                 <a ng-if="btn.type=='add'" dy-add="{url:btn.url,title:btn.text,cb:refresh}"><button class="btn btn-success" >{{btn.text}} <i class="icon-plus icon-white"></i></button></a>
+                 <a ng-if="btn.type=='edit'" layer-open="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true,cb:refresh}"><button class="btn btn-success" >{{btn.text}} <i class="icon-edit icon-white"></i></button></a>
                  <a ng-if="btn.type=='del'" layer-confirm="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true,cb:refresh}"><button class="btn btn-success" >{{btn.text}} <i class="icon-remove icon-white"></i></button></a>
                  <a ng-if="btn.type=='confirm'" layer-confirm="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-refresh icon-white"></i></button></a>
               </div>
@@ -16,7 +16,7 @@
                  <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
                  <ul class="dropdown-menu">
                     <li><a ng-href="/exportExcel/{{exportTable}}">导出</a></li>
-                    <li><a ng-href="/importExcel/{{exportTable}}">导入</a></li>
+                    <li><a href="javascript:;" dy-add="{url:'toImportExcel/'+exportTable,title:'导入'}">导入</a></li>
                  </ul>
               </div>
            </div>

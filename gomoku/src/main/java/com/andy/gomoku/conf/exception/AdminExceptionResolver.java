@@ -29,7 +29,7 @@ public class AdminExceptionResolver extends ExceptionHandlerExceptionResolver {
         if(handlerMethod.getMethod() == null) return null;
         
         if(!(exception instanceof GoSeviceException)){
-        	exception = new GoSeviceException("内部异常，请联系管理员",exception);
+        	exception = new GoSeviceException(exception.getMessage(),exception);
         }
         
         logger.error("error",exception);

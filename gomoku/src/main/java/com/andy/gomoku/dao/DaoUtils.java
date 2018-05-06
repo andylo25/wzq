@@ -20,7 +20,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.dao.vo.GenTable;
@@ -64,8 +63,9 @@ public class DaoUtils {
 	}
 
 	public static String toTable(String entity) {
+		if(entity.indexOf('_') > 0) return entity;
 		String[] strs = StringUtils.splitByCharacterTypeCamelCase(entity);
-		return StringUtils.join(strs, "_");
+		return StringUtils.join(strs, "_");	
 	}
 
 	/**
@@ -267,10 +267,13 @@ public class DaoUtils {
 		QueryRunner run = new QueryRunner(dataSource);
 		try {
 			List<NameValue> fields = null;
+			String table = "";
 			if (entity instanceof BaseEntity) {
 				((BaseEntity) entity).setCreateTime(System.currentTimeMillis()/1000);
 				fields = EntityUtils.getNameValues((BaseEntity) entity, false,true);
+				table = toTable(entity.getClass().getSimpleName());
 			} else if (entity instanceof Map) {
+				table = (String) ((Map) entity).remove("table_");
 				((Map) entity).put("create_time", System.currentTimeMillis()/1000);
 				fields = Lists.newArrayList();
 				for (Entry<String, Object> fc : ((Map<String, Object>) entity).entrySet()) {
@@ -283,7 +286,6 @@ public class DaoUtils {
 			} else {
 				return 0;
 			}
-			String table = toTable(entity.getClass().getSimpleName());
 			StringBuilder sb = new StringBuilder();
 			Object[] vas = new Object[fields.size()];
 			for (int i = 0; i < fields.size(); i++) {

@@ -40,12 +40,19 @@ var dyService = angular.module("dyService", [])
      */
     .factory('postUrl', ['$http', function ($http) {
         var doRequest = function (url, data) {
+        	var isFormData = false;
+        	if(data){
+        		isFormData = Object.prototype.toString.call(data) === '[object FormData]';
+        		if(!isFormData) data = $.param(data);
+        	}else{
+        		data = '';
+        	}
             return $http({
                 method: 'post',
                 url: url,
-                data: data ? $.param(data) : '',
+                data: data,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': isFormData? undefined : 'application/x-www-form-urlencoded'
                 }
             });
         };

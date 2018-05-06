@@ -1,7 +1,5 @@
 package com.andy.gomoku.base;
 
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,14 +8,11 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.andy.gomoku.base.form.FormData;
 import com.andy.gomoku.base.form.FormField;
 import com.andy.gomoku.base.table.PageStructure;
 import com.andy.gomoku.base.table.Search;
 import com.andy.gomoku.base.table.TableHeader;
 import com.andy.gomoku.base.table.Tool;
-import com.andy.gomoku.entity.BaseEntity;
-import com.andy.gomoku.utils.ReflectUtil;
 import com.google.common.collect.Lists;
 
 /**
@@ -33,7 +28,7 @@ public class PageUtil {
 	 * @param formFieldList
 	 * @return
 	 */
-	public static Map<String, Object> createFormPageStructure(String subUrl, List<FormField> formFieldList) throws Exception {
+	public static Map<String, Object> createFormPageStructure(String subUrl, List<FormField> formFieldList) {
 		return createFormPageStructure(subUrl, formFieldList,null);
 	}
 	
@@ -46,7 +41,7 @@ public class PageUtil {
 	 * @param cancelBtn 是否添加取消按钮
 	 * @return
 	 */
-	public static Map<String, Object> createFormPageStructure(String subUrl, List<FormField> formFieldList, Object formData) throws Exception {
+	public static Map<String, Object> createFormPageStructure(String subUrl, List<FormField> formFieldList, Object formData) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> formStruct = new HashMap<String, Object>();
 		formStruct.put("submitUrl", subUrl);
@@ -69,7 +64,7 @@ public class PageUtil {
 	 * @param types
 	 * @return
 	 */
-	public static Map<String, Object> createFormPageStructure(String subUrl, String[] names, String[] texts, String[] types) throws Exception {
+	public static Map<String, Object> createFormPageStructure(String subUrl, String[] names, String[] texts, String[] types) {
 		List<FormField> formFieldList = new ArrayList<FormField>();
 		if(names != null) {
 			for(int i=0;i<names.length;i++) {

@@ -534,6 +534,9 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         maxmin: true,
                         shade: 0.3,
                         area: ["770px", "550px"],
+                        end : function(){
+                        		params.cb && params.cb();
+                        	},
                         content: "/" + params.url //iframe的url
                     });
                 })
@@ -554,6 +557,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         if(_data.status == 200){
                             parent.layer.msg(_data.description, {icon: 1, time: 1000}, function(){
                                 layer.closeAll();
+                                params.cb && params.cb();
                             });
                         }else{
                             parent.layer.msg(_data.description, {icon: 2, time: 1000});
@@ -679,6 +683,9 @@ var dyDir = angular.module("dyDir", ["dyService"])
                             maxmin: false,
                             shade: 0.3,
                             area: ["770px", "550px"],
+                            end : function(){
+                        		params.cb && params.cb();
+                        	},
                             content: srcUrl
                         });
                         parent.layer.full(index);
@@ -689,6 +696,9 @@ var dyDir = angular.module("dyDir", ["dyService"])
                             shadeClose: false,
                             maxmin: true,
                             shade: 0.3,
+                            end : function(){
+                        		params.cb && params.cb();
+                        	},
                             area: [params.width || "770px", params.height || "550px"],
                             content: srcUrl
                         });
