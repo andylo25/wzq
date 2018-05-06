@@ -2,14 +2,11 @@ package com.andy.gomoku.action;
 
 import java.util.Map;
 
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.dao.DaoUtils;
-import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.game.GameUser;
@@ -39,6 +36,7 @@ public class Login101Action implements IWebAction{
 		UsrGameInfo gameInfo = new UsrGameInfo();
 		gameInfo.setUid(user.getId());
 		gameInfo.setTitleSort(0);
+		gameInfo.setCoin(0L);
 		DaoUtils.insert(gameInfo);
 		
 		GameUser gameUser = new GameUser(user);

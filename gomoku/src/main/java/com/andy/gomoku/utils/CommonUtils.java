@@ -52,19 +52,19 @@ public class CommonUtils {
 			winLog.setResult(1);
 			otLog.setResult(-1);
 			if(wingi.getTitleSort() == otgu.getTitleSort()){
-				wingi.addScore(10);
+				wingi.addCoin(10);
 				winLog.setAddCoin(10);
-				otgu.addScore(-10);
+				otgu.addCoin(-10);
 				otLog.setAddCoin(-10);
 			}else if(wingi.getTitleSort() < otgu.getTitleSort()){
-				wingi.addScore(15);
+				wingi.addCoin(15);
 				winLog.setAddCoin(15);
-				otgu.addScore(-10);
+				otgu.addCoin(-10);
 				otLog.setAddCoin(-10);
 			}else{
-				wingi.addScore(5);
+				wingi.addCoin(5);
 				winLog.setAddCoin(5);
-				otgu.addScore(-10);
+				otgu.addCoin(-10);
 				otLog.setAddCoin(-10);
 			}
 			

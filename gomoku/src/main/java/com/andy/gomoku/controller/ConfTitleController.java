@@ -55,7 +55,7 @@ public class ConfTitleController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="listData")
 	public RespVO listData(Integer page,Integer limit) throws Exception {
-		PageVO titles = DaoUtils.getPageForMap(ConfTitle.table(), null,"min_scr",page,limit);
+		PageVO titles = DaoUtils.getPageForMap(ConfTitle.table(), null,"title_sort",page,limit);
 		
         return RespVO.createSuccessJsonResonse(titles);
 	}
@@ -70,6 +70,7 @@ public class ConfTitleController extends BaseController{
 	public ModelAndView add() throws Exception {
 		List<FormField> formFieldList = new ArrayList<>();
 		formFieldList.add(FormField.builder().name("title").text("段位名称").build());
+		formFieldList.add(FormField.builder().name("titleSort").text("段位等级").build());
 		formFieldList.add(FormField.builder().name("minScr").text("大于等于").build());
 		formFieldList.add(FormField.builder().name("maxScr").text("小于").build());
 		
@@ -103,6 +104,7 @@ public class ConfTitleController extends BaseController{
 		List<FormField> formFieldList = new ArrayList<>();
 		formFieldList.add(FormField.builder().name("id").text("ID").type("span").build());
 		formFieldList.add(FormField.builder().name("title").text("段位名称").build());
+		formFieldList.add(FormField.builder().name("titleSort").text("段位等级").build());
 		formFieldList.add(FormField.builder().name("minScr").text("大于等于").build());
 		formFieldList.add(FormField.builder().name("maxScr").text("小于").build());
 		ConfTitle confTitle = DaoUtils.getOne(ConfTitle.class,Where.eq("id", id));

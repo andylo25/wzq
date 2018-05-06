@@ -37,9 +37,8 @@ public class GameUser implements Serializable{
 			user.setRole("1");
 			this.gameInfo = new UsrGameInfo();
 			gameInfo.setCoin(RandomUtils.nextLong(100, 1000));
+			gameInfo.addCoin(0);
 			gameInfo.setLoseCount(RandomUtils.nextInt(100, 1000));
-			gameInfo.setScore(RandomUtils.nextInt(100, 1000));
-			gameInfo.addScore(0);
 			gameInfo.setWinCount(RandomUtils.nextInt(100, 1000));
 		}
 		
@@ -94,7 +93,6 @@ public class GameUser implements Serializable{
 		resu.put("icon", user.getIcon());
 		resu.put("cid", user.getTheme());
 		resu.put("coin", gameInfo.getCoin());
-		resu.put("score", gameInfo.getScore());
 		resu.put("title", gameInfo.getTitle());
 		return resu;
 	}

@@ -17,7 +17,7 @@ public class UsrGameInfo extends BaseEntity{
 	
 	private Long coin;
 	
-	private Integer score;
+//	private Integer score;
 	
 	private Integer titleSort;
 	private Integer winCount;
@@ -41,14 +41,6 @@ public class UsrGameInfo extends BaseEntity{
 		this.coin = coin;
 	}
 
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -68,9 +60,9 @@ public class UsrGameInfo extends BaseEntity{
 		}
 	}
 
-	public void addScore(int score){
-		this.score += score;
-		int titleSor = GameConf.getTitleSort(score);
+	public void addCoin(int coin){
+		this.coin += coin;
+		int titleSor = GameConf.getTitleSort(this.coin.intValue());
 		if(this.titleSort == null || this.titleSort != titleSor){
 			this.setTitleSort(titleSor);
 		}

@@ -23,6 +23,7 @@ public class Action104 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		if(gameUser.getRoom() != null) return;
 		
+		if(gameUser.isMatching()) return;
 		Global.addMatch(gameUser);
 		
 		SendUtil.send104(myWebSocket,gameUser);
