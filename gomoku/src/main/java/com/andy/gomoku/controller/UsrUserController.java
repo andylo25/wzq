@@ -99,13 +99,12 @@ public class UsrUserController extends BaseController{
 	@RequestMapping(value="addCoin")
 	public RespVO addCoin(Long id,Integer addCoin) throws Exception {
 		UsrGameInfo gameInfo = DaoUtils.get(id, UsrGameInfo.class);
-		if(addCoin > 0){
-			gameInfo.setCoin(gameInfo.getCoin()+addCoin);
-		}
+		gameInfo.setCoin(gameInfo.getCoin()+addCoin);
 		DaoUtils.update(gameInfo);
 		
 		MyWebSocket session = Global.getSession(id);
 		if(session != null){
+			session.getUser().getGameInfo().addCoin(addCoin);
 			SendUtil.send114(session.getUser());
 		}
 		
