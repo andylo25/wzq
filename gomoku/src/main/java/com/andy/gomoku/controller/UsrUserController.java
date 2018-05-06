@@ -22,6 +22,9 @@ import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
+import com.andy.gomoku.game.Global;
+import com.andy.gomoku.utils.SendUtil;
+import com.andy.gomoku.websocket.MyWebSocket;
 
 @Controller
 @RequestMapping("admin/user")
@@ -100,6 +103,12 @@ public class UsrUserController extends BaseController{
 			gameInfo.setCoin(gameInfo.getCoin()+addCoin);
 		}
 		DaoUtils.update(gameInfo);
+		
+		MyWebSocket session = Global.getSession(id);
+		if(session != null){
+			SendUtil.send114(session.getUser());
+		}
+		
         return RespVO.createSuccessJsonResonse("增加成功");
 	}
 }

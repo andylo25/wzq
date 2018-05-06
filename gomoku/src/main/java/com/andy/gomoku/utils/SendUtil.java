@@ -156,5 +156,20 @@ public class SendUtil {
 		}
 	}
 	
+	public static void send114(GameUser user) {
+		Room room = user.getRoom();
+		Map<String,Object> map = Maps.newHashMap();
+		map.put("userId", user.getId());
+		map.put("coin", user.getGameInfo().getCoin());
+		map.put("title", user.getGameInfo().getTitle());
+		if(room != null){
+			for(GameUser gameUser:room.getUsers()){
+				doSend(gameUser,GmAction.ACTION_114, map);
+			}
+		}else{
+			doSend(user,GmAction.ACTION_114, map);
+		}
+	}
+	
 
 }
