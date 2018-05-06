@@ -728,6 +728,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                 scope.tableHeader = scope.tableList.tableHeader;
                 scope.search = scope.tableList.search;
                 scope.toollist = scope.tableList.toollist;
+                scope.exportTable = scope.tableList.exportTable;
                 if(scope.tableList.ext){
                     scope.showPager = scope.tableList.ext.pager; //是否显示分页
                     scope.pageOptions = scope.tableList.ext.page_options; //分页条数的配置项

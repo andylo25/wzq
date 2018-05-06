@@ -31,7 +31,7 @@ public class PageStructure implements Serializable {
 	
 	private Map<String,Object> header_data;
 	
-	private String rowLinkTitle;
+	private String exportTable;
 	
 	private Map treeData;
 	private Map ext;
@@ -100,14 +100,6 @@ public class PageStructure implements Serializable {
 		this.filter = filter;
 	}
 
-	public String getRowLinkTitle() {
-		return rowLinkTitle;
-	}
-
-	public void setRowLinkTitle(String rowLinkTitle) {
-		this.rowLinkTitle = rowLinkTitle;
-	}
-
 	public String getFirstTitle() {
 		return firstTitle;
 	}
@@ -164,6 +156,14 @@ public class PageStructure implements Serializable {
 
 	public void setViewId(String viewId) {
 		this.viewId = viewId;
+	}
+
+	public String getExportTable() {
+		return exportTable;
+	}
+
+	public void setExportTable(String exportTable) {
+		this.exportTable = exportTable;
 	}
 	
 }

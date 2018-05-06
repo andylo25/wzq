@@ -12,13 +12,13 @@
                  <a ng-if="btn.type=='del'" layer-confirm="{url:btn.url,title:btn.text,id:tableB[curSel].id,needId:true,cb:refresh}"><button class="btn btn-success" >{{btn.text}} <i class="icon-remove icon-white"></i></button></a>
                  <a ng-if="btn.type=='confirm'" layer-confirm="{url:btn.url,title:btn.text}"><button class="btn btn-success" >{{btn.text}} <i class="icon-refresh icon-white"></i></button></a>
               </div>
-              <!-- <div class="btn-group pull-right">
+              <div class="btn-group pull-right" ng-if="exportTable">
                  <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
                  <ul class="dropdown-menu">
-                    <li><a href="#">Print</a></li>
-                    <li><a href="#">Export to Excel</a></li>
+                    <li><a ng-href="/exportExcel/{{exportTable}}">导出</a></li>
+                    <li><a ng-href="/importExcel/{{exportTable}}">导入</a></li>
                  </ul>
-              </div> -->
+              </div>
            </div>
             
             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" >

@@ -34,8 +34,8 @@ public class ConfTitleController extends BaseController{
 	@RequestMapping(value="list")
 	public ModelAndView list() throws Exception {
 		TableHeader tableHeader = new TableHeader();
-		tableHeader.setNames(new String[]{"id", "title", "min_scr", "max_scr"});
-		tableHeader.setTexts(new String[]{"ID", "段位名称","大于等于","小于积分"});
+		tableHeader.setNames(new String[]{"id", "title_sort","title", "min_scr", "max_scr"});
+		tableHeader.setTexts(new String[]{"ID","段位等级", "段位名称","大于等于","小于积分"});
 		
 		Tool tool = new Tool();
 		tool.setUrls("admin/confTitle/add","admin/confTitle/edit","admin/confTitle/delete","admin/confTitle/refreshCache");
@@ -43,6 +43,7 @@ public class ConfTitleController extends BaseController{
 		tool.setTypes("add","edit","del","confirm");
 		
 		PageStructure data = PageUtil.createTablePageStructure("admin/confTitle/listData","id", tableHeader,tool,null);
+		data.setExportTable(ConfTitle.table());
 		return createMV("tableList","称号配置", Collections.singletonMap("formStruct", data));
 	}
 	

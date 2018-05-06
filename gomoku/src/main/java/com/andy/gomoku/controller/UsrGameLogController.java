@@ -32,7 +32,7 @@ public class UsrGameLogController extends BaseController{
 	@RequestMapping(value="list")
 	public ModelAndView list() throws Exception {
 		TableHeader tableHeader = new TableHeader();
-		tableHeader.setNames(new String[]{"id", "nick_name", "coin", "add_coin","result","create_time"});
+		tableHeader.setNames(new String[]{"id", "nick_name", "coin", "add_coin","result","create_time:datetime"});
 		tableHeader.setTexts(new String[]{"ID", "玩家名称","原金币","增加金币","结果","结算时间"});
 		
 		PageStructure data = PageUtil.createTablePageStructure("admin/playLog/listData", "id", tableHeader,null,null);

@@ -35,7 +35,8 @@ public class GameUser implements Serializable{
 		
 		if(id >= GoConstant.ROBOT_ID_START){
 			user.setRole("1");
-			this.gameInfo = new UsrGameInfo();
+			this.gameInfo = new UsrGameInfo(user.getId()+1);
+			gameInfo.setUid(user.getId());
 			gameInfo.setCoin(RandomUtils.nextLong(100, 1000));
 			gameInfo.addCoin(0);
 			gameInfo.setLoseCount(RandomUtils.nextInt(100, 1000));
