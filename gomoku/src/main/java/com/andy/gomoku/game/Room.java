@@ -78,7 +78,10 @@ public class Room implements Serializable{
 
 	public GameUser getOther(GameUser user) {
 		if(users.get(0) == user){
-			return users.get(1);
+			if(users.size() > 1){
+				return users.get(1);
+			}
+			return null;
 		}
 		return users.get(0);
 	}
