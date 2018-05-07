@@ -24,6 +24,7 @@ public class Action111 implements IWebAction{
 		GameUser user = myWebSocket.getUser();
 		Room room = user.getRoom();
 		if(room != null){
+			data.put("userId", user.getId());
 			SendUtil.send111(room,data);
 		}
 		
