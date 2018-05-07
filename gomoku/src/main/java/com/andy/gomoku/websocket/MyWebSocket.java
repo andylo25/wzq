@@ -98,6 +98,9 @@ public class MyWebSocket {
 		if(logger.isInfoEnabled()){
 			logger.info("来自客户端消息:{}", message);
 		}
+		if(this.getUser() == null){
+			logger.error("用户没有登录，请确认");
+		}
 		Map<String, Object> reqData = JsonUtils.json2Map(message);
 		Integer action = MapUtils.getInteger(reqData, "action");
 		if(action == null)return;
@@ -106,7 +109,11 @@ public class MyWebSocket {
 		if(data == null){
 			data = Maps.newHashMap();
 		}
-		webAction.doAction(this,data);
+		try {
+			webAction.doAction(this,data);
+		} catch (Exception e) {
+			logger.error("来自客户端消息:{}", message);
+		}
 		
 	}
 

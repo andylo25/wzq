@@ -46,14 +46,24 @@ public class Global implements Serializable{
 	public static void removeSession(MyWebSocket session){
 		onlineNumber.decrementAndGet();
 		sessions.remove(session);
-		sessionMap.remove(session);
+		GameUser user = session.getUser();
+		if(user != null){
+			sessionMap.remove(user.getId());
+			session.removeAttr(GoConstant.USER_SESSION_KEY);
+			if(logger.isInfoEnabled()){
+				logger.info("断开连接用户：{}-{}", user.getId(),session);
+			}
+		}
 		
 		if(logger.isInfoEnabled()){
-			logger.info("有连接关闭！ 当前在线人数{}", onlineNumber);
+			logger.info("有连接关闭！ 当前在线人数{},s={},u={}", onlineNumber,sessions.size(),sessionMap.size());
 		}
 	}
 	
 	public static void addUser(Long uid,MyWebSocket session){
+		if(logger.isInfoEnabled()){
+			logger.info("登录用户：{}-{}", uid,session);
+		}
 		sessionMap.put(uid, session);
 	}
 	
