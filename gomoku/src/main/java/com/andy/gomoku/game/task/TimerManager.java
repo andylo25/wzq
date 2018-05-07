@@ -16,7 +16,7 @@ public class TimerManager {
 		// 自动匹配
 		timer = new Timer("TimerManager");
 		TimerTask task = new AutoMatchTask();
-		timer.schedule(task, 5000, 5*1000);
+		timer.schedule(task, 5000, 3*1000);
 		
 		// 机器人占用房间检测
 		TimerTask checkTask = new RobotTask();
