@@ -39,13 +39,14 @@ public class Global implements Serializable{
 		sessions.add(session);
 		
 		if(logger.isInfoEnabled()){
-			logger.info("有新连接加入！ 当前在线人数{}", onlineNumber);
+			logger.info("有新连接加入！ 当前在线人数{}，s={}", onlineNumber,sessions.size());
 		}
 	}
 	
 	public static void removeSession(MyWebSocket session){
-		onlineNumber.decrementAndGet();
-		sessions.remove(session);
+		if(sessions.remove(session)){
+			onlineNumber.decrementAndGet();
+		}
 		GameUser user = session.getUser();
 		if(user != null){
 			sessionMap.remove(user.getId());
@@ -63,6 +64,7 @@ public class Global implements Serializable{
 	public static void addUser(Long uid,MyWebSocket session){
 		if(logger.isInfoEnabled()){
 			logger.info("登录用户：{}-{}", uid,session);
+			logger.info("当前在线人数{},s={},u={}", onlineNumber,sessions.size(),sessionMap.size());
 		}
 		sessionMap.put(uid, session);
 	}

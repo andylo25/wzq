@@ -112,7 +112,7 @@ public class MyWebSocket {
 		try {
 			webAction.doAction(this,data);
 		} catch (Exception e) {
-			logger.error("来自客户端消息:{}", message);
+			logger.error("执行逻辑异常", e);
 		}
 		
 	}
