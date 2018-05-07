@@ -9,7 +9,7 @@ import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 /**
  * 主题选择
@@ -20,7 +20,7 @@ import com.andy.gomoku.websocket.MyWebSocket;
 public class Action112 implements IWebAction{
 
 	@Override
-	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
+	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		
 		GameUser user = myWebSocket.getUser();
 		

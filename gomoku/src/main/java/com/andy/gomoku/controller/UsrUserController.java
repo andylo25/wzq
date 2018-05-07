@@ -24,7 +24,7 @@ import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 @Controller
 @RequestMapping("admin/user")
@@ -102,7 +102,7 @@ public class UsrUserController extends BaseController{
 		gameInfo.setCoin(gameInfo.getCoin()+addCoin);
 		DaoUtils.update(gameInfo);
 		
-		MyWebSocket session = Global.getSession(id);
+		MySocketSession session = Global.getSession(id);
 		if(session != null){
 			session.getUser().getGameInfo().addCoin(addCoin);
 			SendUtil.send114(session.getUser());

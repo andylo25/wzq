@@ -8,9 +8,8 @@ import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.Room;
 import com.andy.gomoku.utils.GmAction;
-import com.andy.gomoku.utils.GoConstant;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 /**
  * 好友约战
@@ -21,7 +20,7 @@ import com.andy.gomoku.websocket.MyWebSocket;
 public class Action102 implements IWebAction{
 
 	@Override
-	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
+	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		GameUser user = myWebSocket.getUser();
 		if(user.getRoom() != null) return;
 		

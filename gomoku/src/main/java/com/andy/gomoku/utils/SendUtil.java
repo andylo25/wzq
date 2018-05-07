@@ -6,12 +6,12 @@ import java.util.Map;
 import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.Room;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 import com.google.common.collect.Maps;
 
 public class SendUtil {
 
-	public static void send100(MyWebSocket session,GameUser gameUser) {
+	public static void send100(MySocketSession session,GameUser gameUser) {
 		if(gameUser == null){
 			Map<String,Object> map = Maps.newHashMap();
 			map.put("respCode", 1);
@@ -23,7 +23,7 @@ public class SendUtil {
 			doSend(session,GmAction.ACTION_100, gameUser.getUserInfo());
 		}
 	}
-	public static void send101(MyWebSocket session,GameUser gameUser) {
+	public static void send101(MySocketSession session,GameUser gameUser) {
 		if(gameUser == null)return;
 		doSend(session,GmAction.ACTION_101, gameUser.getUserInfo());
 	}
@@ -47,7 +47,7 @@ public class SendUtil {
 		doSend(session,GmAction.ACTION_103, map);
 	}
 	
-	public static void send104(MyWebSocket session,GameUser gameUser) {
+	public static void send104(MySocketSession session,GameUser gameUser) {
 		if(gameUser == null)return;
 		Map<String,Object> map = Maps.newHashMap();
 		map.put("respCode", GoConstant.SUCC_CODE);
@@ -111,12 +111,12 @@ public class SendUtil {
 	private static void doSend(Object sessionOrId,int action,Object data) {
 		if(data == null)return;
 		if(sessionOrId != null){
-			MyWebSocket sess = null;
+			MySocketSession sess = null;
 			Map<String,Object> map = Maps.newHashMap();
 			map.put("action", action);
 			map.put("data", data);
-			if(sessionOrId instanceof MyWebSocket){
-				sess = (MyWebSocket) sessionOrId;
+			if(sessionOrId instanceof MySocketSession){
+				sess = (MySocketSession) sessionOrId;
 			}else if(sessionOrId instanceof GameUser){
 				sess = Global.getSession(((GameUser) sessionOrId).getId());
 			}else{
@@ -130,7 +130,7 @@ public class SendUtil {
 	
 	public static void broadcast(int action,String data) {
 		if(data == null)return;
-		for(MyWebSocket session:Global.getUserSessions()){
+		for(MySocketSession session:Global.getUserSessions()){
 			doSend(session,action,data);
 		}
 	}

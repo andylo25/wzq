@@ -14,7 +14,7 @@ import com.andy.gomoku.game.Room;
 import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 /**
  * 落子
@@ -27,7 +27,7 @@ public class Action106 implements IWebAction{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
+	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		int x = MapUtils.getIntValue(data, "x");
 		int y = MapUtils.getIntValue(data, "y");
 		

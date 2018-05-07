@@ -11,7 +11,7 @@ import com.andy.gomoku.game.Room;
 import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 /**
  * 超时检测
@@ -22,7 +22,7 @@ import com.andy.gomoku.websocket.MyWebSocket;
 public class Action113 implements IWebAction{
 
 	@Override
-	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
+	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		
 		GameUser user = myWebSocket.getUser();
 		int type = MapUtils.getIntValue(data, "type");

@@ -15,7 +15,7 @@ import com.andy.gomoku.game.Global;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.GoConstant;
 import com.andy.gomoku.utils.SendUtil;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 /**
  * 登录逻辑
@@ -26,7 +26,7 @@ import com.andy.gomoku.websocket.MyWebSocket;
 public class LoginAction implements IWebAction{
 
 	@Override
-	public void doAction(MyWebSocket myWebSocket, Map<String, Object> data) {
+	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		String userName = MapUtils.getString(data, "userName");
 		UsrUser user = null;
 		UsrGameInfo gameInfo = null;

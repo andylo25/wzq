@@ -31,7 +31,7 @@ import com.google.common.collect.Maps;
  */
 @Component
 @ServerEndpoint(value = "/websocket")
-public class MyWebSocket {
+public class TomcatWebSocket implements MySocketSession{
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -132,6 +132,12 @@ public class MyWebSocket {
 		} catch (IOException e) {
 			logger.error("发送消息异常",e);
 		}
+	}
+
+	@Override
+	public void invalidate() {
+		attrs.clear();
+		session = null;
 	}
 	
 	

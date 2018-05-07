@@ -15,7 +15,7 @@ import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.utils.CommonUtils;
 import com.andy.gomoku.utils.GoConstant;
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Queues;
@@ -31,19 +31,19 @@ public class Global implements Serializable{
 	 */
 	public static AtomicInteger onlineNumber = new AtomicInteger();
 
-	private static Map<Long,MyWebSocket> sessionMap = Maps.newConcurrentMap();
-	private static List<MyWebSocket> sessions = Lists.newCopyOnWriteArrayList();
+	private static Map<Long,MySocketSession> sessionMap = Maps.newConcurrentMap();
+	private static List<MySocketSession> sessions = Lists.newCopyOnWriteArrayList();
 	
-	public static void addSession(MyWebSocket session){
+	public static void addSession(MySocketSession session){
 		onlineNumber.incrementAndGet();
 		sessions.add(session);
 		
 		if(logger.isInfoEnabled()){
-			logger.info("有新连接加入！ 当前在线人数{}，s={}", onlineNumber,sessions.size());
+			logger.info("有新连接加入！ 当前在线人数：{}，s={}", onlineNumber,sessions.size());
 		}
 	}
 	
-	public static void removeSession(MyWebSocket session){
+	public static void removeSession(MySocketSession session){
 		if(sessions.remove(session)){
 			onlineNumber.decrementAndGet();
 		}
@@ -57,11 +57,11 @@ public class Global implements Serializable{
 		}
 		
 		if(logger.isInfoEnabled()){
-			logger.info("有连接关闭！ 当前在线人数{},s={},u={}", onlineNumber,sessions.size(),sessionMap.size());
+			logger.info("有连接关闭！ 当前在线人数：{},s={},u={}", onlineNumber,sessions.size(),sessionMap.size());
 		}
 	}
 	
-	public static void addUser(Long uid,MyWebSocket session){
+	public static void addUser(Long uid,MySocketSession session){
 		if(logger.isInfoEnabled()){
 			logger.info("登录用户：{}-{}", uid,session);
 			logger.info("当前在线人数{},s={},u={}", onlineNumber,sessions.size(),sessionMap.size());
@@ -69,11 +69,11 @@ public class Global implements Serializable{
 		sessionMap.put(uid, session);
 	}
 	
-	public static MyWebSocket getSession(long id){
+	public static MySocketSession getSession(long id){
 		return sessionMap.get(id);
 	}
 	
-	public static Collection<MyWebSocket> getUserSessions(){
+	public static Collection<MySocketSession> getUserSessions(){
 		return sessionMap.values();
 	}
 

@@ -2,10 +2,10 @@ package com.andy.gomoku.action;
 
 import java.util.Map;
 
-import com.andy.gomoku.websocket.MyWebSocket;
+import com.andy.gomoku.websocket.MySocketSession;
 
 public interface IWebAction {
 
-	public void doAction(MyWebSocket myWebSocket, Map<String,Object> data);
+	public void doAction(MySocketSession myWebSocket, Map<String,Object> data);
 	
 }
