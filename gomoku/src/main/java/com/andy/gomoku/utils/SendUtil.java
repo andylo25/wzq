@@ -58,6 +58,7 @@ public class SendUtil {
 		if(room == null || readyUser == null)return;
 		Map<String,Object> map = Maps.newHashMap();
 		map.put("userId", readyUser.getId());
+		map.put("cid", readyUser.getCid());
 		if(first != null){
 			map.put("firstId", first.getId());
 		}

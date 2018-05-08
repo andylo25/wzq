@@ -18,13 +18,17 @@ public class GomokuGame implements Serializable{
 	public GomokuGame(boolean haveRob,int firstInd) {
 		gameState = new GameState(15,firstInd);
 		this.setHaveRob(haveRob);
-		gomokuAI = new NegamaxAI(gameState.getSize());
+		if(haveRob){
+			gomokuAI = new NegamaxAI(gameState.getSize());
+		}
 	}
 
 	public void end(){
 		if(gomokuAI != null){
 			gomokuAI.end();
+			gomokuAI = null;
 		}
+		gameState = null;
 		status = -1;
 	}
 	

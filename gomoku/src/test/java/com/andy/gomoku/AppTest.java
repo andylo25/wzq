@@ -1,9 +1,11 @@
 package com.andy.gomoku;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.andy.gomoku.ai.Move;
 import com.andy.gomoku.ai.NegamaxAI;
+import com.google.common.collect.Lists;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -30,16 +32,21 @@ public class AppTest extends TestCase {
 		return new TestSuite(AppTest.class);
 	}
 
-//	/**
-//	 * Rigourous Test :-)
-//	 */
-//	public void testApp() {
-//		
+	/**
+	 * Rigourous Test :-)
+	 */
+	public void testApp() {
+		
 //		WineAI fd = new WineAI(15);
 //		fd.addChess(7, 7);
 //		Mov mov = fd.getBestMove();
 //		System.out.println(mov.x + ":"+ mov.y);
-//	}
+		List<NegamaxAI> ai = Lists.newArrayList();
+		for(int i=0;i<100;i++){
+			ai.add(new NegamaxAI(15));
+		}
+		System.out.println(ai);
+	}
 	
 	public void testAi() {
 		NegamaxAI player = new NegamaxAI(15);
