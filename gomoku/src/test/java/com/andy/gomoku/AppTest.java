@@ -54,17 +54,27 @@ public class AppTest extends TestCase {
 		int win = player.addChess(mov);
 		System.out.println(mov.col + ":"+ mov.row);
 		Scanner scan = new Scanner(System.in);
+		boolean isH = false;
 		while(win < 0){
 			String fd = scan.nextLine();
 			if(fd.equals("b")){
 				player.takeBack();
+			}else if(fd.equals("h")){
+				isH = true;
+			}else if(fd.equals("g")){
+				isH = false;
+				mov = player.getBestMove();
+				win = player.addChess(mov);
+				System.out.println(mov.col + ":"+ mov.row);
 			}else{
 				String[] fds = fd.split(",");
 				player.addChess(new Move(Integer.parseInt(fds[1]), Integer.parseInt(fds[0])));
 				
-				mov = player.getBestMove();
-				win = player.addChess(mov);
-				System.out.println(mov.col + ":"+ mov.row);
+				if(!isH){
+					mov = player.getBestMove();
+					win = player.addChess(mov);
+					System.out.println(mov.col + ":"+ mov.row);
+				}
 			}
 		}
 		scan.close();

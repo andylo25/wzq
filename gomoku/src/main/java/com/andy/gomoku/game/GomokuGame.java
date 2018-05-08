@@ -47,14 +47,13 @@ public class GomokuGame implements Serializable{
 		Move move = new Move(y,x);
 		if(!gameState.makeMove(ind,move)) return -2;
 		if(gomokuAI != null){
-			int resu = gomokuAI.addChess(move);
-			if(resu >= 0){
-				end();
-			}
-			return resu;
+			gomokuAI.addChess(move);
 		}
-		
-		return gameState.checkWin();
+		int resu = gameState.checkWin();
+		if(resu >= 0){
+			end();
+		}
+		return resu;
 		
 	}
 	

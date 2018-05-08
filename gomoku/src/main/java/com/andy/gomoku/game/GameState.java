@@ -22,7 +22,7 @@ public class GameState {
      */
     public GameState(int size,int first) {
         this.size = size;
-        this.currentIndex = first;
+        this.currentIndex = first+1;
         this.board = new int[size][size];
         this.moves = new Stack<>();
     }
@@ -68,7 +68,7 @@ public class GameState {
      * @param move Move to make
      */
     public boolean makeMove(int ind, Move move) {
-    	if(this.currentIndex != ind+1) return false;
+    	if(ind >= 0 && this.currentIndex != ind+1) return false;
     	if(!inBounds(move.col) || !inBounds(move.row)) return false;
     	
         this.moves.push(move);

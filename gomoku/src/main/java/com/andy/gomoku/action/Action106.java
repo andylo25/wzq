@@ -40,7 +40,7 @@ public class Action106 implements IWebAction{
 		if(!CommonUtils.checkMov(gameUser)) return;
 		
 		Move mov = new Move(y,x);
-		int resu = -1;
+		int resu = -2;
 		GameUser movUser = gameUser;
 		if(x >= 0 && y >= 0){
 			resu = game.turnMove(room.getIndx(gameUser),x,y);
@@ -57,8 +57,8 @@ public class Action106 implements IWebAction{
 				logger.error("落子异常："+data);
 			}
 		}
-		movUser.move(room.getOther(movUser).getLastMov());
 		if(resu > -2){
+			movUser.move(room.getOther(movUser).getLastMov());
 			SendUtil.send106(room, movUser.getId(), mov.col, mov.row);
 			
 			if(resu >= 0){

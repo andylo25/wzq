@@ -324,7 +324,13 @@ public class NegamaxAI implements GomokuAI{
 	public int addChess(Move move) {
 		if(state != null){
 			state.makeMove(move);
-			return state.checkWin();
+			int res = state.checkWin();
+			if(res == 0){
+				return -1;
+			}else if(res == 3){
+				return 0;
+			}
+			return res;
 		}
 		return -1;
 	}
