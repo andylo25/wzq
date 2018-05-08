@@ -68,10 +68,10 @@ public class AutoMatchTask extends TimerTask {
 		SendUtil.send103(gameUsers[0], gameUsers[1]);
 		
 		// 准备
-		room.ready(gameUsers[0]);
-		SendUtil.send105(room, gameUsers[0], null);
-		GameUser first = room.ready(gameUsers[1]);
-		SendUtil.send105(room, gameUsers[1], first);
+//		room.ready(gameUsers[0]);
+//		SendUtil.send105(room, gameUsers[0], null);
+//		GameUser first = room.ready(gameUsers[1]);
+//		SendUtil.send105(room, gameUsers[1], first);
 		
 	}
 
