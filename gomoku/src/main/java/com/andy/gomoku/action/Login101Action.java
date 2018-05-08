@@ -12,6 +12,7 @@ import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.utils.CommonUtils;
+import com.andy.gomoku.utils.GameConf;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.GoConstant;
 import com.andy.gomoku.utils.SendUtil;
@@ -35,8 +36,7 @@ public class Login101Action implements IWebAction{
 		
 		UsrGameInfo gameInfo = new UsrGameInfo();
 		gameInfo.setUid(user.getId());
-		gameInfo.setTitleSort(0);
-		gameInfo.setCoin(0L);
+		gameInfo.addCoin(GameConf.getConfInt("init_coin"));
 		DaoUtils.insert(gameInfo);
 		
 		GameUser gameUser = new GameUser(user);
