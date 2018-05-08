@@ -22,6 +22,7 @@ public class Action104 implements IWebAction{
 	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		GameUser gameUser = myWebSocket.getUser();
 		if(gameUser.getRoom() != null) return;
+		if(gameUser.getGameInfo().getCoin() <= 0)return ;
 		
 		if(gameUser.isMatching()) return;
 		Global.addMatch(gameUser);
