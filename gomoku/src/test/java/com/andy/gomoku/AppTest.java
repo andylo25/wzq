@@ -2,13 +2,8 @@ package com.andy.gomoku;
 
 import java.util.Scanner;
 
-import com.andy.gomoku.ai.GameInfo;
-import com.andy.gomoku.ai.GameState;
 import com.andy.gomoku.ai.Move;
-import com.andy.gomoku.ai.NegamaxPlayer;
-import com.andy.gomoku.ai.State;
-import com.andy.gomoku.ai.WineAI;
-import com.andy.gomoku.ai.WineAI.Mov;
+import com.andy.gomoku.ai.NegamaxAI;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -47,22 +42,21 @@ public class AppTest extends TestCase {
 //	}
 	
 	public void testAi() {
-		State state = new State(15);
-		NegamaxPlayer player = new NegamaxPlayer(state);
-		Move mov = player.getMove();
-		state.makeMove(mov);
+		NegamaxAI player = new NegamaxAI(15);
+		Move mov = player.getBestMove();
+		int win = player.addChess(mov);
 		System.out.println(mov.col + ":"+ mov.row);
 		Scanner scan = new Scanner(System.in);
-		while(state.checkWin() == 0){
+		while(win < 0){
 			String fd = scan.nextLine();
 			if(fd.equals("b")){
-				state.undoMove();
+				player.takeBack();
 			}else{
 				String[] fds = fd.split(",");
-				state.makeMove(new Move(Integer.parseInt(fds[1]), Integer.parseInt(fds[0])));
+				player.addChess(new Move(Integer.parseInt(fds[1]), Integer.parseInt(fds[0])));
 				
-				mov = player.getMove();
-				state.makeMove(mov);
+				mov = player.getBestMove();
+				win = player.addChess(mov);
 				System.out.println(mov.col + ":"+ mov.row);
 			}
 		}

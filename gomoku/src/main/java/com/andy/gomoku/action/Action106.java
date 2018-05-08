@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.andy.gomoku.ai.WineAI.Mov;
+import com.andy.gomoku.ai.Move;
 import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.GomokuGame;
 import com.andy.gomoku.game.Room;
@@ -39,7 +39,7 @@ public class Action106 implements IWebAction{
 		if(!gameUser.isOutPeace()) return;
 		if(!CommonUtils.checkMov(gameUser)) return;
 		
-		Mov mov = new Mov(x,y);
+		Move mov = new Move(y,x);
 		int resu = -1;
 		GameUser movUser = gameUser;
 		if(x >= 0 && y >= 0){
@@ -48,18 +48,21 @@ public class Action106 implements IWebAction{
 			// 机器人
 			if(game.haveRob()){
 				movUser = room.getOther(gameUser);
-				mov = new Mov();
-				resu = game.robotMove(mov);
+				int[] resu1 = game.robotMove(-1);
+				resu = resu1[0];
+				if(resu > -2){
+					mov = new Move(resu1[1],resu1[2]);
+				}
 			}else{
 				logger.error("落子异常："+data);
 			}
 		}
 		movUser.move(room.getOther(movUser).getLastMov());
-		if(resu >= 0){
-			SendUtil.send106(room, movUser.getId(), mov.x, mov.y);
+		if(resu > -2){
+			SendUtil.send106(room, movUser.getId(), mov.col, mov.row);
 			
-			if(resu == 1){
-				CommonUtils.gameOver(room,game,movUser);
+			if(resu >= 0){
+				CommonUtils.gameOver(room,game,resu==0?null:movUser);
 			}
 		}else{
 			logger.error("落子失败："+data);

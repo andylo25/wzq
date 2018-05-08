@@ -1,8 +1,10 @@
-package com.andy.gomoku.ai;
+package com.andy.gomoku.game;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import com.andy.gomoku.ai.Move;
+import com.google.common.collect.Lists;
 
 /**
  * State for a Gomoku game.
@@ -18,21 +20,22 @@ public class GameState {
      * Create a new game state.
      * @param size Board size
      */
-    public GameState(int size) {
+    public GameState(int size,int first) {
         this.size = size;
+        this.currentIndex = first;
         this.board = new int[size][size];
         this.moves = new Stack<>();
     }
 
     /**
      * Return the terminal status of the game.
-     * @return 0 if not terminal, the player index of the winning player, or
-     * 3 if the game ended in a draw.
+     * @return -1 if not terminal, the player index of the winning player, or
+     * 0 if the game ended in a draw.
      */
     public int checkWin() {
-        if(isWinner()) return lastIndex();
-        if(moves.size() == size * size) return 3;
-        return 0;
+        if(isWin()) return lastIndex();
+        if(moves.size() == size * size) return 0;
+        return -1;
     }
 
     /**
@@ -48,7 +51,7 @@ public class GameState {
      * @return ArrayList of moves, ordered from first move to last move made
      */
     public List<Move> getMoves() {
-        return new ArrayList(moves);
+        return Lists.newArrayList(moves);
     }
 
     /**
@@ -61,12 +64,17 @@ public class GameState {
 
     /**
      * Make a move on this state.
+     * @param ind 0/1
      * @param move Move to make
      */
-    public void makeMove(Move move) {
+    public boolean makeMove(int ind, Move move) {
+    	if(this.currentIndex != ind+1) return false;
+    	if(!inBounds(move.col) || !inBounds(move.row)) return false;
+    	
         this.moves.push(move);
         this.board[move.row][move.col] = currentIndex;
         this.currentIndex = lastIndex();
+        return true;
     }
     
     public int lastIndex(){
@@ -92,7 +100,7 @@ public class GameState {
      * @param playerIndex Player index (1 or 2)
      * @return True if the index has won
      */
-    private boolean isWinner() {
+    private boolean isWin() {
         if(moves.size() < 5) return false;
         Move lastMove = getLastMove();
         int row = lastMove.row;
@@ -161,4 +169,9 @@ public class GameState {
         }
         return count;
     }
+    
+    public int getSize(){
+    	return size;
+    }
+    
 }

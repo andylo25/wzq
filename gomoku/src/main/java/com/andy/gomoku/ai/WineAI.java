@@ -3,7 +3,7 @@ package com.andy.gomoku.ai;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WineAI {
+public class WineAI implements GomokuAI{
 
 	static {
 		try {
@@ -33,36 +33,28 @@ public class WineAI {
 		winePoint = newPoint(size,0,toTurn,toMatch);
 	}
 	
-	public boolean addChess(int x,int y){
-		boolean isWin = addChess(winePoint, x, y);
+	public int addChess(Move move){
+		boolean isWin = addChess(winePoint, move.col, move.row);
 		if(isWin){
-			end();
+			return end();
 		}
-		return isWin;
+		return -1;
 	}
 	
-	public Mov getBestMove(){
+	public Move getBestMove(){
 		long pi = getBestMove(winePoint);
-		return new Mov((int) (pi/10000), (int)(pi%10000));
+		return new Move((int)(pi%10000),(int) (pi/10000));
 	}
 	
-	public void end(){
-		if(isEnd) return;
+	public int end(){
+		if(isEnd) return -1;
 		isEnd = true;
 		deletePoint(winePoint);
+		return 0;
 	}
 	
 	public void takeBack(){
 		takeBack(winePoint);
-	}
-	
-	public static class Mov{
-		public int x,y;
-		public Mov(){ }
-		public Mov(int x,int y) {
-			this.x = x;
-			this.y = y;
-		}
 	}
 	
 	private static native long newPoint(int size,int depth,int turn,int match);

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Negamax player, with alpha-beta pruning and further optimisations
  */
-public class NegamaxPlayer {
+public class NegamaxAI implements GomokuAI{
 
     private final ThreatUtils reducer;
     private final Evaluator evaluator;
@@ -25,7 +25,11 @@ public class NegamaxPlayer {
 
     private State state;
 
-    public NegamaxPlayer(State state) {
+    public NegamaxAI(int size){
+    	this(new State(size));
+    }
+    
+    public NegamaxAI(State state) {
     	this.state = state;
         this.reducer = new ThreatUtils();
         this.evaluator = Evaluator.getInstance();
@@ -254,7 +258,7 @@ public class NegamaxPlayer {
         return moves.get(0);
     }
     
-    public Move getMove() {
+    public Move getBestMove() {
         // Reset performance counts, clear the hash table
         this.totalNodeCount = 0;
         this.nonLeafCount = 0;
@@ -315,4 +319,30 @@ public class NegamaxPlayer {
             this.depth = depth;
         }
     }
+
+	@Override
+	public int addChess(Move move) {
+		if(state != null){
+			state.makeMove(move);
+			return state.checkWin();
+		}
+		return -1;
+	}
+
+	@Override
+	public int end() {
+		if(state != null){
+			int index = state.currentIndex;
+			state = null;
+			return index;
+		}
+		return -1;
+	}
+
+	@Override
+	public void takeBack() {
+		if(state != null){
+			state.undoMove();
+		}
+	}
 }
