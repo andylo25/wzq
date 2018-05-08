@@ -51,6 +51,9 @@ public class UsrGameLogController extends BaseController{
 		PageVO logs = DaoUtils.getPageForMap(UsrGameLog.table(), null,page,limit);
 		this.idToName(logs.getItems(), UsrUser.table(), "uid:nick_name");
 		for(Map<String, Object> item:logs.getItems()){
+			if(item.get("nick_name") == null){
+				item.put("nick_name", "机器人");
+			}
 			item.put("result", MapUtils.getInteger(item, "result") == 1?"赢":"输");
 		}
         return RespVO.createSuccessJsonResonse(logs);
