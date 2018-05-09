@@ -61,6 +61,9 @@ public class UsrGameInfo extends BaseEntity{
 	}
 
 	public void addCoin(int coin){
+		if(this.coin == null){
+			this.coin = 0L;
+		}
 		this.coin += coin;
 		int titleSor = GameConf.getTitleSort(this.coin.intValue());
 		if(this.titleSort == null || this.titleSort != titleSor){

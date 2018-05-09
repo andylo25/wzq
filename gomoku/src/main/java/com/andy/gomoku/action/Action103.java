@@ -25,6 +25,7 @@ public class Action103 implements IWebAction{
 	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		GameUser gameUser = myWebSocket.getUser();
 		if(gameUser.getRoom() != null)return;
+		if(gameUser.getGameInfo().getCoin() <= 0)return ;
 		
 		Integer roomId = MapUtils.getInteger(data, "roomNum");
 		Room room = Global.getRoom(roomId);

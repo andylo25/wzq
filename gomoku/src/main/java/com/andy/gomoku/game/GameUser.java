@@ -19,6 +19,7 @@ public class GameUser implements Serializable{
 	private UsrGameInfo gameInfo;
 	private Long id;
 	private Room room;
+	private Integer cid;
 	private GomokuGame game;
 	
 	private long startMatch;
@@ -92,15 +93,18 @@ public class GameUser implements Serializable{
 		resu.put("nickName", getNickName());
 		resu.put("userName", getUserName());
 		resu.put("icon", user.getIcon());
-		resu.put("cid", user.getTheme());
+		resu.put("cid", cid);
 		resu.put("coin", gameInfo.getCoin());
 		resu.put("title", gameInfo.getTitle());
 		return resu;
 	}
 
-	public void toggleReady() {
+	public void toggleReady(Integer chid) {
 		if(status == GoConstant.USER_STATUS_0){
 			status = GoConstant.USER_STATUS_1;
+			if(chid != null){
+				this.cid = chid;
+			}
 		}else{
 			status = GoConstant.USER_STATUS_0;
 		}
@@ -172,5 +176,9 @@ public class GameUser implements Serializable{
 
 	public void rejuct() {
 		startPeace = 0;
+	}
+	
+	public Integer getCid(){
+		return cid;
 	}
 }

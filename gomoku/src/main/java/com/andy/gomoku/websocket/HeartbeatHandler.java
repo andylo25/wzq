@@ -20,7 +20,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter{
 	@Override
 	public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
 		if(evt instanceof IdleStateEvent) {
-			logger.info("====>Heartbeat: greater than {}", 180);
+			logger.info("====>Heartbeat: greater than {}", 1800);
 			ctx.writeAndFlush(HEARTBEAT_SEQUENCE.duplicate()).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
 		}else {
 			super.userEventTriggered(ctx, evt);

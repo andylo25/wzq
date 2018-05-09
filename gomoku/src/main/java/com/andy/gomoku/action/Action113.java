@@ -44,8 +44,9 @@ public class Action113 implements IWebAction{
 			if(other.isOutPeace()) return;
 			other.rejuct(); // 恢复状态
 			// 执行悔棋
-			user.getGame().backMove();
-			user.move(other.getLastMov());
+			if(user.getGame().backMove()){
+				user.move(other.getLastMov());
+			}
 		}else if(type == 5){ // 投降
 			CommonUtils.gameOver(room, game, other);
 			return;

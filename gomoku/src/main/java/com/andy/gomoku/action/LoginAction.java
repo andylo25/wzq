@@ -39,6 +39,7 @@ public class LoginAction implements IWebAction{
 		}else{
 			GameUser gameUser = new GameUser(user);
 			gameInfo = DaoUtils.getOne(UsrGameInfo.class, Where.eq("uid", user.getId()));
+			gameInfo.addCoin(0); // 刷新称号
 			gameUser.setGameInfo(gameInfo);
 			
 			Global.addUser(user.getId(), myWebSocket);

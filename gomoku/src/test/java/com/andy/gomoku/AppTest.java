@@ -1,14 +1,11 @@
 package com.andy.gomoku;
 
+import java.util.List;
 import java.util.Scanner;
 
-import com.andy.gomoku.ai.GameInfo;
-import com.andy.gomoku.ai.GameState;
 import com.andy.gomoku.ai.Move;
-import com.andy.gomoku.ai.NegamaxPlayer;
-import com.andy.gomoku.ai.State;
-import com.andy.gomoku.ai.WineAI;
-import com.andy.gomoku.ai.WineAI.Mov;
+import com.andy.gomoku.ai.NegamaxAI;
+import com.google.common.collect.Lists;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -35,38 +32,52 @@ public class AppTest extends TestCase {
 		return new TestSuite(AppTest.class);
 	}
 
-//	/**
-//	 * Rigourous Test :-)
-//	 */
-//	public void testApp() {
-//		
+	/**
+	 * Rigourous Test :-)
+	 */
+	public void testApp() {
+		
 //		WineAI fd = new WineAI(15);
 //		fd.addChess(7, 7);
 //		Mov mov = fd.getBestMove();
 //		System.out.println(mov.x + ":"+ mov.y);
-//	}
+		List<NegamaxAI> ai = Lists.newArrayList();
+		for(int i=0;i<100;i++){
+			ai.add(new NegamaxAI(15));
+		}
+		System.out.println(ai);
+	}
 	
 	public void testAi() {
-		State state = new State(15);
-		NegamaxPlayer player = new NegamaxPlayer(state);
-		Move mov = player.getMove();
-		state.makeMove(mov);
+		NegamaxAI player = new NegamaxAI(15);
+		Move mov = player.getBestMove();
+		int win = player.addChess(mov);
 		System.out.println(mov.col + ":"+ mov.row);
-		Scanner scan = new Scanner(System.in);
-		while(state.checkWin() == 0){
-			String fd = scan.nextLine();
-			if(fd.equals("b")){
-				state.undoMove();
-			}else{
-				String[] fds = fd.split(",");
-				state.makeMove(new Move(Integer.parseInt(fds[1]), Integer.parseInt(fds[0])));
-				
-				mov = player.getMove();
-				state.makeMove(mov);
-				System.out.println(mov.col + ":"+ mov.row);
-			}
-		}
-		scan.close();
+//		Scanner scan = new Scanner(System.in);
+//		boolean isH = false;
+//		while(win < 0){
+//			String fd = scan.nextLine();
+//			if(fd.equals("b")){
+//				player.takeBack();
+//			}else if(fd.equals("h")){
+//				isH = true;
+//			}else if(fd.equals("g")){
+//				isH = false;
+//				mov = player.getBestMove();
+//				win = player.addChess(mov);
+//				System.out.println(mov.col + ":"+ mov.row);
+//			}else{
+//				String[] fds = fd.split(",");
+//				player.addChess(new Move(Integer.parseInt(fds[1]), Integer.parseInt(fds[0])));
+//				
+//				if(!isH){
+//					mov = player.getBestMove();
+//					win = player.addChess(mov);
+//					System.out.println(mov.col + ":"+ mov.row);
+//				}
+//			}
+//		}
+//		scan.close();
 	}
 
 }

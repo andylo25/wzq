@@ -104,6 +104,7 @@ public class State {
      * @param move Move to undo
      */
     public void undoMove() {
+    	if(moveStack.isEmpty())return;
         Move move = moveStack.pop();
         this.zobristHash ^= zobristKeys[board[move.row][move.col]
                 .index - 1][move.row][move.col];

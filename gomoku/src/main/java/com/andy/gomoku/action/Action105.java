@@ -2,6 +2,8 @@ package com.andy.gomoku.action;
 
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
@@ -24,15 +26,16 @@ public class Action105 implements IWebAction{
 		Room room = gameUser.getRoom();
 		if(room == null)return;
 		
-		ready(gameUser, room);
+		ready(gameUser, room,MapUtils.getInteger(data, "cid"));
 		
 		GameUser robot = room.getOther(gameUser);
 		if(robot != null && robot.isRobo()){
-			ready(robot, room);
+			ready(robot, room,RandomUtils.nextInt(0, 4));
 		}
 	}
 
-	private void ready(GameUser gameUser, Room room) {
+	private void ready(GameUser gameUser, Room room, Integer cid) {
+		gameUser.toggleReady(cid);
 		GameUser first = room.ready(gameUser);
 		if(first != null){
 			SendUtil.send105(room, gameUser, first);

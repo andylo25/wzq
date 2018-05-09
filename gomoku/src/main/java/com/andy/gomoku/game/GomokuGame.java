@@ -1,39 +1,34 @@
 package com.andy.gomoku.game;
 
 import java.io.Serializable;
-import java.util.List;
 
-import com.andy.gomoku.ai.WineAI;
-import com.andy.gomoku.ai.WineAI.Mov;
-import com.andy.gomoku.utils.GameUI;
-import com.google.common.collect.Lists;
+import com.andy.gomoku.ai.GomokuAI;
+import com.andy.gomoku.ai.Move;
+import com.andy.gomoku.ai.NegamaxAI;
 
 public class GomokuGame implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private int[][] chess;
-	private List<Mov> movLine = Lists.newArrayList();
 	private int status;
-	private int turnInd;
 	private boolean haveRob;
-	private int size;
-	private WineAI wineAI;
-	private GameUI ui;
+	private GomokuAI gomokuAI;
+	private GameState gameState;
 	
 	public GomokuGame(boolean haveRob,int firstInd) {
-		this.turnInd = firstInd;
+		gameState = new GameState(15,firstInd);
 		this.setHaveRob(haveRob);
-		size = 15;
-		wineAI = new WineAI(size);
-		chess = new int[size][size];
-		ui = new GameUI();
+		if(haveRob){
+			gomokuAI = new NegamaxAI(gameState.getSize());
+		}
 	}
 
 	public void end(){
-		if(wineAI != null){
-			wineAI.end();
+		if(gomokuAI != null){
+			gomokuAI.end();
+			gomokuAI = null;
 		}
+		gameState = null;
 		status = -1;
 	}
 	
@@ -42,39 +37,32 @@ public class GomokuGame implements Serializable{
 	}
 
 	/**
-	 * 落子，-1-失败，0-成功，1-结束
-	 * @param turnIndx
+	 * 落子，-2-失败，-1-未结束，0-和棋，>0-赢方
+	 * @param turnIndx 校验下棋方，-1不校验
 	 * @param x
 	 * @param y
 	 * @return
 	 */
-	public int turnMove(int turnIndx,int x, int y) {
-		if(x < 0 || x >= size || y < 0 ||y >= size)return -1;
-		if(chess[x][y] > 0)return -1;
-		if(turnInd != turnIndx)return -1;
-		chess[x][y] = turnIndx+1;
-		movLine.add(new Mov(x,y));
-		turnInd = 1-turnInd;
-		ui.addChess(x, y);
-		if(wineAI != null){
-			if(wineAI.addChess(x, y)){
-				end();
-				return 1;
-			}
+	public int turnMove(int ind,int x, int y) {
+		Move move = new Move(y,x);
+		if(!gameState.makeMove(ind,move)) return -2;
+		if(gomokuAI != null){
+			gomokuAI.addChess(move);
 		}
-		return 0;
+		int resu = gameState.checkWin();
+		if(resu >= 0){
+			end();
+		}
+		return resu;
+		
 	}
 	
-	public void backMove(){
-		if(!movLine.isEmpty()){
-			Mov mov = movLine.remove(movLine.size()-1);
-			chess[mov.x][mov.y] = 0;
-			turnInd = 1-turnInd;
-			ui.removeChess(mov.x, mov.y);
-			if(wineAI != null){
-				wineAI.takeBack();
-			}
+	public boolean backMove(){
+		if(gameState.undo() == null) return false;
+		if(gomokuAI != null){
+			gomokuAI.takeBack();
 		}
+		return true;
 	}
 
 	public boolean haveRob() {
@@ -85,14 +73,18 @@ public class GomokuGame implements Serializable{
 		this.haveRob = haveRob;
 	}
 
-	public int robotMove(Mov out) {
-		if(wineAI != null){
-			Mov mov = wineAI.getBestMove();
-			out.x = mov.x;
-			out.y = mov.y;
-			return turnMove(turnInd, mov.x, mov.y);
+	/**
+	 * 落子，-2-执行失败，-1-未结束，0-和棋，>0-赢方
+	 * @param turnIndx
+	 * @return
+	 */
+	public int[] robotMove(int ind) {
+		if(gomokuAI != null){
+			Move move = gomokuAI.getBestMove();
+			int resu = turnMove(ind,move.col, move.row);
+			return new int[]{resu,move.row,move.col};
 		}
-		return -1;
+		return new int[]{-2};
 	}
 	
 }
