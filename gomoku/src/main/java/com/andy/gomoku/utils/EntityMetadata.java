@@ -79,7 +79,7 @@ public class EntityMetadata implements Serializable{
 			if("serialVersionUID".equals(fieldName)) continue;
 			String colName = DaoUtils.toTable(fieldName);
 			fieldCol.put(fieldName, new MetadataEntry(fieldName, colName));
-			fieldsS.append(",").append(colName).append(" as ").append(fieldName);
+			fieldsS.append(",").append(colName);
 		}
 		fieldSelect = fieldsS.substring(1);
 	}

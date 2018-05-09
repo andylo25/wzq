@@ -28,6 +28,7 @@ import com.andy.gomoku.dao.vo.NameValue;
 import com.andy.gomoku.dao.vo.Where;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.exception.GoSeviceException;
+import com.andy.gomoku.utils.EntityMetadata;
 import com.andy.gomoku.utils.EntityUtils;
 import com.andy.gomoku.utils.ReflectUtil;
 import com.andy.gomoku.utils.SpringContextHolder;
@@ -306,6 +307,50 @@ public class DaoUtils {
 			throw new GoSeviceException(sqle);
 		}
 	}
+	
+	/**
+	 * 批量插入
+	 * @param entitys
+	 * @return 
+	 */
+	public static int[] batchSave(List<? extends BaseEntity> entitys) {
+		if(entitys == null || entitys.isEmpty()) return null;
+		QueryRunner run = new QueryRunner(dataSource);
+		
+		EntityMetadata metadata = EntityUtils.getEntityMetadata(entitys.get(0).getClass());
+		String[] fields = metadata.getFieldSelect().split(",");
+		
+		Object[][] params = new Object[entitys.size()][fields.length-1];
+		
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < fields.length; i++) {
+			if(!fields[i].equalsIgnoreCase("id")){
+				sb.append(",").append(keywordEscape).append(fields[i]).append(keywordEscape);
+			}
+		}
+		for(int i=0;i<entitys.size();i++){
+			entitys.get(i).setUpdateTime(System.currentTimeMillis()/1000);
+			int j = 0;
+			for (String fi:fields) {
+				if(!fi.equalsIgnoreCase("id")){
+					params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fields[j]);
+					j++;
+				}
+			}
+		}
+		
+		try {
+			int[] inserts = run.batch("INSERT INTO " + toTable(entitys.get(0).getClass().getSimpleName()) + 
+					" (" + sb.substring(1) + ") VALUES (" + StringUtils.repeat("?", ",", fields.length-1) + ")", params);
+//			for(int i=0;i<inserts.length;i++){
+//				entitys.get(i).setId((long) inserts[i]);
+//			}
+			return inserts;
+		} catch (SQLException sqle) {
+			throw new GoSeviceException(sqle);
+		}
+	}
+
 
 	/**
 	 * 更新实体
@@ -360,7 +405,7 @@ public class DaoUtils {
 	 * @param entity
 	 * @return
 	 */
-	public static int[] updateBatch(String field, List<BaseEntity> entitys) {
+	public static int[] updateBatch(String field, List<? extends BaseEntity> entitys) {
 		if(field == null || entitys == null || entitys.isEmpty()) return null;
 		QueryRunner run = new QueryRunner(dataSource);
 		String[] fields = StringUtils.split(field,",");
@@ -369,7 +414,7 @@ public class DaoUtils {
 		String table = toTable(entitys.get(0).getClass().getSimpleName());
 		sql.append(table).append(" SET ");
 		for(String fie:fields){
-			sql.append(",").append(keywordEscape).append(fie).append(keywordEscape).append("=?");
+			sql.append(",").append(keywordEscape).append(toTable(fie)).append(keywordEscape).append("=?");
 		}
 		sql.append(" WHERE id=?");
 		
