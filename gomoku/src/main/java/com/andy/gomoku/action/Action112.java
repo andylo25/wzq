@@ -26,11 +26,11 @@ public class Action112 implements IWebAction{
 		GameUser user = myWebSocket.getUser();
 		
 		String theme = user.getUser().getTheme();
-		if(StringUtils.isNotBlank(theme)){
-			theme += ","+MapUtils.getString(data,"chess");
-		}else {
-			theme = MapUtils.getString(data,"chess");
+		String chess = MapUtils.getString(data,"chess");
+		if(theme != null && theme.indexOf(chess+",") >= 0){
+			return;
 		}
+		theme += chess+",";
 		user.getUser().setTheme(theme);
 		
 		CommonUtils.saveDb(user.getUser());
