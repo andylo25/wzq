@@ -30,17 +30,20 @@ public class EntityUtils {
             return new HashMap<>();  
         }  
     };  
+    
+    public static EntityMetadata getEntityMetadata(Class<? extends BaseEntity> claz){
+    	Map<Class<?>, EntityMetadata> map = mcache.get();
+		EntityMetadata metadata = map.get(claz);
+		if(metadata == null){
+			metadata = new EntityMetadata(claz);
+			map.put(claz, metadata);
+		}
+		return metadata;
+    }
 	
 	public static List<NameValue> getNameValues(BaseEntity baseEntity,boolean containEmpty,boolean containId) {
 		List<NameValue> nameValueList = new ArrayList<NameValue>();
-		Map<Class<?>, EntityMetadata> map = mcache.get();
-		Class<? extends BaseEntity> clasz = baseEntity.getClass();
-		EntityMetadata metadata = map.get(clasz );
-		if(metadata == null){
-			metadata = new EntityMetadata(clasz);
-			map.put(clasz, metadata);
-		}
-		
+		EntityMetadata metadata = getEntityMetadata(baseEntity.getClass());
 		Map<String, MetadataEntry> fcs = metadata.getFieldCols();
 		for(Entry<String, MetadataEntry> fc : fcs.entrySet()) {
 			if(!containId && "id".equals(fc.getKey()))continue;
