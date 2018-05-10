@@ -7,6 +7,7 @@ import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.Room;
 import com.andy.gomoku.websocket.MySocketSession;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class SendUtil {
@@ -83,6 +84,15 @@ public class SendUtil {
 		Map<String,Object> map = Maps.newHashMap();
 		if(winner != null){
 			map.put("userId", winner.getId());
+			List<Map<String,Object>> uifs = Lists.newArrayList();
+			for(GameUser user:room.getUsers()){
+				Map<String,Object> uif = Maps.newHashMap();
+				uif.put("uid", user.getId());
+				uif.put("coin", user.getGameInfo().getCoin());
+				uif.put("title", user.getGameInfo().getTitle());
+				uifs.add(uif);
+			}
+			map.put("uif", uifs);
 		} else {
 			map.put("userId", -1);
 		}
