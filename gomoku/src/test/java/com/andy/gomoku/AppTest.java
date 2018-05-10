@@ -42,7 +42,7 @@ public class AppTest extends TestCase {
 //		Mov mov = fd.getBestMove();
 //		System.out.println(mov.x + ":"+ mov.y);
 		List<NegamaxAI> ai = Lists.newArrayList();
-		for(int i=0;i<100;i++){
+		for(int i=0;i<1;i++){
 			ai.add(new NegamaxAI(15));
 		}
 		System.out.println(ai);
