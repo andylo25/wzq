@@ -51,7 +51,7 @@ public class Action113 implements IWebAction{
 			CommonUtils.gameOver(room, game, other);
 			return;
 		}else if(type == 6){ // 取消
-			user.rejuct();
+			other.rejuct();
 		}
 		
 		data.put("userId", user.getId());
