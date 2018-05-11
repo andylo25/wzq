@@ -60,15 +60,18 @@ public class UsrGameInfo extends BaseEntity{
 		}
 	}
 
-	public void addCoin(int coin){
+	public int addCoin(int coin){
 		if(this.coin == null){
 			this.coin = 0L;
 		}
+		Long old = this.coin;
 		this.coin += coin;
+		if(this.coin < 0)this.coin = 0L;
 		int titleSor = GameConf.getTitleSort(this.coin.intValue());
 		if(this.titleSort == null || this.titleSort != titleSor){
 			this.setTitleSort(titleSor);
 		}
+		return (int) (this.coin - old);
 	}
 
 	public Integer getWinCount() {

@@ -51,22 +51,20 @@ public class CommonUtils {
 			otgu.setWinCount(otgu.getWinCount()-1);
 			winLog.setResult(1);
 			otLog.setResult(-1);
-			if(wingi.getTitleSort() == otgu.getTitleSort()){
-				wingi.addCoin(10);
-				winLog.setAddCoin(10);
-				otgu.addCoin(-10);
-				otLog.setAddCoin(-10);
-			}else if(wingi.getTitleSort() < otgu.getTitleSort()){
-				wingi.addCoin(15);
-				winLog.setAddCoin(15);
-				otgu.addCoin(-10);
-				otLog.setAddCoin(-10);
-			}else{
-				wingi.addCoin(5);
-				winLog.setAddCoin(5);
-				otgu.addCoin(-10);
-				otLog.setAddCoin(-10);
-			}
+//			if(wingi.getTitleSort() == otgu.getTitleSort()){
+//				winLog.setAddCoin(wingi.addCoin(10));
+//				otLog.setAddCoin(otgu.addCoin(-10));
+//			}else if(wingi.getTitleSort() < otgu.getTitleSort()){
+//				winLog.setAddCoin(wingi.addCoin(15));
+//				otLog.setAddCoin(otgu.addCoin(-10));
+//			}else{
+//				winLog.setAddCoin(wingi.addCoin(5));
+//				otLog.setAddCoin(otgu.addCoin(-10));
+//			}
+			int wc = GameConf.getConfInt("win_coin");
+			int lc = GameConf.getConfInt("lost_coin");
+			winLog.setAddCoin(wingi.addCoin(wc));
+			otLog.setAddCoin(otgu.addCoin(lc));
 			
 			saveDb(wingi,otgu,winLog,otLog);
 		}

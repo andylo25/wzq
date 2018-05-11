@@ -23,7 +23,7 @@ public class Action102 implements IWebAction{
 	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		GameUser user = myWebSocket.getUser();
 		if(user.getRoom() != null) return;
-		if(user.getGameInfo().getCoin() <= 0)return ;
+//		if(user.getGameInfo().getCoin() <= 0)return ;
 		
 		Room room = Global.newRoom(user);
 		SendUtil.send102(user, room);
