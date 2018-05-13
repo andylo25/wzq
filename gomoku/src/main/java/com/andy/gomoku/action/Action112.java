@@ -3,7 +3,6 @@ package com.andy.gomoku.action;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
@@ -25,12 +24,15 @@ public class Action112 implements IWebAction{
 		
 		GameUser user = myWebSocket.getUser();
 		
+		if(user.getGameInfo().getCoin() < 500) return;
+		
 		String theme = user.getUser().getTheme();
 		String chess = MapUtils.getString(data,"chess");
 		if(theme != null && theme.indexOf(chess+",") >= 0){
 			return;
 		}
 		theme += chess+",";
+		user.getGameInfo().addCoin(-500);
 		user.getUser().setTheme(theme);
 		
 		CommonUtils.saveDb(user.getUser());
