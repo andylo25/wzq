@@ -32,7 +32,7 @@ public class Action112 implements IWebAction{
 		String chess = MapUtils.getString(data,"chess");
 		if(theme != null && theme.indexOf(chess+",") >= 0){
 			return;
-		}else{
+		}else if(theme == null){
 			theme = "";
 		}
 		theme += chess+",";
