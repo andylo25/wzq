@@ -20,6 +20,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.dao.vo.GenTable;
@@ -36,6 +38,8 @@ import com.google.common.collect.Lists;
 
 public class DaoUtils {
 
+	static Logger logger = LoggerFactory.getLogger(DaoUtils.class);
+	
 	static DataSource dataSource = SpringContextHolder.getBean(DataSource.class);
 	
 	static GmkBeanProcessor convert = new GmkBeanProcessor();

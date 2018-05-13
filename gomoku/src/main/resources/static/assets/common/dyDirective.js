@@ -765,7 +765,7 @@ var dyDir = angular.module("dyDir", ["dyService"])
                         scope.Pages = _data.data.total_pages; //总页数
                         scope.Epage = _data.data.epage; //每页条数
                         scope.reloadPage = _data.data.page; //当前页
-                        scope.curSel = null;
+                        scope.curSel = undefined;
                         scope.pageLis = [];
                         var min = 2,max = 2;
                         if(scope.reloadPage < 3){
