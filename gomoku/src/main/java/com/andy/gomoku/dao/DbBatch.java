@@ -41,7 +41,7 @@ public class DbBatch{
 		}
 	}
 	
-	public static void sv(UsrGameLog m){
+	public static void svGameLog(UsrGameLog m){
 		DbBatch batch = dbBatchs.get(Math.abs(m.hashCode())%dbBatchs.size());
 		if(batch.thread.isAlive()){
 			batch.modelSaveList.add(m);

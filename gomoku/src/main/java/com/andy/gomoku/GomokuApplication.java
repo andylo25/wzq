@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.andy.gomoku.dao.DbBatch;
 import com.andy.gomoku.websocket.GomokuServer;
 
 import io.netty.channel.ChannelFuture;
@@ -35,6 +36,7 @@ public class GomokuApplication implements CommandLineRunner {
 			@Override
 			public void run() {
 				gomokuServer.destroy();
+				DbBatch.stopBatch();
 			}
 		});
 

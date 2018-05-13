@@ -271,7 +271,7 @@ public class DaoUtils {
 			String table = "";
 			if (entity instanceof BaseEntity) {
 				((BaseEntity) entity).setCreateTime(System.currentTimeMillis()/1000);
-				fields = EntityUtils.getNameValues((BaseEntity) entity, false,true);
+				fields = EntityUtils.getNameValues((BaseEntity) entity, false,false);
 				table = toTable(entity.getClass().getSimpleName());
 			} else if (entity instanceof Map) {
 				table = (String) ((Map) entity).remove("table_");
@@ -333,7 +333,7 @@ public class DaoUtils {
 			int j = 0;
 			for (String fi:fields) {
 				if(!fi.equalsIgnoreCase("id")){
-					params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fields[j]);
+					params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fi);
 					j++;
 				}
 			}
@@ -410,13 +410,11 @@ public class DaoUtils {
 		QueryRunner run = new QueryRunner(dataSource);
 		String[] fields = StringUtils.split(field,",");
 		Object[][] params = new Object[entitys.size()][fields.length+1];
-		StringBuilder sql = new StringBuilder("UPDATE ");
 		String table = toTable(entitys.get(0).getClass().getSimpleName());
-		sql.append(table).append(" SET ");
+		StringBuilder sb = new StringBuilder("");
 		for(String fie:fields){
-			sql.append(",").append(keywordEscape).append(toTable(fie)).append(keywordEscape).append("=?");
+			sb.append(",").append(keywordEscape).append(toTable(fie)).append(keywordEscape).append("=?");
 		}
-		sql.append(" WHERE id=?");
 		
 		for(int i=0;i<entitys.size();i++){
 			entitys.get(i).setUpdateTime(System.currentTimeMillis()/1000);
@@ -427,7 +425,7 @@ public class DaoUtils {
 		}
 		
 		try {
-			int[] updates = run.batch(sql.substring(1), params);
+			int[] updates = run.batch("UPDATE " + table + " SET " + sb.substring(1) + " WHERE id=?", params);
 			return updates;
 		} catch (SQLException sqle) {
 			throw new GoSeviceException(sqle);

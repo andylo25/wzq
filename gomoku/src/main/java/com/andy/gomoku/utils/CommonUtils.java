@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.andy.gomoku.dao.DaoUtils;
+import com.andy.gomoku.dao.DbBatch;
 import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrGameLog;
@@ -79,13 +80,20 @@ public class CommonUtils {
 	}
 	
 	public static void saveDb(BaseEntity... entity){
-		// todo 可改批量插入
 		try {
 			for(BaseEntity en:entity){
 				if(en.getId() != null){
-					DaoUtils.update(en);
+					if(en instanceof UsrGameInfo){
+						DbBatch.upUsrUser((UsrGameInfo) en);
+					}else{
+						DaoUtils.update(en);
+					}
 				}else{
-					DaoUtils.insert(en);
+					if(en instanceof UsrGameLog){
+						DbBatch.svGameLog((UsrGameLog) en);
+					}else{
+						DaoUtils.insert(en);
+					}
 				}
 			}
 		} catch (Exception e) {

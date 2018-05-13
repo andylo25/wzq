@@ -4,6 +4,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import com.andy.gomoku.dao.DbBatch;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.task.TimerManager;
 import com.andy.gomoku.utils.GameConf;
@@ -18,6 +19,10 @@ public class StartupListener implements ApplicationListener<ApplicationReadyEven
     	initRank(event);
     	
     	TimerManager.init();
+    	
+    	// 启动db线程
+    	DbBatch.start(2);
+    	
     }
 
 	private void initRank(ApplicationReadyEvent event) {

@@ -39,8 +39,7 @@ public class Action112 implements IWebAction{
 		user.getGameInfo().addCoin(-bcc);
 		user.getUser().setTheme(theme);
 		
-		CommonUtils.saveDb(user.getUser());
-		CommonUtils.saveDb(user.getGameInfo());
+		CommonUtils.saveDb(user.getUser(),user.getGameInfo());
 		
 		SendUtil.send112(user,data);
 		
