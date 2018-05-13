@@ -50,7 +50,7 @@ public class Search implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
-		this.placeholder = text;
+		this.setPlaceholder(text);
 	}
 
 	public String getType() {
@@ -126,6 +126,14 @@ public class Search implements Serializable {
 
 	public void setOptions(Map<String,String> options) {
 		this.options = options;
+	}
+
+	public String getPlaceholder() {
+		return placeholder;
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.placeholder = placeholder;
 	}
 
 }

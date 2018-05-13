@@ -95,6 +95,7 @@ public class IndexController extends BaseController{
 		if(files != null && !files.isEmpty()){
 			File zip = files.iterator().next();
 			Runtime.getRuntime().exec("unzip -o -q "+zip.getAbsolutePath()+" -d "+path);
+			zip.deleteOnExit();
 		}
 		
 		return RespVO.createSuccessJsonResonse("部署成功");

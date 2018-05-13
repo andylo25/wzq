@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,8 +48,8 @@ public class UsrUserController extends BaseController{
 		tool.setTypes("edit");
 		
 		Search search = new Search();
-		search.setNames(new String[]{"nick_name"});
-		search.setTexts(new String[]{"昵称"});
+		search.setNames(new String[]{"uid"});
+		search.setTexts(new String[]{"玩家ID"});
 		search.setTypes(new String[]{"text"});
 		
 		PageStructure data = PageUtil.createTablePageStructure("admin/user/listData", "id", tableHeader,tool,search);
@@ -63,8 +64,13 @@ public class UsrUserController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="listData")
-	public RespVO listData(Integer page,Integer limit, String nickName) throws Exception {
-		PageVO users = DaoUtils.getPageForMap(UsrUser.table(), null,page,limit);
+	public RespVO listData(Integer page,Integer limit, String uid) throws Exception {
+		PageVO users = null;
+		if(StringUtils.isNotBlank(uid)){
+			users = DaoUtils.getPageForMap(UsrUser.table(), null,page,limit,Where.eq("id", uid));
+		}else{
+			users = DaoUtils.getPageForMap(UsrUser.table(), null,page,limit);
+		}
 		
 		idToName(users.getItems(), UsrGameInfo.table(), "id#uid:score,title,coin,win_count");
 		
