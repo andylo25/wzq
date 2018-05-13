@@ -1,6 +1,8 @@
 package com.andy.gomoku.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +29,7 @@ import com.andy.gomoku.dao.vo.GenTable;
 import com.andy.gomoku.dao.vo.GenTableColumn;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
+import com.andy.gomoku.utils.GameConf;
 import com.andy.gomoku.utils.excel.ExportExcel;
 import com.andy.gomoku.utils.excel.ImportExcel;
 import com.google.common.collect.Maps;
@@ -44,6 +48,57 @@ public class IndexController extends BaseController{
 		map.put("gameInfos", gameInfos);
         return createMV("dashboard","管理面板", Collections.singletonMap("formData", map));
     }  
+	
+	/**
+	 * 上传游戏包界面
+	 * @param table
+	 * @return
+	 */
+	@RequestMapping("dashboard/uploadGame")  
+    public ModelAndView uploadGame() {
+		List<FormField> formFieldList = new ArrayList<>();
+		formFieldList.add(FormField.builder().name("path").text("上传地址").type("span").build());
+		formFieldList.add(FormField.builder().name("upload").text("选择文件").type("upload").build());
+		
+		Map<String, Object> data = PageUtil.createFormPageStructure("dashboard/doUploadGame", formFieldList,Collections.singletonMap("path", GameConf.getConfStr("game_client_path")));
+		
+		return createCustMV("window/add",data);
+    }  
+	
+	/**
+	 * 上传前端游戏包
+	 * @param areas
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="dashboard/doUploadGame")
+	public RespVO doUploadGame(MultipartFile upload) throws Exception {
+		if(upload == null || !upload.getOriginalFilename().endsWith(".zip")){
+			return RespVO.createErrorJsonResonse("请选择zip文件");
+		}
+		String path = GameConf.getConfStr("game_client_path");
+		FileUtils.writeByteArrayToFile(new File(path+upload.getOriginalFilename()), upload.getBytes());
+		
+		return RespVO.createSuccessJsonResonse("上传成功");
+	}
+	
+	/**
+	 * 部署前端游戏包
+	 * @param areas
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="dashboard/deployGame")
+	public RespVO deployGame() throws Exception {
+		String path = GameConf.getConfStr("game_client_path");
+		Collection<File> files = FileUtils.listFiles(new File(path), new String[]{"zip"}, false);
+		if(files != null && !files.isEmpty()){
+			File zip = files.iterator().next();
+			Runtime.getRuntime().exec("unzip -o -q "+zip.getAbsolutePath()+" -d "+path);
+		}
+		
+		return RespVO.createSuccessJsonResonse("部署成功");
+	}
 	
 	/**
 	 * 导入excel
