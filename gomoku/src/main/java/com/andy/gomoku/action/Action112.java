@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
 import com.andy.gomoku.utils.CommonUtils;
+import com.andy.gomoku.utils.GameConf;
 import com.andy.gomoku.utils.GmAction;
 import com.andy.gomoku.utils.SendUtil;
 import com.andy.gomoku.websocket.MySocketSession;
@@ -24,7 +25,8 @@ public class Action112 implements IWebAction{
 		
 		GameUser user = myWebSocket.getUser();
 		
-		if(user.getGameInfo().getCoin() < 500) return;
+		int bcc = GameConf.getConfInt("buy_chess_coin");
+		if(user.getGameInfo().getCoin() < bcc) return;
 		
 		String theme = user.getUser().getTheme();
 		String chess = MapUtils.getString(data,"chess");
@@ -34,10 +36,11 @@ public class Action112 implements IWebAction{
 			theme = "";
 		}
 		theme += chess+",";
-		user.getGameInfo().addCoin(-500);
+		user.getGameInfo().addCoin(-bcc);
 		user.getUser().setTheme(theme);
 		
 		CommonUtils.saveDb(user.getUser());
+		CommonUtils.saveDb(user.getGameInfo());
 		
 		SendUtil.send112(user,data);
 		
