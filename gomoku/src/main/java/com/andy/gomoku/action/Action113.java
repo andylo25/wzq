@@ -59,6 +59,7 @@ public class Action113 implements IWebAction{
 		
 		// 机器人处理,直接拒绝
 		if(other.isRobo() && (type == 1 || type == 3)){ // 求和,请求悔棋
+			user.rejuct();
 			data.put("type", 6);
 			data.put("userId", other.getId());
 			SendUtil.send113(room,data);
