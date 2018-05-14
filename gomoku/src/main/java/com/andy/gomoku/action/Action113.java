@@ -48,6 +48,8 @@ public class Action113 implements IWebAction{
 				user.move(other.getLastMov());
 			}
 		}else if(type == 5){ // 投降
+			data.put("userId", user.getId());
+			SendUtil.send113(room,data);
 			CommonUtils.gameOver(room, game, other);
 			return;
 		}else if(type == 6){ // 取消

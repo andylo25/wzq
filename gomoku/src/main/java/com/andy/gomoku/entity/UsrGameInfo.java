@@ -76,7 +76,7 @@ public class UsrGameInfo extends BaseEntity{
 	}
 
 	public Integer getWinCount() {
-		return winCount;
+		return winCount == null?0:winCount;
 	}
 
 	public void setWinCount(Integer winCount) {
@@ -84,7 +84,7 @@ public class UsrGameInfo extends BaseEntity{
 	}
 
 	public Integer getLoseCount() {
-		return loseCount;
+		return loseCount==null?0:loseCount;
 	}
 
 	public void setLoseCount(Integer loseCount) {

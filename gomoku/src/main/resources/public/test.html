@@ -16,6 +16,7 @@
     <button onclick="send(105)">开始准备</button>
     <button onclick="send(106)">落子</button>
     <button onclick="send(106,1)">机器人落子</button>
+    <button onclick="send(113)">操作</button>
     <button onclick="send(108)">退出房间</button>
     <button onclick="send(109)">排行榜</button>
     <hr/>
@@ -51,6 +52,8 @@ function send(act,rob){
 		data.data = {};
 	}else if(act == 109){
 		data.data = {};
+	}else if(act == 113){
+		data.data = {type:fd[0]};
 		
 	}
 	var msg = JSON.stringify(data);

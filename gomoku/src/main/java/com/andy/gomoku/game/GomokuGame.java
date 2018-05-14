@@ -44,6 +44,7 @@ public class GomokuGame implements Serializable{
 	 * @return
 	 */
 	public int turnMove(int ind,int x, int y) {
+		if(isEnd())return -2;
 		Move move = new Move(y,x);
 		if(!gameState.makeMove(ind,move)) return -2;
 		if(gomokuAI != null){
@@ -58,6 +59,7 @@ public class GomokuGame implements Serializable{
 	}
 	
 	public boolean backMove(){
+		if(isEnd())return false;
 		if(gameState.undo() == null) return false;
 		if(gomokuAI != null){
 			gomokuAI.takeBack();
@@ -79,7 +81,7 @@ public class GomokuGame implements Serializable{
 	 * @return
 	 */
 	public int[] robotMove(int ind) {
-		if(gomokuAI != null){
+		if(!isEnd() && gomokuAI != null){
 			Move move = gomokuAI.getBestMove();
 			int resu = turnMove(ind,move.col, move.row);
 			return new int[]{resu,move.row,move.col};
