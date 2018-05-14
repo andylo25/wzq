@@ -37,6 +37,8 @@ public class Login101Action implements IWebAction{
 		UsrGameInfo gameInfo = new UsrGameInfo();
 		gameInfo.setUid(user.getId());
 		gameInfo.addCoin(GameConf.getConfInt("init_coin"));
+		gameInfo.setWinCount(0);
+		gameInfo.setLoseCount(0);
 		DaoUtils.insert(gameInfo);
 		
 		GameUser gameUser = new GameUser(user);

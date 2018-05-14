@@ -23,7 +23,6 @@ public class CommonUtils {
 		Room room = user.getRoom();
 		GomokuGame game = user.getGame();
 		if(game != null){
-			game.end();
 			GameUser winner = room.getOther(user);
 			gameOver(room, game,winner);
 		}
@@ -45,6 +44,9 @@ public class CommonUtils {
 	}
 
 	public static void gameOver(Room room, GomokuGame game,GameUser winner) {
+		if(game != null){
+			game.end();
+		}
 		if(winner != null){
 			GameUser other = room.getOther(winner);
 			UsrGameInfo wingi = winner.getGameInfo();

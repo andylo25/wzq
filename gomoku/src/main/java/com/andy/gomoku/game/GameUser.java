@@ -39,8 +39,8 @@ public class GameUser implements Serializable{
 			gameInfo.setUid(user.getId());
 			gameInfo.setCoin(RandomUtils.nextLong(100, 1000));
 			gameInfo.addCoin(0);
-			gameInfo.setLoseCount(RandomUtils.nextInt(100, 1000));
-			gameInfo.setWinCount(RandomUtils.nextInt(100, 1000));
+			gameInfo.setLoseCount(RandomUtils.nextInt(100, 100));
+			gameInfo.setWinCount(RandomUtils.nextInt(100, 100));
 		}
 		
 	}
