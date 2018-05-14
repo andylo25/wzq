@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.andy.gomoku.GomokuApplication;
 import com.andy.gomoku.base.PageUtil;
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
@@ -99,6 +100,18 @@ public class IndexController extends BaseController{
 		}
 		
 		return RespVO.createSuccessJsonResonse("部署成功");
+	}
+	
+	/**
+	 * 关闭服务器
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="dashboard/closeGame")
+	public RespVO closeGame() throws Exception {
+		GomokuApplication.destroy();
+		
+		return RespVO.createSuccessJsonResonse("关闭成功");
 	}
 	
 	/**

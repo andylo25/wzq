@@ -43,7 +43,7 @@ public class Action105 implements IWebAction{
 
 	private boolean checkCid(GameUser gameUser, Integer cid) {
 		String theme = gameUser.getUser().getTheme();
-		if(StringUtils.isNotBlank(theme) && theme.indexOf(cid+",") >= 0){
+		if(StringUtils.isNotBlank(theme) && theme.indexOf(cid+".0,") >= 0){
 			return true;
 		}
 		return false;

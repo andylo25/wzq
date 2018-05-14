@@ -31,24 +31,22 @@ public class DbBatch{
 	
 	public static void upUsrUser(UsrGameInfo m){
 		DbBatch batch = dbBatchs.get(Math.abs(m.hashCode())%dbBatchs.size());
-		if(batch.thread.isAlive()){
-			if(!batch.modelUpdateList.contains(m)){
-				batch.modelUpdateList.add(m);
-			}
-		}else{
+		if(!batch.thread.isAlive()){
 			batch.stop();
 			batch.start();
+		}
+		if(!batch.modelUpdateList.contains(m)){
+			batch.modelUpdateList.add(m);
 		}
 	}
 	
 	public static void svGameLog(UsrGameLog m){
 		DbBatch batch = dbBatchs.get(Math.abs(m.hashCode())%dbBatchs.size());
-		if(batch.thread.isAlive()){
-			batch.modelSaveList.add(m);
-		}else{
+		if(!batch.thread.isAlive()){
 			batch.stop();
 			batch.start();
 		}
+		batch.modelSaveList.add(m);
 	}
 	
 	private DbBatch(int i) {start();this.index = i;}
@@ -110,12 +108,7 @@ public class DbBatch{
 			@Override
 			public void run() {
 				while(run){
-					try {
-						saveBatch();
-						updateBatch();
-					} catch (Exception e) {
-						logger.error(e.getMessage(),e);
-					}
+					doRun();
 					try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e) {
@@ -123,11 +116,21 @@ public class DbBatch{
 					}
 				}
 			}
+
 		});
 		thread.setName("DbBatch"+index);
 		thread.setDaemon(true);
 		thread.start();
 		return true;
+	}
+	
+	private void doRun() {
+		try {
+			saveBatch();
+			updateBatch();
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+		}
 	}
 
 	public boolean stop() {
@@ -136,6 +139,7 @@ public class DbBatch{
 			thread.join();
 		} catch (InterruptedException e) {
 		}
+		doRun();
 		saveException(modelSaveList,"saving");
 		saveException(modelUpdateList,"updating");
 		thread = null;

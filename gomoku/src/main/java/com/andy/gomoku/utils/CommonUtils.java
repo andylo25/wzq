@@ -34,7 +34,7 @@ public class CommonUtils {
 		if(user.isMatching()){
 			Global.removeMatch(user);
 		}
-		
+		saveDb(user.getGameInfo());
 		
 	}
 
