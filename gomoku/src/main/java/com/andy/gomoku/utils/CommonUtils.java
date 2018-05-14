@@ -10,6 +10,7 @@ import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrGameLog;
 import com.andy.gomoku.game.GameUser;
+import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.GomokuGame;
 import com.andy.gomoku.game.Room;
 
@@ -29,6 +30,9 @@ public class CommonUtils {
 		if(room != null){
 			room.logout(user);
 			SendUtil.send108(room, user);
+		}
+		if(user.isMatching()){
+			Global.removeMatch(user);
 		}
 		
 		
