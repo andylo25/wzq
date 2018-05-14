@@ -46,6 +46,8 @@ public class CommonUtils {
 	public static void gameOver(Room room, GomokuGame game,GameUser winner) {
 		if(game != null){
 			game.end();
+		}else{
+			return;
 		}
 		if(winner != null){
 			GameUser other = room.getOther(winner);
