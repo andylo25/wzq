@@ -101,8 +101,8 @@ public class Global implements Serializable{
 	private static List<GameUser> readyRobots = Lists.newArrayList();
 	
 	public static void addMatch(GameUser user){
-		autoMatchs.add(user);
 		user.match(true);
+		autoMatchs.add(user);
 	}
 	public static GameUser[] pollMatch(){
 		if(autoMatchs.size() >= 2){
