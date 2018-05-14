@@ -33,7 +33,7 @@ public class Action104 implements IWebAction{
 			Global.removeMatch(gameUser);
 		}
 		
-		SendUtil.send104(myWebSocket,gameUser);
+		SendUtil.send104(myWebSocket,data);
 		
 	}
 

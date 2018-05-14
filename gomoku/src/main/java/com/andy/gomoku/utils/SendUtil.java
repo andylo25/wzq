@@ -48,11 +48,8 @@ public class SendUtil {
 		doSend(session,GmAction.ACTION_103, map);
 	}
 	
-	public static void send104(MySocketSession session,GameUser gameUser) {
-		if(gameUser == null)return;
-		Map<String,Object> map = Maps.newHashMap();
-		map.put("respCode", GoConstant.SUCC_CODE);
-		doSend(session,GmAction.ACTION_104, map);
+	public static void send104(MySocketSession session,Map<String, Object> data) {
+		doSend(session,GmAction.ACTION_104, data);
 	}
 	
 	public static void send105(Room room,GameUser readyUser,GameUser first) {
