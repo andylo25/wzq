@@ -2,6 +2,7 @@ package com.andy.gomoku.action;
 
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
@@ -23,9 +24,14 @@ public class Action104 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		if(gameUser.getRoom() != null) return;
 //		if(gameUser.getGameInfo().getCoin() <= 0)return ;
-		
-		if(gameUser.isMatching()) return;
-		Global.addMatch(gameUser);
+		Integer type = MapUtils.getInteger(data, "type");
+		if(type == null || type == 0){
+			if(gameUser.isMatching()) return;
+			Global.addMatch(gameUser);
+		}else{
+			// 取消排队
+			Global.removeMatch(gameUser);
+		}
 		
 		SendUtil.send104(myWebSocket,gameUser);
 		

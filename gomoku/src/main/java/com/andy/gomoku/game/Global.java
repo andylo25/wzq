@@ -116,7 +116,7 @@ public class Global implements Serializable{
 	public static GameUser outTimeUser(int timeOut){
 		GameUser user = autoMatchs.peek();
 		if(user != null && user.isMatchOutTime(timeOut)){
-			autoMatchs.remove(user);
+			removeMatch(user);
 			return user;
 		}
 		return null;
