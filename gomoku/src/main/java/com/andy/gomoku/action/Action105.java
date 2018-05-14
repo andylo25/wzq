@@ -26,18 +26,20 @@ public class Action105 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		Room room = gameUser.getRoom();
 		if(room == null)return;
-		Integer cid = MapUtils.getInteger(data, "cid");
-		if(cid != null){
-			if(!checkCid(gameUser,cid)){
-				cid = null;
+		synchronized (room) {
+			Integer cid = MapUtils.getInteger(data, "cid");
+			if(cid != null){
+				if(!checkCid(gameUser,cid)){
+					cid = null;
+				}
 			}
-		}
-		
-		ready(gameUser, room,cid);
-		
-		GameUser robot = room.getOther(gameUser);
-		if(robot != null && robot.isRobo()){
-			ready(robot, room,RandomUtils.nextInt(0, 4));
+			
+			ready(gameUser, room,cid);
+			
+			GameUser robot = room.getOther(gameUser);
+			if(robot != null && robot.isRobo()){
+				ready(robot, room,RandomUtils.nextInt(0, 4));
+			}
 		}
 	}
 
