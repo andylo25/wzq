@@ -25,7 +25,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private AttributeKey<NettySocketSession> nssKey = AttributeKey.valueOf("netty.channel.session.key");
+	public static AttributeKey<NettySocketSession> nssKey = AttributeKey.valueOf("netty.channel.session.key");
 	
 	@Override
 	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {

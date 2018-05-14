@@ -20,7 +20,12 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter{
 	@Override
 	public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
 		if(evt instanceof IdleStateEvent) {
-			logger.info("====>Heartbeat: greater than {}", 1800);
+			NettySocketSession session = ctx.channel().attr(TextWebSocketFrameHandler.nssKey).get();
+			if(session != null && session.getUser() != null){
+				logger.info("====>Heartbeat: greater than {},outUser:{}", 1800,session.getUser().getId());
+			}else{
+				logger.info("====>Heartbeat: greater than {}", 1800);
+			}
 			ctx.writeAndFlush(HEARTBEAT_SEQUENCE.duplicate()).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
 		}else {
 			super.userEventTriggered(ctx, evt);
