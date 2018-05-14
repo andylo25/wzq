@@ -151,6 +151,7 @@ public class DbBatch{
 		for(DbBatch dbBatch:dbBatchs){
 			dbBatch.stop();
 		}
+		logger.error("数据落地线程完毕");
 	}
 	
 	/**

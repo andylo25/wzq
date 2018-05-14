@@ -333,11 +333,11 @@ public class DaoUtils {
 			}
 		}
 		for(int i=0;i<entitys.size();i++){
-			entitys.get(i).setUpdateTime(System.currentTimeMillis()/1000);
+			entitys.get(i).setCreateTime(System.currentTimeMillis()/1000);
 			int j = 0;
 			for (String fi:fields) {
 				if(!fi.equalsIgnoreCase("id")){
-					params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fi);
+					params[i][j] = ReflectUtil.getFieldValue(entitys.get(i), fi.replace("_", ""));
 					j++;
 				}
 			}
