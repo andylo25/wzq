@@ -26,6 +26,7 @@ public class Action105 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		Room room = gameUser.getRoom();
 		if(room == null)return;
+		if(gameUser.isReady())return;
 		synchronized (room) {
 			Integer cid = MapUtils.getInteger(data, "cid");
 			if(cid != null){
