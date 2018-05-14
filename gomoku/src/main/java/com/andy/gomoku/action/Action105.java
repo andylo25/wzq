@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
@@ -25,13 +26,27 @@ public class Action105 implements IWebAction{
 		GameUser gameUser = myWebSocket.getUser();
 		Room room = gameUser.getRoom();
 		if(room == null)return;
+		Integer cid = MapUtils.getInteger(data, "cid");
+		if(cid != null){
+			if(!checkCid(gameUser,cid)){
+				cid = null;
+			}
+		}
 		
-		ready(gameUser, room,MapUtils.getInteger(data, "cid"));
+		ready(gameUser, room,cid);
 		
 		GameUser robot = room.getOther(gameUser);
 		if(robot != null && robot.isRobo()){
 			ready(robot, room,RandomUtils.nextInt(0, 4));
 		}
+	}
+
+	private boolean checkCid(GameUser gameUser, Integer cid) {
+		String theme = gameUser.getUser().getTheme();
+		if(StringUtils.isNotBlank(theme) && theme.indexOf(cid+",") >= 0){
+			return true;
+		}
+		return false;
 	}
 
 	private void ready(GameUser gameUser, Room room, Integer cid) {
