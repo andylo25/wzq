@@ -19,7 +19,6 @@ public class GameUser implements Serializable{
 	private UsrGameInfo gameInfo;
 	private Long id;
 	private Room room;
-	private Integer cid;
 	private GomokuGame game;
 	
 	private long startMatch;
@@ -87,13 +86,16 @@ public class GameUser implements Serializable{
 		return room;
 	}
 
-	public Map<String, Object> getUserInfo() {
+	public Map<String, Object> getUserInfo(boolean isSelf) {
 		Map<String, Object> resu = Maps.newHashMap();
 		resu.put("userId", id);
 		resu.put("nickName", getNickName());
 		resu.put("userName", getUserName());
 		resu.put("icon", user.getIcon());
-		resu.put("cids", user.getTheme());
+		if(isSelf){
+			resu.put("cids", user.getTheme());
+		}
+		resu.put("cid", gameInfo.getCid());
 		resu.put("coin", gameInfo.getCoin());
 		resu.put("title", gameInfo.getTitle());
 		return resu;
@@ -103,7 +105,7 @@ public class GameUser implements Serializable{
 		if(status == GoConstant.USER_STATUS_0){
 			status = GoConstant.USER_STATUS_1;
 			if(chid != null){
-				this.cid = chid;
+				this.gameInfo.setCid(chid);
 			}
 		}else{
 			status = GoConstant.USER_STATUS_0;
@@ -179,6 +181,6 @@ public class GameUser implements Serializable{
 	}
 	
 	public Integer getCid(){
-		return cid;
+		return gameInfo.getCid();
 	}
 }

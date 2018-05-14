@@ -22,6 +22,7 @@ public class UsrGameInfo extends BaseEntity{
 	private Integer titleSort;
 	private Integer winCount;
 	private Integer loseCount;
+	private Integer cid;
 	
 	private String title;
 
@@ -92,6 +93,14 @@ public class UsrGameInfo extends BaseEntity{
 
 	public static String table() {
 		return "usr_game_info";
+	}
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
 	
 	

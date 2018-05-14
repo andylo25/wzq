@@ -79,7 +79,7 @@ public class DbBatch{
 				modelUpdateList.clear();
 			}
 			try {
-				DaoUtils.updateBatch("coin,titleSort,winCount,loseCount,title",modelListT);
+				DaoUtils.updateBatch("coin,titleSort,winCount,loseCount,title,cid",modelListT);
 			} catch (Exception e) {
 				logger.error("",e);
 				saveException(modelListT,"updating");

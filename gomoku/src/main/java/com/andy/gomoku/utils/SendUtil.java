@@ -18,15 +18,15 @@ public class SendUtil {
 			map.put("respCode", 1);
 			doSend(session,GmAction.ACTION_100, map);
 		}else{
-			Map<String, Object> map = gameUser.getUserInfo();
+			Map<String, Object> map = gameUser.getUserInfo(true);
 			map.put("respCode", GoConstant.SUCC_CODE);
 			
-			doSend(session,GmAction.ACTION_100, gameUser.getUserInfo());
+			doSend(session,GmAction.ACTION_100, gameUser.getUserInfo(true));
 		}
 	}
 	public static void send101(MySocketSession session,GameUser gameUser) {
 		if(gameUser == null)return;
-		doSend(session,GmAction.ACTION_101, gameUser.getUserInfo());
+		doSend(session,GmAction.ACTION_101, gameUser.getUserInfo(true));
 	}
 	
 	public static void send102(GameUser session,Room room) {
@@ -40,7 +40,7 @@ public class SendUtil {
 	public static void send103(GameUser session,GameUser gameUser) {
 		Map<String,Object> map = Maps.newHashMap();
 		if(gameUser != null){
-			map = gameUser.getUserInfo();
+			map = gameUser.getUserInfo(false);
 			map.put("roomNum", gameUser.getRoom().getId());
 		}else{
 			map.put("roomNum", 0);
