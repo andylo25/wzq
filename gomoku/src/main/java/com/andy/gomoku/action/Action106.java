@@ -32,6 +32,8 @@ public class Action106 implements IWebAction{
 		int y = MapUtils.getIntValue(data, "y");
 		
 		GameUser gameUser = myWebSocket.getUser();
+		if(gameUser == null)return ;
+		
 		GomokuGame game = gameUser.getGame();
 		Room room = gameUser.getRoom();
 		if(room == null || game == null)return;

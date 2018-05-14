@@ -21,6 +21,7 @@ public class Action110 implements IWebAction{
 	public void doAction(MySocketSession myWebSocket, Map<String, Object> data) {
 		
 		GameUser user = myWebSocket.getUser();
+		if(user == null)return;
 		CommonUtils.checkMov(user);
 		
 	}
