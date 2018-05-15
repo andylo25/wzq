@@ -108,22 +108,22 @@ public class GameState {
         if(board[row][col] == lastIndex()) {
             // Diagonal from the bottom left to the top right
             if(countConsecutiveStones(row, col, 1, -1) +
-                    countConsecutiveStones(row, col, -1, 1) == 4) {
+                    countConsecutiveStones(row, col, -1, 1) >= 4) {
                 return true;
             }
             // Diagonal from the top left to the bottom right
             if(countConsecutiveStones(row, col, -1, -1) +
-                    countConsecutiveStones(row, col, 1, 1) == 4) {
+                    countConsecutiveStones(row, col, 1, 1) >= 4) {
                 return true;
             }
             // Horizontal
             if(countConsecutiveStones(row, col, 0, 1) +
-                    countConsecutiveStones(row, col, 0, -1) == 4) {
+                    countConsecutiveStones(row, col, 0, -1) >= 4) {
                 return true;
             }
             // Vertical
             if(countConsecutiveStones(row, col, 1, 0) +
-                    countConsecutiveStones(row, col, -1, 0) == 4) {
+                    countConsecutiveStones(row, col, -1, 0) >= 4) {
                 return true;
             }
         }

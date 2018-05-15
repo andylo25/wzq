@@ -241,7 +241,7 @@ public class State {
                             break;
                         }
                     }
-                    if(count == 4) return lastIndex;
+                    if(count >= 4) return lastIndex;
                 }
             }
         }
