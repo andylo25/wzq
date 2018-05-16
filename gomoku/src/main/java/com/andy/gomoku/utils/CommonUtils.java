@@ -81,6 +81,9 @@ public class CommonUtils {
 		for(GameUser us:room.getUsers()){
 			us.gameOver();
 		}
+		if(room != null){
+			room.gameOver();
+		}
 		
 		SendUtil.send107(room, winner);
 		
