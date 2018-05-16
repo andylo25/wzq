@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
@@ -183,4 +184,13 @@ public class GameUser implements Serializable{
 	public Integer getCid(){
 		return gameInfo.getCid();
 	}
+	
+	public boolean checkCid(Integer cid) {
+		String theme = this.getUser().getTheme();
+		if(StringUtils.isNotBlank(theme) && theme.indexOf(cid+".0,") >= 0){
+			return true;
+		}
+		return false;
+	}
+	
 }

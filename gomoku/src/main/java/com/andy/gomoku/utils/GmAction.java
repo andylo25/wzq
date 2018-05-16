@@ -19,6 +19,7 @@ public class GmAction {
 	public static final int ACTION_112 = 112; // 主题选择
 	public static final int ACTION_113 = 113; // 请求相关
 	public static final int ACTION_114 = 114; // 同步玩家信息
+	public static final int ACTION_115 = 115; // 选择棋子
 	
 	
 	public static final int ACTION_200 = 200; // 广播消息

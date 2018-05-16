@@ -14,7 +14,7 @@ import com.andy.gomoku.utils.SendUtil;
 import com.andy.gomoku.websocket.MySocketSession;
 
 /**
- * 超时检测
+ * 请求操作相关
  * @author cuiwm
  *
  */

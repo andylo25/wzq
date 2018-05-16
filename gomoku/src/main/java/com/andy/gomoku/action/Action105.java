@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.andy.gomoku.game.GameUser;
@@ -30,7 +29,7 @@ public class Action105 implements IWebAction{
 		synchronized (room) {
 			Integer cid = MapUtils.getInteger(data, "cid");
 			if(cid != null){
-				if(!checkCid(gameUser,cid)){
+				if(!gameUser.checkCid(cid)){
 					cid = null;
 				}
 			}
@@ -44,13 +43,6 @@ public class Action105 implements IWebAction{
 		}
 	}
 
-	private boolean checkCid(GameUser gameUser, Integer cid) {
-		String theme = gameUser.getUser().getTheme();
-		if(StringUtils.isNotBlank(theme) && theme.indexOf(cid+".0,") >= 0){
-			return true;
-		}
-		return false;
-	}
 
 	private void ready(GameUser gameUser, Room room, Integer cid) {
 		gameUser.toggleReady(cid);
