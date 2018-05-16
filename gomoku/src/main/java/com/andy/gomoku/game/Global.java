@@ -153,7 +153,7 @@ public class Global implements Serializable{
 	}
 
 	public static void refreshRanks() {
-		List<Map<String, Object>> ranksT = DaoUtils.getListSql( "select uid,win_count as winCount from usr_game_info order by win_count desc limit 0,10");
+		List<Map<String, Object>> ranksT = DaoUtils.getListSql( "select uid,win_count as winCount,title from usr_game_info order by win_count desc limit 0,10");
 		BaseController.idToName(ranksT, UsrUser.table(), "uid#id:icon,nick_name as nickName");
 		ranks = ranksT;
 	}
