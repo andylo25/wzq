@@ -21,7 +21,7 @@ public class Room implements Serializable{
 	
 	private List<GameUser> users = Lists.newCopyOnWriteArrayList();
 	
-	private int curIndex = -1;
+	private int firstIndex = -1;
 	
 	private GomokuGame game ;
 
@@ -49,7 +49,7 @@ public class Room implements Serializable{
 	public void logout(GameUser user){
 		this.game = null;
 		this.users.remove(user);
-		this.curIndex = -1;
+		this.firstIndex = -1;
 		user.setRoom(null);
 		user.setGame(null);
 	}
@@ -63,19 +63,16 @@ public class Room implements Serializable{
 				haveRob = true;
 			}
 		}
-		int firstInd = 0;
-		if(curIndex == -1){
-			firstInd = RandomUtils.nextInt(0, users.size());
-		}else{
-			firstInd = curIndex;
+		if(firstIndex == -1){
+			firstIndex = RandomUtils.nextInt(0, users.size());
 		}
 		// 创建游戏
-		game = new GomokuGame(haveRob,firstInd);
+		game = new GomokuGame(haveRob,firstIndex);
 		for(GameUser user:users){
 			user.setGame(game);
 		}
 		
-		return users.get(firstInd);
+		return users.get(firstIndex);
 	}
 
 	public int getIndx(GameUser gameUser) {
@@ -96,7 +93,7 @@ public class Room implements Serializable{
 	}
 	
 	public void gameOver(){
-		this.curIndex = -1;
+		this.firstIndex = 1-firstIndex;
 		this.game = null;
 	}
 	
