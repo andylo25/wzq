@@ -48,12 +48,12 @@ public class Room implements Serializable{
 	
 	public void logout(GameUser user){
 		this.game = null;
-		this.users.remove(user);
 		this.firstIndex = -1;
 		GameUser other = this.getOther(user);
 		if(other != null && other.isReady()){
 			other.toggleReady(null);
 		}
+		this.users.remove(user);
 		user.setRoom(null);
 		user.setGame(null);
 	}

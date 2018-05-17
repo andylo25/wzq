@@ -76,7 +76,13 @@ public class TomcatWebSocket implements MySocketSession{
 	@OnClose
 	public void onClose(Session session) {
 		// 先退出房间
-		CommonUtils.outRoom(this.getUser());
+		GameUser user = this.getUser();
+		if(user != null){
+			CommonUtils.outRoom(user);
+			if(user.isMatching()){
+				Global.removeMatch(user);
+			}
+		}
 		Global.removeSession(this);
 	}
 	

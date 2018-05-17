@@ -25,7 +25,7 @@ public class Action115 implements IWebAction{
 		if(user == null)return;
 		
 		Integer cid = MapUtils.getInteger(data, "cid");
-		if(cid != null){
+		if(cid != null && cid != 0){
 			if(!user.checkCid(cid)){
 				cid = null;
 			}
