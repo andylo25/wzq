@@ -2,6 +2,7 @@ package com.andy.gomoku.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class LoginController extends BaseController{
 
 	@RequestMapping("login")
 	public @ResponseBody RespVO login(String userName,String password) {
+		if(StringUtils.isBlank(userName)) RespVO.createErrorJsonResonse("请输入用户名");
 		password = SecurityUtil.sha1(password, userName);
 		UsrAdmin admin = DaoUtils.getOne(UsrAdmin.class, Where.eq("user_name", userName),Where.eq("password", password));
 		if(admin == null){
