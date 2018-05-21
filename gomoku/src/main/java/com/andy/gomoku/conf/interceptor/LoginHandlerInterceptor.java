@@ -18,7 +18,7 @@ import com.andy.gomoku.utils.JsonUtils;
 
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 	
-	static final String NO_INTERCEPTOR_PATH = ".*/((login)|(public)|(common)).*";
+	static final String NO_INTERCEPTOR_PATH = ".*/((login)|(public)|(common)|(cmd)).*";
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

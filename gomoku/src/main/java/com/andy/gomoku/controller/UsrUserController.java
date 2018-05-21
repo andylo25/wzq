@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.andy.gomoku.GomokuApplication;
+import com.andy.gomoku.base.HttpClientUtil;
 import com.andy.gomoku.base.PageUtil;
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
@@ -21,11 +23,15 @@ import com.andy.gomoku.base.table.TableHeader;
 import com.andy.gomoku.base.table.Tool;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.Where;
+import com.andy.gomoku.entity.ConfCommon;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.game.Global;
+import com.andy.gomoku.utils.CommonUtils;
+import com.andy.gomoku.utils.GameConf;
 import com.andy.gomoku.utils.SendUtil;
 import com.andy.gomoku.websocket.MySocketSession;
+import com.google.common.collect.Maps;
 
 @Controller
 @RequestMapping("admin/user")
@@ -104,16 +110,18 @@ public class UsrUserController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="addCoin")
 	public RespVO addCoin(Long id,Integer addCoin) throws Exception {
-		UsrGameInfo gameInfo = DaoUtils.get(id, UsrGameInfo.class);
-		gameInfo.setCoin(gameInfo.getCoin()+addCoin);
-		DaoUtils.update(gameInfo);
-		
-		MySocketSession session = Global.getSession(id);
-		if(session != null){
-			session.getUser().getGameInfo().addCoin(addCoin);
-			SendUtil.send114(session.getUser());
+		if(GomokuApplication.gameServerEnable()){
+			CommonUtils.addCoin(id, addCoin);
+		}else{
+			ConfCommon conf = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "game_server_url"));
+			ConfCommon secKey = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "commu_seckey"));
+			Map<String,Object> params = Maps.newHashMap();
+			params.put("seckey", secKey.getValue());
+			params.put("addCoin", addCoin);
+			HttpClientUtil.post(conf.getValue()+"admin/cmd/addCoin/"+id, params, null);
 		}
 		
         return RespVO.createSuccessJsonResonse("增加成功");
 	}
+
 }

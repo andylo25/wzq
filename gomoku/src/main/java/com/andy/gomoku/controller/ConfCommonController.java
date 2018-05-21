@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.andy.gomoku.GomokuApplication;
+import com.andy.gomoku.base.HttpClientUtil;
 import com.andy.gomoku.base.PageUtil;
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
@@ -23,6 +25,7 @@ import com.andy.gomoku.entity.ConfCommon;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.game.Global;
 import com.andy.gomoku.utils.GameConf;
+import com.google.common.collect.Maps;
 
 @Controller
 @RequestMapping("admin/confCommon")
@@ -103,7 +106,15 @@ public class ConfCommonController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="refreshCache")
 	public RespVO refreshCache() throws Exception {
-		GameConf.initCommons();
+		if(GomokuApplication.gameServerEnable()){
+			GameConf.initCommons();
+		}else{
+			ConfCommon conf = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "game_server_url"));
+			ConfCommon secKey = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "commu_seckey"));
+			Map<String,Object> params = Maps.newHashMap();
+			params.put("seckey", secKey.getValue());
+			HttpClientUtil.post(conf.getValue()+"admin/cmd/refreshCache/2", params, null);
+		}
         return RespVO.createSuccessJsonResonse("配置已生效，需重新登录客户端验证");
 	}
 }

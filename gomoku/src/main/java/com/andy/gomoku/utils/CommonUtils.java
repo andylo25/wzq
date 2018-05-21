@@ -10,8 +10,10 @@ import com.andy.gomoku.entity.BaseEntity;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrGameLog;
 import com.andy.gomoku.game.GameUser;
+import com.andy.gomoku.game.Global;
 import com.andy.gomoku.game.GomokuGame;
 import com.andy.gomoku.game.Room;
+import com.andy.gomoku.websocket.MySocketSession;
 
 public class CommonUtils {
 
@@ -121,6 +123,18 @@ public class CommonUtils {
 			return false;
 		}else {
 			return true;
+		}
+	}
+	
+	public static void addCoin(Long id, Integer addCoin) {
+		UsrGameInfo gameInfo = DaoUtils.get(id, UsrGameInfo.class);
+		gameInfo.setCoin(gameInfo.getCoin()+addCoin);
+		DaoUtils.update(gameInfo);
+		
+		MySocketSession session = Global.getSession(id);
+		if(session != null){
+			session.getUser().getGameInfo().addCoin(addCoin);
+			SendUtil.send114(session.getUser());
 		}
 	}
 

@@ -19,19 +19,33 @@ import io.netty.util.concurrent.GenericFutureListener;
 //@EnableTransactionManagement
 public class GomokuApplication implements CommandLineRunner {
 	
-	@Value("${game.server.port}")
+	@Value("${game.server.port:0}")
 	private int port;
+	private static boolean gameServerEnable;
 	private static GomokuServer gomokuServer = null;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(GomokuApplication.class, args);
 	}
+	
+	public static boolean gameServerEnable(){
+		return gameServerEnable;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
+		gameServerEnable = port > 0;
+		if(!gameServerEnable())return;
 		gomokuServer = new GomokuServer();
 		InetSocketAddress address = new InetSocketAddress(port);
 		ChannelFuture future = gomokuServer.start(address);
+		future.addListener(new GenericFutureListener<Future<? super Void>>() {
+			@Override
+			public void operationComplete(Future<? super Void> paramF) throws Exception {
+				System.out.println("服务器启动完成");
+			}
+			
+		});
 
 		Runtime.getRuntime().addShutdownHook(new Thread(){
 			@Override

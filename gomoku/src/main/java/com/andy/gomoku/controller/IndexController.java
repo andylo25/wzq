@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.andy.gomoku.GomokuApplication;
+import com.andy.gomoku.base.HttpClientUtil;
 import com.andy.gomoku.base.PageUtil;
 import com.andy.gomoku.base.PageVO;
 import com.andy.gomoku.base.RespVO;
@@ -28,6 +29,8 @@ import com.andy.gomoku.base.form.FormField;
 import com.andy.gomoku.dao.DaoUtils;
 import com.andy.gomoku.dao.vo.GenTable;
 import com.andy.gomoku.dao.vo.GenTableColumn;
+import com.andy.gomoku.dao.vo.Where;
+import com.andy.gomoku.entity.ConfCommon;
 import com.andy.gomoku.entity.UsrGameInfo;
 import com.andy.gomoku.entity.UsrUser;
 import com.andy.gomoku.utils.GameConf;
@@ -109,7 +112,15 @@ public class IndexController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="dashboard/closeGame")
 	public RespVO closeGame() throws Exception {
-		GomokuApplication.destroy();
+		if(GomokuApplication.gameServerEnable()){
+			GomokuApplication.destroy();
+		}else{
+			ConfCommon conf = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "game_server_url"));
+			ConfCommon secKey = DaoUtils.getOne(ConfCommon.class, Where.eq("nid", "commu_seckey"));
+			Map<String,Object> params = Maps.newHashMap();
+			params.put("seckey", secKey.getValue());
+			HttpClientUtil.post(conf.getValue()+"admin/cmd/refreshCache/3", params, null);
+		}
 		
 		return RespVO.createSuccessJsonResonse("关闭成功");
 	}
